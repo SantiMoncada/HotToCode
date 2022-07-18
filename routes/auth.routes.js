@@ -89,10 +89,9 @@ router.post('/login', (req, res, next) => {
 
 
 router.get('/verify', isAuthenticated, (req, res) => {
+    //TODO gives an error whe you verify and there is no noken
+    res.status(200).json(req.payload)
 
-    setTimeout(() => {
-        res.status(200).json(req.payload)
-    }, 1500) //TODO quitar en el deploy
 })
 
 module.exports = router
