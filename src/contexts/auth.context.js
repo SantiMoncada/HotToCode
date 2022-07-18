@@ -29,9 +29,9 @@ function AuthProviderWrapper(props) {
         localStorage.removeItem('authToken')
     }
 
-    useEffect(() => {
-        authenticateUser()
-    }, [])
+    // useEffect(() => {
+    //     authenticateUser()
+    // }, [])
 
     return (
         <AuthContext.Provider value={{ user, storeToken, authenticateUser, logoutUser }}>
