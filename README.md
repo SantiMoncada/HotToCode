@@ -12,6 +12,8 @@ User routes
 
 Snippets routes
 
+| METHOD | ENDPOINT                         | RESPONSE                         | ACTION                |
+|--------|----------------------------------|----------------------------------|-----------------------|
 | GET    | api/snippets/create              | [snippets]                       |                       |
 | POST   | api/snippets/create              | {message: New snipped created}   | create snippet        |
 | GET    | api/snippets/list                | [snippets]                       | get all snippets      |
@@ -22,4 +24,6 @@ Snippets routes
 
 Comments routes
 
+| METHOD | ENDPOINT                         | RESPONSE                         | ACTION                |
+|--------|----------------------------------|----------------------------------|-----------------------|
 | POST   | api/comment/:comment_id          | {meesage: comment}               | post a cooment        |
