@@ -5,6 +5,7 @@ router.get("/", (req, res, next) => {
 });
 
 
-// example: router.use("/auth", authRoutes)
+router.use('/comments', require('./comment.routes'))
+router.use('/snippets', require('./snippet.routes'))
 
 module.exports = router;
