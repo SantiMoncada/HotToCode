@@ -1,29 +1,39 @@
 # HotToCode-Server
  The server for the application HotToCode developed by Santiago Moncada & Jorge Hermo
 
-User routes
+## Auth routes
 
 | METHOD | ENDPOINT                         | RESPONSE                         | ACTION                |
 |--------|----------------------------------|----------------------------------|-----------------------|
-| GET    | api/users                        | [users]                          | get all users info    |
-| GET    | api/users/details/user_id        | {user}                           | get one user info     |
-| POST   | api/users/update                 | {mesage: user edited}            | edit a user           |
-| POST   | api/:snippet_id/favSnippet       | {message: snippet marked as fav} | mark a snippet as fav |
+| GET    | api/auth/signup                  | [{user}]                         |     |
+| GET    | api/auth/login                   | [{user}]                         |     |
+| GET    | api/auth/verify                  | [{user}]                         |     |
 
-Snippets routes
-
-| METHOD | ENDPOINT                         | RESPONSE                         | ACTION                |
-|--------|----------------------------------|----------------------------------|-----------------------|
-| GET    | api/snippets/create              | [snippets]                       |                       |
-| POST   | api/snippets/create              | {message: New snipped created}   | create snippet        |
-| GET    | api/snippets/list                | [snippets]                       | get all snippets      |
-| GET    | api/snippets/:sinppet_id/details | {snippet}                        | get all users snippet |
-| GET    | api/snippets/:sinppet_id/edit    | {snippet}                        | get snippet           |
-| POST   | api/snippets/:snippet_id/edit    | {message: snippet edited}        | edit snippet          |
-| POST   | api/snippets/:snippet_id/delete  | {message: snippet deleted}       | delete snippet        |
-
-Comments routes
+## User routes
 
 | METHOD | ENDPOINT                         | RESPONSE                         | ACTION                |
 |--------|----------------------------------|----------------------------------|-----------------------|
-| POST   | api/comment/:comment_id          | {meesage: comment}               | post a cooment        |
+| GET    | api/users                        | [{user}]                         | get all users info    |
+| GET    | api/users/details/:user_id       | {user}                           | get one user info     |
+| PUT    | api/users/edit/:users_id         | {user}                           | edit a user           |
+| PUT    | api/users/favSnippet/:snippet_id | {snippet}                        | mark a snippet as fav |
+| PUT    | api/users/rmSnippet/:snippet_id  | {snippet}                        | del snippet from fav  |
+
+## Snippets routes
+
+| METHOD | ENDPOINT                         | RESPONSE                         | ACTION                |
+|--------|----------------------------------|----------------------------------|-----------------------|
+| GET    | api/snippets/list?user={user_id}&lang={language}&limit={quantity} | [snippet]| get all snippets|
+| GET    | api/snippets/details/:sinppet_id | {snippet}                        | get snippet details   |
+| POST   | api/snippets/create              | {snippet}                        | create snippet        |
+| PUT    | api/snippets/edit/:snippet_id    | {snippet}                        | edit snippet          |
+| DELETE | api/snippets/delete/:snippet_id  | {snippet}                        | delete snippet        |
+
+## Comments routes
+
+| METHOD | ENDPOINT                         | RESPONSE                         | ACTION                |
+|--------|----------------------------------|----------------------------------|-----------------------|
+| GET    | api/comments/:post_id            | [comment]                        | get all comments      |
+| POST   | api/comments/create/:post_id     | {snippet}                        | create a comment      |
+| PUT    | api/comments/edit/:post_id       | {comment}                        | edit a comment        |
+| DELETE | api/comments/delete/:post_id     | {comment}                        | delete a comment      |

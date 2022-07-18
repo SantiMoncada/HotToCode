@@ -5,7 +5,6 @@ const userSchema = new Schema(
     username: {
       type: String,
       required: [true, 'Username is required.'],
-      unique: [true, 'Username is alredy used'],
       trim: true
     },
     email: {
@@ -29,10 +28,10 @@ const userSchema = new Schema(
       enum: ['USER', 'MODERATOR', 'ADMIN'],
       default: 'USER'
     },
-    favSnippets: {
+    favSnippets: [{
       type: Schema.Types.ObjectId,
       ref: 'Snippet'
-    }
+    }]
   },
   {
     timestamps: true,

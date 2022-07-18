@@ -2,12 +2,24 @@ const { Schema, model } = require("mongoose")
 
 const snippetSchema = new Schema(
     {
+        title: String,
+        content: String,
+        language: {
+            type: String,
+            enum: ['JS', 'PYTHON', 'C'],
+            default: 'JS'
+        },
         owner:
         {
             type: Schema.Types.ObjectId,
-            ref: 'User'
+            ref: 'User',
+            required: true
+
         },
-        content: String
+        comments: [{
+            type: Schema.Types.ObjectId,
+            ref: 'Comment'
+        }],
     },
     {
         timestamps: true,

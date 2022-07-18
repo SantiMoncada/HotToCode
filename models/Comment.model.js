@@ -2,7 +2,7 @@ const { Schema, model } = require("mongoose")
 
 const commentSchema = new Schema(
     {
-        comment: String,
+        title: String,
         owner:
         {
             type: Schema.Types.ObjectId,
@@ -10,7 +10,7 @@ const commentSchema = new Schema(
             required: true
         },
         content: {
-            String,
+            type: String,
             maxlength: 250
         }
     },
