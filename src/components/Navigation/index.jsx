@@ -16,13 +16,15 @@ const Navigation = () => {
         <>
             <Navbar bg="dark" variant="dark">
                 <Container>
-                    <Navbar.Brand href="/">Navbar</Navbar.Brand>
+                    <Link to="/">
+                        <Nav.Link as="span">HotToCode</Nav.Link>
+                    </Link>
                     <Nav className="me-auto">
                         <Link to="/signup">
-                            <Nav.Link as="span">Registro</Nav.Link>
+                            <Nav.Link as="span">Signup</Nav.Link>
                         </Link>
                         <Link to="/login">
-                            <Nav.Link as="span">Iniciar sesión</Nav.Link>
+                            <Nav.Link as="span">Login</Nav.Link>
                         </Link>
                     </Nav>
                 </Container>
