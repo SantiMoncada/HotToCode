@@ -42,7 +42,7 @@ router.post('/signup', (req, res, next) => {
         .catch(err => {
             const errorCode = err.errorCode ? err.errorCode : 500
             const message = err.message ? err.message : "Internal server error"
-            res.status(errorCode).json(message)
+            res.status(errorCode).json({ message })
         })
 })
 
@@ -86,7 +86,7 @@ router.post('/login', (req, res, next) => {
         .catch(err => {
             const errorCode = err.errorCode ? err.errorCode : 500
             const message = err.message ? err.message : "Internal server error"
-            res.status(errorCode).json(message)
+            res.status(errorCode).json({ message })
         })
 });
 

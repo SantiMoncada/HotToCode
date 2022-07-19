@@ -70,7 +70,7 @@ router.put('/edit/:comment_id', isAuthenticated, (req, res) => {
         .catch(err => {
             const errorCode = err.errorCode ? err.errorCode : 500
             const message = err.message ? err.message : "Internal server error"
-            res.status(errorCode).json(message)
+            res.status(errorCode).json({ message })
         })
 })
 
@@ -93,7 +93,7 @@ router.delete('/delete/:comment_id', isAuthenticated, (req, res) => {
         .catch(err => {
             const errorCode = err.errorCode ? err.errorCode : 500
             const message = err.message ? err.message : "Internal server error"
-            res.status(errorCode).json(message)
+            res.status(errorCode).json({ message })
         })
 })
 

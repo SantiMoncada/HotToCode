@@ -43,7 +43,7 @@ router.put('/edit/:user_id', isAuthenticated, (req, res) => {
     }
 
     if (!(logged_user_id === user_id)) {
-        res.status(401).json("You can only edit your own profile")
+        res.status(401).json({ message: "You can only edit your own profile" })
         return
     }
 

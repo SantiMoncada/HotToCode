@@ -79,7 +79,7 @@ router.put('/edit/:snippet_id', isAuthenticated, (req, res) => {
         .catch(err => {
             const errorCode = err.errorCode ? err.errorCode : 500
             const message = err.message ? err.message : "Internal server error"
-            res.status(errorCode).json(message)
+            res.status(errorCode).json({ message })
         })
 })
 
@@ -101,7 +101,7 @@ router.delete('/delete/:snippet_id', (req, res) => {
         .catch(err => {
             const errorCode = err.errorCode ? err.errorCode : 500
             const message = err.message ? err.message : "Internal server error"
-            res.status(errorCode).json(message)
+            res.status(errorCode).json({ message })
         })
 })
 
