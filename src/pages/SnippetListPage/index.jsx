@@ -4,7 +4,7 @@ import { Container } from "react-bootstrap"
 
 import snippetService from "../../services/snippets.services"
 import SnippetList from "../../components/SnippetList"
-
+import Loader from "../../components/Loader"
 
 
 
@@ -27,7 +27,6 @@ const SnippetListPage = () => {
             })
             .catch(err => console.log(err))
     }
-
 
     return (
         <>
