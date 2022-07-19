@@ -1,7 +1,11 @@
 import { useContext, useEffect, useState } from "react"
 import { AuthContext } from "../../contexts/auth.context"
+import { Container } from "react-bootstrap"
+
 import snippetService from "../../services/snippets.services"
 import SnippetList from "../../components/SnippetList"
+
+
 
 
 const SnippetListPage = () => {
@@ -24,9 +28,14 @@ const SnippetListPage = () => {
             .catch(err => console.log(err))
     }
 
+
     return (
         <>
-
+            <Container>
+                {
+                    snippets.length ? <SnippetList snippets={snippets} /> : <Loader />
+                }
+            </Container>
         </>
     )
 }
