@@ -10,6 +10,6 @@
 | /users/:user_id/fav-snippets      | Fav snippet page        |
 | /users/list                       | users list page         |
 | /snippets/list                    | snippet list page       |
-| /snippets/create                  | snippet list page       |
-| /snippets/edit                    | snippet list page       |
-| /snippets/my-snippets             | snippet list page       |
+| /snippets/create                  | snippet create page     |
+| /snippets/edit                    | snippet edit page       |
+| /snippets/my-snippets             | own snippet page        |

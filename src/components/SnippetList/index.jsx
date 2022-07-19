@@ -1,16 +1,19 @@
 import SnippetCard from "../SnippetCard"
+import { Col, Row, Container } from "react-bootstrap"
 
 const SnippetList = ({ snippets }) => {
     return (
-        <>
-            {snippets.map(snippets => {
-                return (
-                    <div key={snippets_id}>
-                        <SnippetCard {...snippets} />
-                    </div>
-                )
-            })}
-        </>
+        <Container>
+            <Row>
+                {snippets.map(snippet => {
+                    return (
+                        <Col xs={4} key={snippet._id}>
+                            <SnippetCard {...snippet} />
+                        </Col>
+                    )
+                })}
+            </Row>
+        </Container>
     )
 }
 

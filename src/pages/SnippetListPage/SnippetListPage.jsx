@@ -26,8 +26,11 @@ const SnippetListPage = () => {
 
     return (
         <>
-
+            <h1>Snippet list page</h1>
+            <SnippetList snippets={snippets} />
         </>
+
+
     )
 }
 
