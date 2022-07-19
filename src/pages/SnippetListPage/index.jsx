@@ -28,7 +28,6 @@ const SnippetListPage = () => {
             .catch(err => console.log(err))
     }
 
-
     return (
         <>
             <Container>

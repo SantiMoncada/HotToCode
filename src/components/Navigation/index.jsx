@@ -26,10 +26,20 @@ const Navigation = () => {
                         <Link to="/login">
                             <Nav.Link as="span">Login</Nav.Link>
                         </Link>
+                        <Link to="/snippets">
+                            <Nav.Link as="span">Snippets</Nav.Link>
+                        </Link>
+                        <Link to="/snippetForm">
+                            <Nav.Link as="span">SnippetForm</Nav.Link>
+                        </Link>
+                        <Link to="/myProfile">
+                            <Nav.Link as="span">My Profile</Nav.Link>
+                        </Link>
                     </Nav>
                 </Container>
             </Navbar>
-        </>)
+        </>
+    )
 
 }
 
