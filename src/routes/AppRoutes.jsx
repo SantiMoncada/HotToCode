@@ -4,6 +4,7 @@ import SignupPage from '../pages/SignupPage'
 import HomePage from '../pages/HomePage'
 import SnippetListPage from '../pages/SnippetListPage'
 import SnippetFormPage from '../pages/SnippetFormPage'
+import UserProfilePage from '../pages/UserProfilePage'
 
 const AppRoutes = () => {
 
@@ -14,6 +15,7 @@ const AppRoutes = () => {
             <Route path='/login' element={<LoginPage />} />
             <Route path='/snippets' element={<SnippetListPage />} />
             <Route path='/snippetForm' element={<SnippetFormPage />} />
+            <Route path='/myProfile' element={<UserProfilePage />} />
         </Routes>
     )
 }

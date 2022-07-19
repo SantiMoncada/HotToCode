@@ -32,6 +32,9 @@ const Navigation = () => {
                         <Link to="/snippetForm">
                             <Nav.Link as="span">SnippetForm</Nav.Link>
                         </Link>
+                        <Link to="/myProfile">
+                            <Nav.Link as="span">My Profile</Nav.Link>
+                        </Link>
                     </Nav>
                 </Container>
             </Navbar>
