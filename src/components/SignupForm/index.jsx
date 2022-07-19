@@ -24,7 +24,6 @@ const SignupForm = () => {
         authService
             .signup(signupData)
             .then(({ data }) => {
-                alert({ show: true, title: `Bienvenid@, ${data.user.username}`, text: 'Te has registrado correctamente' })
                 navigate('/login')
             })
             .catch(err => console.log(err))

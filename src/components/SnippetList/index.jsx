@@ -13,3 +13,5 @@ const SnippetList = ({ snippets }) => {
         </>
     )
 }
+
+export default SnippetList

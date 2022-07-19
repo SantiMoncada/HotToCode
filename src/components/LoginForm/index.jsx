@@ -2,7 +2,7 @@ import { useContext, useState } from "react"
 import authService from "../../services/auth.services"
 import { Form, Button } from "react-bootstrap"
 import { AuthContext } from "../../contexts/auth.context"
-
+import { useNavigate } from "react-router-dom"
 
 const LoginForm = () => {
 
@@ -10,6 +10,8 @@ const LoginForm = () => {
         email: '',
         password: ''
     })
+
+    const navigate = useNavigate()
 
     const { storeToken, authenticateUser } = useContext(AuthContext)
 
@@ -26,6 +28,7 @@ const LoginForm = () => {
             .then(({ data }) => {
                 storeToken(data.authToken)
                 authenticateUser()
+                navigate('/') //aqui redirigir al profile
             })
             .catch(err => console.log(err))
     }
