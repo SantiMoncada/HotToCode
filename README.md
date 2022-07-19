@@ -1,5 +1,5 @@
 # HotToCode-Server
- The server for the application HotToCode developed by Santiago Moncada & Jorge Hermo
+The server for the application HotToCode developed by Santiago Moncada & Jorge Hermo
 
 ## Auth routes
 
@@ -37,3 +37,8 @@
 | POST   | api/comments/create/:post_id     | {snippet}                        | create a comment      |
 | PUT    | api/comments/edit/:post_id       | {comment}                        | edit a comment        |
 | DELETE | api/comments/delete/:post_id     | {comment}                        | delete a comment      |
+
+## Environment variables required
+PORT
+ORIGIN
+TOKEN_SECRET

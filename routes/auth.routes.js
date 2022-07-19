@@ -13,20 +13,18 @@ router.post('/signup', (req, res, next) => {
 
     const { email, password, username } = req.body
 
-    if (password.length <= 6) {
+    if (password.length < 6) {
         res.status(400).json({ message: 'Password must have at least 6 characters' })
         return
     }
 
     User
         .findOne({ email })
-        .select("_id") //TODO test if it wworks
+        .select("_id")
         .then((foundUser) => {
 
             if (foundUser) {
-                res.status(400).json({ message: "User already exists." })
-                //TODO fix signup error
-                return
+                throw { message: "User already exists.", errorCode: 400 }
             }
 
             const salt = bcrypt.genSaltSync(saltRounds)
@@ -42,8 +40,9 @@ router.post('/signup', (req, res, next) => {
             res.status(201).json({ user })
         })
         .catch(err => {
-            console.log(err)
-            res.status(500).json({ message: "Internal Server Error" })
+            const errorCode = err.errorCode ? err.errorCode : 500
+            const message = err.message ? err.message : "Internal server error"
+            res.status(errorCode).json(message)
         })
 })
 
@@ -61,8 +60,7 @@ router.post('/login', (req, res, next) => {
         .then((foundUser) => {
 
             if (!foundUser) {
-                res.status(401).json({ message: "User not found." })
-                return;
+                throw { message: "User not found.", errorCode: 401 }
             }
 
             if (bcrypt.compareSync(password, foundUser.password)) {
@@ -78,20 +76,23 @@ router.post('/login', (req, res, next) => {
                 )
 
                 res.status(200).json({ authToken: authToken });
+
             }
             else {
-                res.status(401).json({ message: "Unable to authenticate the user" });
+                throw { message: "Unable to authenticate the user", errorCode: 401 }
             }
 
         })
-        .catch(err => res.status(500).json({ message: "Internal Server Error" }));
+        .catch(err => {
+            const errorCode = err.errorCode ? err.errorCode : 500
+            const message = err.message ? err.message : "Internal server error"
+            res.status(errorCode).json(message)
+        })
 });
 
 
 router.get('/verify', isAuthenticated, (req, res) => {
-    //TODO gives an error whe you verify and there is no noken
     res.status(200).json(req.payload)
-
 })
 
 module.exports = router
