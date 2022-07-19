@@ -1,6 +1,7 @@
 import { useContext, useState } from "react"
 import authService from "../../services/auth.services"
 import { Form, Button } from "react-bootstrap"
+import { AuthContext } from "../../contexts/auth.context"
 
 
 const LoginForm = () => {
@@ -10,7 +11,7 @@ const LoginForm = () => {
         password: ''
     })
 
-    const { storeToken, authenticateUser } = useContext
+    const { storeToken, authenticateUser } = useContext(AuthContext)
 
     const handleInputChange = e => {
         const { value, name } = e.target
