@@ -11,7 +11,7 @@ const SignupForm = () => {
         password: ''
     })
 
-    // const navigate = useNavigate()
+    const navigate = useNavigate()
 
     const handleInputChange = e => {
         const { value, name } = e.target
@@ -25,7 +25,7 @@ const SignupForm = () => {
             .signup(signupData)
             .then(({ data }) => {
                 alert({ show: true, title: `Bienvenid@, ${data.user.username}`, text: 'Te has registrado correctamente' })
-                // navigate('/iniciar-sesion')
+                navigate('/login')
             })
             .catch(err => console.log(err))
     }

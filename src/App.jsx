@@ -3,7 +3,6 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 
 import AppRoutes from './routes/AppRoutes'
 
-import SignupForm from './components/SignupForm'
 import Navigation from './components/Navigation';
 
 function App() {
@@ -11,8 +10,6 @@ function App() {
     <div className="App">
       <Navigation />
       <AppRoutes />
-      <h1>Hot to Code</h1>
-      <SignupForm />
     </div>
   );
 }
