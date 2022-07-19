@@ -1,8 +1,32 @@
-.SnippetCar {
-    background-color: red;
+.SnippetCard {}
+
+.SnippetCard p {
+    margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .SnippetCard img {
+
     width: 100%;
 
+}
+
+.SnippetCard Col {
+    padding: 0;
+}
+
+.SnippetCard pre {
+    white-space: wrap;
+}
+
+.SnippetCard .col-4 {
+    flex: 0 0 33.3333333%;
+    max-width: 33.3333333%;
+    position: relative;
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+    display: flex;
 }

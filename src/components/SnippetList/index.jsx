@@ -1,9 +1,10 @@
 import SnippetCard from "../SnippetCard"
+import "./SnippetList.css"
 import { Col, Row, Container } from "react-bootstrap"
 
 const SnippetList = ({ snippets }) => {
     return (
-        <Container>
+        <Container className="SnippetList">
             <Row>
                 {snippets.map(snippet => {
                     return (
