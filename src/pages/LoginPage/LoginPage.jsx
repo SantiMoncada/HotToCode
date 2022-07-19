@@ -1,29 +1,22 @@
-import SignupForm from "../../components/SignupForm"
+import LoginForm from "../../components/LoginForm"
 import { Container, Col, Row } from "react-bootstrap"
 
 
-const SignupPage = () => {
+const LoginPage = () => {
 
     return (
-
         <Container>
-
             <Row>
 
                 <Col md={{ offset: 3, span: 6 }}>
-
-                    <h1>Registro</h1>
-
+                    <h1>Login</h1>
                     <hr />
-
-                    <SignupForm />
-
+                    <LoginForm />
                 </Col>
-            </Row>
 
+            </Row>
         </Container>
     )
-
 }
 
-export default SignupPage
+export default LoginPage
