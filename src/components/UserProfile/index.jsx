@@ -16,6 +16,7 @@ const UserProfile = () => {
                 <Col>
                     <img src={user?.avatar} />
                     <p>{user?.username}</p>
+                    <p>{user?.email}</p>
                 </Col>
             </Row>
 
