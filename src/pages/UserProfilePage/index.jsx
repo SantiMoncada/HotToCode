@@ -1,14 +1,18 @@
-import { Container } from "react-bootstrap"
-import { AuthContext } from "../../contexts/auth.context"
+import { Container, Row, Col } from "react-bootstrap"
+import UserProfile from "../../components/UserProfile"
 
 const UserProfilePage = () => {
 
-    // const { user } = useContext(AuthContext)
 
 
     return (
         <Container>
-            <h1> Aqui todos los datos del user</h1>
+            <Row>
+                <Col>
+                    <UserProfile />
+                </Col>
+                <Col></Col>
+            </Row>
         </Container>
 
     )
