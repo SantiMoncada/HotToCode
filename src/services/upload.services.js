@@ -1,4 +1,3 @@
-import { toHaveAccessibleDescription } from '@testing-library/jest-dom/dist/matchers';
 import axios from 'axios'
 
 class UploadService {

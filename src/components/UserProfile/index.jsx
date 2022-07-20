@@ -1,25 +1,37 @@
-import { useContext, useState } from "react"
+import { useContext } from "react"
 import { AuthContext } from "../../contexts/auth.context"
-import { Card, Row, Col } from 'react-bootstrap'
-
-const UserProfile = () => {
+import { Card, Row, Col, Container } from 'react-bootstrap'
 
 
+const UserProfile = ({ userData }) => {
 
     const { user } = useContext(AuthContext)
 
+    console.log('----data en profile----', userData)
+
     return (
-        <Card>
-
-            <Row>
-                <Col>
-                    <img src={user?.avatar} />
-                    <p>{user?.username}</p>
-                    <p>{user?.email}</p>
-                </Col>
-            </Row>
-
-        </Card>
+        <Container>
+            <Card>
+                <Card.Body>
+                    <Row>
+                        <Col xs={{ span: 2, offset: 5 }}>
+                            <Card.Img src={userData.avatar} alt={`avatar of ${userData.username}`} />
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col>
+                            {userData.username}
+                        </Col>
+                        <Col>
+                            {user.email}
+                        </Col>
+                    </Row>
+                    <Card.Text>
+                        {userData.bio}
+                    </Card.Text>
+                </Card.Body>
+            </Card>
+        </Container>
     )
 }
 
