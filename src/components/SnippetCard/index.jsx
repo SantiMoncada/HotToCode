@@ -15,24 +15,33 @@ const SnippetCard = ({ title, content, language, owner }) => {
 
     const { user } = useContext(AuthContext)
 
-    let icon;
+    let icon
+    let len
+    let border = 'ligth'
     switch (language) {
         case 'JS':
-            icon = jsIcon;
-            break;
+            icon = jsIcon
+            len = 'jsx'
+            border = 'success'
+            break
+
         case 'C':
-            icon = cIcon;
-            break;
+            icon = cIcon
+            len = 'c'
+            border = 'info'
+            break
         case 'PYTHON':
             icon = pythonIcon
-            break;
+            len = 'py'
+            border = 'warning'
+            break
         default:
 
     }
 
     return (
-        <Card className="SnippetCard"  >
-            <Card.Header>
+        <Card border={border} className="SnippetCard" bg={'Secondary'} >
+            <Card.Header style={{ backgroundColor: 'white' }}>
                 <Row>
                     <Col xs={2} style={{ padding: 0 }}>
                         <div className="cardAvatar">
@@ -55,7 +64,7 @@ const SnippetCard = ({ title, content, language, owner }) => {
             <Card.Body style={{ padding: 0 }} >
                 <Card.Text>
 
-                    <CodeStyle className={'codeInCard'} code={content}></CodeStyle>
+                    <CodeStyle className={'codeInCard'} code={content} language={len}></CodeStyle>
 
                 </Card.Text>
                 <div className="actionButtons">
