@@ -1,23 +1,28 @@
 import React from "react";
 import Highlight, { defaultProps } from "prism-react-renderer";
-import github from 'prism-react-renderer/themes/github';
+import theme from 'prism-react-renderer/themes/synthwave84';
+import { Container } from "react-bootstrap";
 
-
-const CodeStyle = ({ code }) => {
+const CodeStyle = ({ className: classNameParent, code }) => {
     return (
-        <Highlight  {...defaultProps} code={code} language="jsx" theme={github}>
-            {({ className, style, tokens, getLineProps, getTokenProps }) => (
-                <pre className={className} style={style}>
-                    {tokens.map((line, i) => (
-                        <div {...getLineProps({ line, key: i })}>
-                            {line.map((token, key) => (
-                                <span {...getTokenProps({ token, key })} />
+        <div >
+            <Highlight {...defaultProps} code={code} language="jsx" theme={theme}>
+                {({ className, style, tokens, getLineProps, getTokenProps }) => (
+                    <pre className={`${className} ${classNameParent}`} style={style}>
+                        <Container>
+                            <br />
+                            {tokens.map((line, i) => (
+                                <div {...getLineProps({ line, key: i })}>
+                                    {line.map((token, key) => (
+                                        <span {...getTokenProps({ token, key })} />
+                                    ))}
+                                </div>
                             ))}
-                        </div>
-                    ))}
-                </pre>
-            )}
-        </Highlight>
+                        </Container>
+                    </pre>
+                )}
+            </Highlight>
+        </div>
     );
 }
 export default CodeStyle

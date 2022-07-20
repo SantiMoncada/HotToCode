@@ -1,4 +1,20 @@
-.SnippetCard {}
+.cardAvatar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+
+.cardAvatar>img {
+    width: 60%;
+
+    border-radius: 50%;
+}
+
+hr {
+    margin: 0;
+}
 
 .SnippetCard p {
     margin: 0;
@@ -7,11 +23,22 @@
     text-overflow: ellipsis;
 }
 
-.SnippetCard img {
-
-    width: 100%;
-
+.cardIcon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
 }
+
+.cardIcon>img {
+    width: 100%;
+}
+
+.codeInCard {
+    height: 150px;
+    margin: 0;
+}
+
 
 .SnippetCard Col {
     padding: 0;
@@ -29,4 +56,10 @@
     padding-right: 15px;
     padding-left: 15px;
     display: flex;
+}
+
+.actionButtons {
+    margin: 5px 0;
+    display: flex;
+    justify-content: space-evenly;
 }

@@ -1,14 +1,6 @@
 import { Container, Row, Col } from 'react-bootstrap'
-import CodeStyle from './../../components/CodeStyle'
-const HomePage = () => {
-    const exampleCode = `
-(function someDemo() {
-  var test = "Hello World!";
-  console.log(test);
-})();
 
-return () => <App />;
-`;
+const HomePage = () => {
 
     return (
         <Container>

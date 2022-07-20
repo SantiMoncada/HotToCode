@@ -8,7 +8,7 @@ const SnippetList = ({ snippets }) => {
             <Row>
                 {snippets.map(snippet => {
                     return (
-                        <Col xs={4} key={snippet._id}>
+                        <Col md={6} lg={4} key={snippet._id} className="mb-4">
                             <SnippetCard {...snippet} />
                         </Col>
                     )
