@@ -41,4 +41,9 @@ The server for the application HotToCode developed by Santiago Moncada & Jorge H
 ## Environment variables required
 PORT
 ORIGIN
+MONGODB_URI
 TOKEN_SECRET
+CLOUDINARY_NAME
+CLOUDINARY_KEY
+CLOUDINARY_SECRET
+
