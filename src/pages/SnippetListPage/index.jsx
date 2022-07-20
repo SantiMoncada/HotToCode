@@ -31,6 +31,7 @@ const SnippetListPage = () => {
     return (
         <>
             <Container>
+                <h1>Snippet List</h1>
                 {
                     snippets.length ? <SnippetList snippets={snippets} /> : <Loader />
                 }
