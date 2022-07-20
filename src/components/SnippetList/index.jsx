@@ -4,17 +4,17 @@ import { Col, Row, Container } from "react-bootstrap"
 
 const SnippetList = ({ snippets }) => {
     return (
-        <Container className="SnippetList">
-            <Row>
-                {snippets.map(snippet => {
-                    return (
-                        <Col md={6} lg={4} key={snippet._id} className="mb-4">
-                            <SnippetCard {...snippet} />
-                        </Col>
-                    )
-                })}
-            </Row>
-        </Container>
+
+        <Row>
+            {snippets.map(snippet => {
+                return (
+                    <Col md={12} lg={6} xl={4} key={snippet._id} className="mb-4">
+                        <SnippetCard {...snippet} />
+                    </Col>
+                )
+            })}
+        </Row>
+
     )
 }
 

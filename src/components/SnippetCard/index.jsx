@@ -62,11 +62,9 @@ const SnippetCard = ({ title, content, language, owner }) => {
                 </Row>
             </Card.Header>
             <Card.Body style={{ padding: 0 }} >
-                <Card.Text>
 
-                    <CodeStyle className={'codeInCard'} code={content} language={len}></CodeStyle>
+                <CodeStyle className={'codeInCard'} code={content} language={len}></CodeStyle>
 
-                </Card.Text>
                 <div className="actionButtons">
                     <MdFavoriteBorder />
                     {/* <MdFavorite /> */}
