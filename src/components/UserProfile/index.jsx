@@ -8,7 +8,6 @@ const UserProfile = () => {
 
     const { user } = useContext(AuthContext)
 
-    console.log(user)
     return (
         <Card>
 
@@ -16,6 +15,7 @@ const UserProfile = () => {
                 <Col>
                     <img src={user?.avatar} />
                     <p>{user?.username}</p>
+                    <p>{user?.email}</p>
                 </Col>
             </Row>
 
