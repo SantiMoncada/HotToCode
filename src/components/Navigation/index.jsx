@@ -1,3 +1,6 @@
+import { AuthContext } from "../../contexts/auth.context";
+import { useContext } from "react";
+
 import { Container, Navbar, Nav } from "react-bootstrap"
 import { Link } from 'react-router-dom'
 
@@ -11,6 +14,9 @@ import logo from './../../assets/blackLogo.svg'
 import { MdOutlineSearch } from 'react-icons/md'
 
 const Navigation = () => {
+
+    const { logoutUser } = useContext(AuthContext)
+
     return (
 
         <Navbar bg="light" expand="lg">
@@ -43,14 +49,24 @@ const Navigation = () => {
                         </Form>
                     </Nav>
                     <Nav>
+
+
+
                         <Link to='/snippets' style={{ textDecoration: 'none' }}>
-                            <Nav.Link as='span'>
+                            <Nav.Link as='span' >
                                 Snippets
                             </Nav.Link>
                         </Link>
 
+                        <Link to='/snippetForm' style={{ textDecoration: 'none' }}>
+                            <Nav.Link as='span' >
+                                Create snippet
+                            </Nav.Link>
+                        </Link>
+
+
                         <Link to='/login' style={{ textDecoration: 'none' }}>
-                            <Nav.Link as='span'>
+                            <Nav.Link as='span' >
                                 Sign in
                             </Nav.Link>
                         </Link>
@@ -61,24 +77,21 @@ const Navigation = () => {
                             </Nav.Link>
                         </Link>
 
-                        <Nav.Link >Sign in</Nav.Link>
-
-
-
                         <NavDropdown title="Session" id="navbarScrollingDropdown" align={'end'}>
                             <NavDropdown.Header active>Hello User!</NavDropdown.Header>
                             <NavDropdown.Divider />
                             <NavDropdown.Item >
                                 <Link to='/myProfile' style={{ textDecoration: 'none' }}>
-                                    <Nav.Link as='span'>
+                                    <NavDropdown.Item as='span' style={{ padding: '0' }}>
                                         Your Profile
-                                    </Nav.Link>
+                                    </NavDropdown.Item>
                                 </Link>
                             </NavDropdown.Item>
+
                             <NavDropdown.Item >Your snippets</NavDropdown.Item>
                             <NavDropdown.Item >Your favs</NavDropdown.Item>
                             <NavDropdown.Divider />
-                            <NavDropdown.Item >Sign out</NavDropdown.Item>
+                            <NavDropdown.Item onClick={logoutUser}>Sign out</NavDropdown.Item>
                         </NavDropdown>
 
                     </Nav>
