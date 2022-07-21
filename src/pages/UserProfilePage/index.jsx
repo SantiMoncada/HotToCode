@@ -42,11 +42,12 @@ const UserProfilePage = () => {
 
     return (
         <Container>
+            <br />
             <Row>
                 <Col sm={4}>
                     <UserProfile loadUser={loadUser} userData={userData} />
                 </Col>
-                <Col sm={8}><SnippetList snippets={snippets} /></Col>
+                <Col sm={8}><SnippetList maxColums={2} snippets={snippets} /></Col>
             </Row>
         </Container>
 

@@ -15,7 +15,7 @@ import { MdOutlineSearch } from 'react-icons/md'
 
 const Navigation = () => {
 
-    const { logoutUser } = useContext(AuthContext)
+    const { logoutUser, user } = useContext(AuthContext)
 
     return (
 
@@ -47,53 +47,55 @@ const Navigation = () => {
                             />
                             <Button variant="outline-success"><MdOutlineSearch /></Button>
                         </Form>
-                    </Nav>
-                    <Nav>
-
-
-
                         <Link to='/snippets' className="LinkStyle" >
                             <Nav.Link as='span' >
                                 Snippets
                             </Nav.Link>
                         </Link>
 
-                        <Link to='/snippetForm' className="LinkStyle" >
-                            <Nav.Link as='span' >
-                                Create snippet
-                            </Nav.Link>
-                        </Link>
+                        {user &&
+                            <Link to='/snippetForm' className="LinkStyle" >
+                                <Nav.Link as='span' >
+                                    Create snippet
+                                </Nav.Link>
+                            </Link>
+                        }
+                    </Nav>
+                    <Nav>
 
-
-                        <Link to='/login' className="LinkStyle" >
-                            <Nav.Link as='span' >
-                                Sign in
-                            </Nav.Link>
-                        </Link>
-
-                        <Link to='/signup' className="LinkStyle" >
-                            <Nav.Link className="signup" as='span' >
-                                Sign up
-                            </Nav.Link>
-                        </Link>
-
-                        <NavDropdown title="Session" id="navbarScrollingDropdown" align={'end'}>
-                            <NavDropdown.Header>Hello User!</NavDropdown.Header>
-                            <NavDropdown.Divider />
-                            <NavDropdown.Item >
-                                <Link to='/myProfile' className="LinkStyle" >
-                                    <NavDropdown.Item as='span' style={{ padding: '0' }}>
-                                        Your Profile
-                                    </NavDropdown.Item>
+                        {!user ?
+                            <>
+                                <Link to='/login' className="LinkStyle" >
+                                    <Nav.Link as='span' >
+                                        Sign in
+                                    </Nav.Link>
                                 </Link>
-                            </NavDropdown.Item>
 
-                            <NavDropdown.Item >Your snippets</NavDropdown.Item>
-                            <NavDropdown.Item >Your favs</NavDropdown.Item>
-                            <NavDropdown.Divider />
-                            <NavDropdown.Item onClick={logoutUser}>Sign out</NavDropdown.Item>
-                        </NavDropdown>
+                                <Link to='/signup' className="LinkStyle" >
+                                    <Nav.Link className="signup" as='span' >
+                                        Sign up
+                                    </Nav.Link>
+                                </Link>
+                            </>
 
+                            :
+                            <NavDropdown title="Session" id="navbarScrollingDropdown" align={'end'}>
+                                <NavDropdown.Header>Hello {user.username} !</NavDropdown.Header>
+                                <NavDropdown.Divider />
+                                <NavDropdown.Item >
+                                    <Link to='/myProfile' className="LinkStyle" >
+                                        <NavDropdown.Item as='span' style={{ padding: '0' }}>
+                                            Your Profile
+                                        </NavDropdown.Item>
+                                    </Link>
+                                </NavDropdown.Item>
+
+                                <NavDropdown.Item >Your snippets</NavDropdown.Item>
+                                <NavDropdown.Item >Your favs</NavDropdown.Item>
+                                <NavDropdown.Divider />
+                                <NavDropdown.Item onClick={logoutUser}>Sign out</NavDropdown.Item>
+                            </NavDropdown>
+                        }
                     </Nav>
                 </Navbar.Collapse>
             </Container>

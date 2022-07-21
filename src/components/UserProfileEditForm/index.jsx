@@ -21,7 +21,7 @@ const UserProfileEditForm = ({ userData, loadUser, formOpenHandler }) => {
         userService
             .editUser(loggedUser._id, formData)
             .then((response) => {
-                //TODO close form
+                formOpenHandler()
                 loadUser()
             })
             .catch(err => console.log(err))
@@ -40,7 +40,11 @@ const UserProfileEditForm = ({ userData, loadUser, formOpenHandler }) => {
                 setFormData({ ...formData, avatar: data.cloudinary_url })
                 setIsLoading(false)
             })
-            .catch(err => console.error(err))
+            .catch(err => {
+                //TODO alert user
+                setIsLoading(false)
+                console.error(err)
+            })
     }
 
 
@@ -61,8 +65,8 @@ const UserProfileEditForm = ({ userData, loadUser, formOpenHandler }) => {
                 <Form.Label>Bio</Form.Label>
                 <Form.Control as="textarea" rows={3} value={bio} onChange={handleChange} name="bio" />
             </Form.Group>
-            <div className="d-grid">
-                {!isLoading ? <Button variant="dark" type="submit">Edit</Button> : <p>Loading...</p>}
+            <div className="d-grid gap-3">
+                {!isLoading ? <Button variant="dark" type="submit">Submit</Button> : <p>Loading...</p>}
                 <Button variant="primary" onClick={formOpenHandler} >Cancel</Button>
             </div>
         </Form>

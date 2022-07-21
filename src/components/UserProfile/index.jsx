@@ -2,7 +2,7 @@ import { Card, Row, Col, Container, Button } from 'react-bootstrap'
 import UserProfileEditForm from "../UserProfileEditForm"
 import { useState } from 'react'
 import './userprofile.css'
-
+import Loader from './../Loader'
 const UserProfile = ({ loadUser, userData }) => {
     const [formOpen, setFormOpen] = useState(false)
 
@@ -10,34 +10,34 @@ const UserProfile = ({ loadUser, userData }) => {
         setFormOpen(state => !state)
     }
 
-    if (userData) {
-        return (
-            <Container>
-                <Row>
-                    <Col className='avatar'>
+
+    return (
+        <>
+            {userData ?
+                <Container>
+                    <figure className='avatar'>
                         <img src={userData.avatar} alt={`avatar of ${userData.username}`} />
-                    </Col>
-                </Row>
-                <Row>
-                    <Col>
-                        {userData.username}
-                    </Col>
-                </Row>
-                <Card.Text>
-                    {userData.bio}
-                </Card.Text>
-                <Row>
-                    {formOpen ?
-                        <UserProfileEditForm formOpenHandler={formOpenHandler} loadUser={loadUser} userData={userData} />
+                    </figure>
+                    {!formOpen ?
+                        <>
+                            <h3>@{userData.username}</h3>
+                            <p>{userData.bio}</p>
+                            <div className="d-grid ">
+                                <Button variant="primary" onClick={formOpenHandler} >Edit</Button>
+                            </div>
+                        </>
                         :
-                        <Button variant="primary" onClick={formOpenHandler} >Edit</Button>
+                        <UserProfileEditForm formOpenHandler={formOpenHandler} loadUser={loadUser} userData={userData} />
                     }
-                </Row>
-            </Container>
-        )
-    } else {
-        <p>Loading...</p>
-    }
+                    <br />
+                </Container>
+                :
+                <Loader />
+            }
+
+        </>
+    )
+
 }
 
 export default UserProfile

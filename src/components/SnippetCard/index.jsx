@@ -66,10 +66,10 @@ const SnippetCard = ({ title, content, language, owner }) => {
                 <CodeStyle className={'codeInCard'} code={content} language={len}></CodeStyle>
 
                 <div className="actionButtons">
-                    <MdFavoriteBorder />
+                    <MdFavoriteBorder className="actionButton" />
                     {/* <MdFavorite /> */}
-                    <MdIosShare />
-                    <TbGitFork />
+                    <MdIosShare className="actionButton" />
+                    <TbGitFork className="actionButton" />
                 </div>
             </Card.Body>
         </Card>

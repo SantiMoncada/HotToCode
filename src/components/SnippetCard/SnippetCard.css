@@ -33,6 +33,7 @@ hr {
     justify-content: center;
     align-items: center;
     height: 100%;
+
 }
 
 .cardIcon>img {
@@ -69,3 +70,5 @@ hr {
     display: flex;
     justify-content: space-evenly;
 }
+
+.actionButton {}
