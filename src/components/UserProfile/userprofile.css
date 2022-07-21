@@ -1,0 +1,18 @@
+.avatar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.avatar>img {
+    width: 220px;
+    height: 220px;
+    border-radius: 50%;
+    align-self: end;
+    display: inline-block;
+    position: relative;
+    vertical-align: middle;
+    object-fit: cover;
+    overflow: inherit
+}

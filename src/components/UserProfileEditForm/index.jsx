@@ -4,11 +4,10 @@ import userService from "../../services/user.services"
 import uploadService from '../../services/upload.services'
 import { AuthContext } from "../../contexts/auth.context"
 
-const UserProfileEditForm = ({ userData }) => {
-    console.log("prop form ", userData)
+const UserProfileEditForm = ({ userData, loadUser, formOpenHandler }) => {
     const { user: loggedUser } = useContext(AuthContext)
 
-    const [isLoading, setIsLoading] = useState(true)
+    const [isLoading, setIsLoading] = useState(false)
 
     const [formData, setFormData] = useState(userData)
 
@@ -20,9 +19,10 @@ const UserProfileEditForm = ({ userData }) => {
     const handleSubmit = e => {
         e.preventDefault()
         userService
-            .editUser(loggedUser._id)
+            .editUser(loggedUser._id, formData)
             .then((response) => {
-                console.log(response)
+                //TODO close form
+                loadUser()
             })
             .catch(err => console.log(err))
 
@@ -63,6 +63,7 @@ const UserProfileEditForm = ({ userData }) => {
             </Form.Group>
             <div className="d-grid">
                 {!isLoading ? <Button variant="dark" type="submit">Edit</Button> : <p>Loading...</p>}
+                <Button variant="primary" onClick={formOpenHandler} >Cancel</Button>
             </div>
         </Form>
     )

@@ -24,8 +24,8 @@ class UserServices {
         return this.api.get(`/details/${user_id}`)
     }
 
-    editUser(user_id) {
-        return this.api.put(`/edit/${user_id}`)
+    editUser(user_id, userData) {
+        return this.api.put(`/edit/${user_id}`, userData)
     }
 
     favSnippet(snippet_id) {

@@ -25,6 +25,8 @@ function AuthProviderWrapper(props) {
                     setIsLoading(false)
                 })
                 .catch(err => logoutUser())
+        } else {
+            logoutUser()
         }
     }
 

@@ -18,19 +18,13 @@ const UserProfilePage = () => {
 
     useEffect(() => {
         loadUser()
-    }, [loggedUser])
-
-    useEffect(() => {
-        loadUser()
         loadSnippet()
     }, [])
 
     const loadUser = () => {
-        console.log('debug---->', loggedUser)
         userService
-            .getUser(loggedUser?._id)
+            .getUser(loggedUser._id)
             .then(({ data }) => {
-                console.log('page fecth user ', data)
                 const { username, avatar, bio } = data
                 setUserData({ username, avatar, bio })
             })
@@ -50,7 +44,7 @@ const UserProfilePage = () => {
         <Container>
             <Row>
                 <Col>
-                    <UserProfile userData={userData} />
+                    <UserProfile loadUser={loadUser} userData={userData} />
                 </Col>
                 <Col><SnippetList snippets={snippets} /></Col>
             </Row>
