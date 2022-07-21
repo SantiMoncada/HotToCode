@@ -56,7 +56,13 @@ const Navigation = () => {
                         <NavDropdown title="Session" id="navbarScrollingDropdown" align={'end'}>
                             <NavDropdown.Header active>Hello User!</NavDropdown.Header>
                             <NavDropdown.Divider />
-                            <NavDropdown.Item >Your profile</NavDropdown.Item>
+                            <NavDropdown.Item >
+                                <Link to='/myProfile' style={{ textDecoration: 'none' }}>
+                                    <Nav.Link as='span'>
+                                        Your Profile
+                                    </Nav.Link>
+                                </Link>
+                            </NavDropdown.Item>
                             <NavDropdown.Item >Your snippets</NavDropdown.Item>
                             <NavDropdown.Item >Your favs</NavDropdown.Item>
                             <NavDropdown.Divider />

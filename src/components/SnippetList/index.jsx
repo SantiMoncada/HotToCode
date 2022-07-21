@@ -1,6 +1,6 @@
 import SnippetCard from "../SnippetCard"
 import "./SnippetList.css"
-import { Col, Row, Container } from "react-bootstrap"
+import { Col, Row } from "react-bootstrap"
 
 const SnippetList = ({ snippets }) => {
     return (
