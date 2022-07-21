@@ -49,8 +49,20 @@ const Navigation = () => {
                             </Nav.Link>
                         </Link>
 
+                        <Link to='/login' style={{ textDecoration: 'none' }}>
+                            <Nav.Link as='span'>
+                                Sign in
+                            </Nav.Link>
+                        </Link>
+
+                        <Link to='/signup' style={{ textDecoration: 'none' }}>
+                            <Nav.Link as='span' style={{ border: 'solid gray 1px', borderRadius: '8px' }}>
+                                Sign up
+                            </Nav.Link>
+                        </Link>
+
                         <Nav.Link >Sign in</Nav.Link>
-                        <Nav.Link style={{ border: 'solid gray 1px', borderRadius: '8px' }}>Sign up</Nav.Link>
+
 
 
                         <NavDropdown title="Session" id="navbarScrollingDropdown" align={'end'}>
