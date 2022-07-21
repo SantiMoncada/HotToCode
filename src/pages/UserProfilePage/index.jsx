@@ -12,23 +12,27 @@ const UserProfilePage = () => {
     const [snippets, setSnippets] = useState([])
 
     const [userData, setUserData] = useState([])
-    const { user } = useContext(AuthContext)
 
+    const { user: loggedUser } = useContext(AuthContext)
 
-    useEffect(() => {
-        loadSnippet()
-    }, [])
 
     useEffect(() => {
         loadUser()
+    }, [loggedUser])
+
+    useEffect(() => {
+        loadUser()
+        loadSnippet()
     }, [])
 
     const loadUser = () => {
+        console.log('debug---->', loggedUser)
         userService
-            .getUser(user._id)
+            .getUser(loggedUser?._id)
             .then(({ data }) => {
-                console.log('---user-----', data)
-                setUserData(data)
+                console.log('page fecth user ', data)
+                const { username, avatar, bio } = data
+                setUserData({ username, avatar, bio })
             })
             .catch(err => console.log(err))
     }
