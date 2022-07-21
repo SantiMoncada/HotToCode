@@ -1,0 +1,14 @@
+.LinkStyle {
+    text-decoration: none;
+}
+
+.signup {
+    border: solid gray 1px;
+    border-radius: 8px;
+}
+
+@media (max-width:991px) {
+    .signup {
+        border: none;
+    }
+}
