@@ -5,6 +5,7 @@ import HomePage from '../pages/HomePage'
 import SnippetListPage from '../pages/SnippetListPage'
 import SnippetFormPage from '../pages/SnippetFormPage'
 import UserProfilePage from '../pages/UserProfilePage'
+import PrivateRoute from './PrivateRoute'
 
 const AppRoutes = () => {
 
@@ -14,9 +15,14 @@ const AppRoutes = () => {
             <Route path='/signup' element={<SignupPage />} />
             <Route path='/login' element={<LoginPage />} />
             <Route path='/snippets' element={<SnippetListPage />} />
-            <Route path='/snippetForm' element={<SnippetFormPage />} />
-            <Route path='/myProfile' element={<UserProfilePage />} />
+            <Route path="/snippetForm" element={<PrivateRoute />}>
+                <Route path="" element={<SnippetFormPage />} />
+            </Route>
+            <Route path="/myProfile" element={<PrivateRoute />}>
+                <Route path="" element={<UserProfilePage />} />
+            </Route>
         </Routes>
+
     )
 }
 
