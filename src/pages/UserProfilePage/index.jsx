@@ -43,10 +43,10 @@ const UserProfilePage = () => {
     return (
         <Container>
             <Row>
-                <Col>
+                <Col sm={4}>
                     <UserProfile loadUser={loadUser} userData={userData} />
                 </Col>
-                <Col><SnippetList snippets={snippets} /></Col>
+                <Col sm={8}><SnippetList snippets={snippets} /></Col>
             </Row>
         </Container>
 

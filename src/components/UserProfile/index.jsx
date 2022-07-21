@@ -14,7 +14,7 @@ const UserProfile = ({ loadUser, userData }) => {
         return (
             <Container>
                 <Row>
-                    <Col className='avatar' >
+                    <Col className='avatar'>
                         <img src={userData.avatar} alt={`avatar of ${userData.username}`} />
                     </Col>
                 </Row>

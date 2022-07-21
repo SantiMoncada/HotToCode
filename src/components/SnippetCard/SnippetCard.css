@@ -7,8 +7,13 @@
 
 
 .cardAvatar>img {
-    width: 60%;
-
+    width: 35px;
+    height: 35px;
+    display: inline-block;
+    position: relative;
+    vertical-align: middle;
+    object-fit: cover;
+    overflow: inherit;
     border-radius: 50%;
 }
 
