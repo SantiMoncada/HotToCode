@@ -16,7 +16,7 @@ const userSchema = new Schema(
     password: String,
     avatar: {
       type: String,
-      default: ''
+      default: 'https://res.cloudinary.com/dyxcgvfhb/image/upload/v1658393841/hottocode/8f1b09269d8df868039a5f9db169a772_nrx9vj.jpg'
     },
     bio: {
       type: String,
