@@ -1,17 +1,17 @@
-import { AuthContext } from "../../contexts/auth.context";
 import { useContext } from "react";
-
-import { Container, Navbar, Nav } from "react-bootstrap"
 import { Link } from 'react-router-dom'
 
+import { AuthContext } from "../../contexts/auth.context";
+
+import './Navigation.css'
+import { Container, Navbar, Nav } from "react-bootstrap"
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-
 import NavDropdown from 'react-bootstrap/NavDropdown';
 
 import logo from './../../assets/blackLogo.svg'
-
 import { MdOutlineSearch } from 'react-icons/md'
+
 
 const Navigation = () => {
 
@@ -19,7 +19,7 @@ const Navigation = () => {
 
     return (
 
-        <Navbar bg="light" expand="lg">
+        <Navbar className="Navigation" bg="light" expand="lg">
             <Container fluid>
                 <Link to='/'>
                     <Navbar.Brand>
@@ -52,36 +52,36 @@ const Navigation = () => {
 
 
 
-                        <Link to='/snippets' style={{ textDecoration: 'none' }}>
+                        <Link to='/snippets' className="LinkStyle" >
                             <Nav.Link as='span' >
                                 Snippets
                             </Nav.Link>
                         </Link>
 
-                        <Link to='/snippetForm' style={{ textDecoration: 'none' }}>
+                        <Link to='/snippetForm' className="LinkStyle" >
                             <Nav.Link as='span' >
                                 Create snippet
                             </Nav.Link>
                         </Link>
 
 
-                        <Link to='/login' style={{ textDecoration: 'none' }}>
+                        <Link to='/login' className="LinkStyle" >
                             <Nav.Link as='span' >
                                 Sign in
                             </Nav.Link>
                         </Link>
 
-                        <Link to='/signup' style={{ textDecoration: 'none' }}>
-                            <Nav.Link as='span' style={{ border: 'solid gray 1px', borderRadius: '8px' }}>
+                        <Link to='/signup' className="LinkStyle" >
+                            <Nav.Link className="signup" as='span' >
                                 Sign up
                             </Nav.Link>
                         </Link>
 
                         <NavDropdown title="Session" id="navbarScrollingDropdown" align={'end'}>
-                            <NavDropdown.Header active>Hello User!</NavDropdown.Header>
+                            <NavDropdown.Header>Hello User!</NavDropdown.Header>
                             <NavDropdown.Divider />
                             <NavDropdown.Item >
-                                <Link to='/myProfile' style={{ textDecoration: 'none' }}>
+                                <Link to='/myProfile' className="LinkStyle" >
                                     <NavDropdown.Item as='span' style={{ padding: '0' }}>
                                         Your Profile
                                     </NavDropdown.Item>
@@ -97,7 +97,7 @@ const Navigation = () => {
                     </Nav>
                 </Navbar.Collapse>
             </Container>
-        </Navbar>
+        </Navbar >
     );
 }
 export default Navigation
