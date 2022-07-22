@@ -1,10 +1,7 @@
-import { useNavigate } from "react-router-dom"
 import { Container } from "react-bootstrap"
 
 
 const CreateSnippetPage = () => {
-
-    const navigate = useNavigate()
 
     return (
         <Container>

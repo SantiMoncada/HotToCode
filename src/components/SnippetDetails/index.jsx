@@ -14,6 +14,7 @@ const SnippetDetails = ({ title, content, language, owner }) => {
     let icon
     let len
     let border = 'ligth'
+
     switch (language) {
         case 'JS':
             icon = jsIcon
