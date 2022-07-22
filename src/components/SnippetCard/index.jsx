@@ -1,4 +1,5 @@
 import { useContext } from "react"
+import { useNavigate } from "react-router-dom";
 import { AuthContext } from '../../contexts/auth.context'
 
 import userService from "../../services/user.services"
@@ -13,11 +14,22 @@ import pythonIcon from "./../../assets/LengIcons/python-plain.svg"
 
 import { MdFavoriteBorder, MdFavorite, MdShare, MdOutlineModeComment } from 'react-icons/md'
 import { TbGitFork } from 'react-icons/tb'
+import { useState } from "react";
+import { useEffect } from "react";
 
 
-const SnippetCard = ({ title, content, language, owner, _id }) => {
+const SnippetCard = ({ title, content, language, owner, _id, isFav }) => {
+
+
+    const [isFavLocal, setIsFavLocal] = useState(isFav)
 
     const { user } = useContext(AuthContext)
+    let navigate = useNavigate();
+
+    useEffect(() => {
+        setIsFavLocal(isFav)
+    }, [isFav])
+
 
     let icon
     let len
@@ -43,16 +55,36 @@ const SnippetCard = ({ title, content, language, owner, _id }) => {
 
     }
 
-    const likeHandler = (snippet_id) => {
-        //TODO if state of fav remove or add
-        userService.favSnippet(snippet_id)
-            .then(({ data }) => {
-                alert(JSON.stringify(data))
-            })
-            .catch(err => alert(err))
+    const likeHandler = () => {
+
+        !user && navigate(`/login`)
+
+
+        if (isFavLocal) {
+            userService.rmFavSnippet(_id)
+                .then(() => {
+                    setIsFavLocal(false)
+                })
+                .catch(err => console.log(err))
+        } else {
+            userService.favSnippet(_id)
+                .then(() => {
+                    setIsFavLocal(true)
+                })
+                .catch(err => console.log(err))
+        }
 
     }
 
+
+    const commentHandler = () => {
+        navigate(`/snippetDetails/${_id}`)
+    }
+
+    const shareHandler = () => {
+        alert('copied to clipboard')
+        navigator.clipboard.writeText(`${window.location.href}/snippetDetails/${_id}`)
+    }
 
     return (
         <Card border={border} className="SnippetCard" bg={'Secondary'} >
@@ -81,11 +113,18 @@ const SnippetCard = ({ title, content, language, owner, _id }) => {
                 <CodeStyle className={'codeInCard'} code={content} language={len}></CodeStyle>
 
                 <div className="actionButtons">
-                    <MdOutlineModeComment className="actionButton comment" />
+                    <MdOutlineModeComment onClick={commentHandler} className="actionButton comment" />
+
                     <TbGitFork className="actionButton fork" />
-                    <MdFavoriteBorder onClick={() => likeHandler(_id)} className="actionButton fav" />
-                    {/* <MdFavorite /> */}
-                    <MdShare className="actionButton share" />
+                    {
+                        isFavLocal
+                            ?
+                            <MdFavorite onClick={likeHandler} className="actionButton fav" />
+                            :
+                            <MdFavoriteBorder onClick={likeHandler} className="actionButton fav" />
+                    }
+
+                    <MdShare onClick={shareHandler} className="actionButton share" />
                 </div>
             </Card.Body>
         </Card>

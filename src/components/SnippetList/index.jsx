@@ -7,10 +7,6 @@ import { useState } from "react"
 
 const SnippetList = ({ snippets, maxColums }) => {
 
-    // userService.getAllFavSnippets('62d6b3d0bddd68202d5b168d')
-    //     .then(({ data }) => console.log(data))
-
-
     let md, lg, xl
     switch (maxColums) {
         case 1:
@@ -44,7 +40,6 @@ const SnippetList = ({ snippets, maxColums }) => {
         <Row>
             {snippets.map(snippet => {
                 return (
-
                     <Col md={md} lg={lg} xl={xl} key={snippet._id} className="mb-4">
                         <SnippetCard {...snippet} />
                     </Col>
