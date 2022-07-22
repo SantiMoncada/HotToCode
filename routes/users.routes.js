@@ -77,5 +77,16 @@ router.put('/rmSnippet/:snippet_id', isAuthenticated, (req, res) => {
         .catch(err => res.status(500).json(err))
 })
 
+router.get('/getAllFavSnippets/:user_id', isAuthenticated, (req, res) => {
+
+    const { user_id } = req.params
+
+    User
+        .findById(user_id)
+        .select('favSnippets')
+        .then(response => res.json(response))
+        .catch(err => res.status(500).json(err))
+})
+
 
 module.exports = router 
