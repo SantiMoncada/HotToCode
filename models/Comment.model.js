@@ -2,7 +2,6 @@ const { Schema, model } = require("mongoose")
 
 const commentSchema = new Schema(
     {
-        title: String,
         owner:
         {
             type: Schema.Types.ObjectId,
