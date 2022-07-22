@@ -1,0 +1,72 @@
+.cardAvatar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+
+.cardAvatar>img {
+    width: 35px;
+    height: 35px;
+    display: inline-block;
+    position: relative;
+    vertical-align: middle;
+    object-fit: cover;
+    overflow: inherit;
+    border-radius: 50%;
+}
+
+hr {
+    margin: 0;
+}
+
+.SnippetCard p {
+    margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.cardIcon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+
+}
+
+.cardIcon>img {
+    width: 100%;
+
+}
+
+.codeInCard {
+    height: 150px;
+    margin: 0;
+}
+
+
+.SnippetCard Col {
+    padding: 0;
+}
+
+.SnippetCard pre {
+    white-space: wrap;
+}
+
+.SnippetCard .col-4 {
+    flex: 0 0 33.3333333%;
+    max-width: 33.3333333%;
+    position: relative;
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+    display: flex;
+}
+
+.actionButtons {
+    margin: 5px 0;
+    display: flex;
+    justify-content: space-evenly;
+}

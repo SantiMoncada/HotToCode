@@ -4,7 +4,7 @@ class CommentService {
 
     constructor() {
         this.api = axios.create({
-            baseURL: `${proces.env.REACT_APP_API_URL}/comments`
+            baseURL: `${process.env.REACT_APP_API_URL}/comments`
         })
 
         this.api.interceptors.request.use((config) => {
@@ -19,7 +19,7 @@ class CommentService {
         })
     }
 
-    createComment(commentData) {
+    createComment(post_id, commentData) {
         return this.api.post(`/create/${post_id}`, commentData)
     }
 
@@ -30,7 +30,7 @@ class CommentService {
     editComment(comment_id) {
         return this.api.put(`/edit/${comment_id}`)
     }
-
+    s
     deleteComment(comment_id) {
         return this.api.delete(`delete/${comment_id}`)
     }
