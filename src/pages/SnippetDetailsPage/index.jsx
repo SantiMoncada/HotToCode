@@ -13,7 +13,7 @@ const SnippetDetailsPage = () => {
         loadSnippet()
     })
 
-    const loadSnippet = () => {
+    const loadSnippet = (snippet_id) => {
         snippetService
             .getOneSnippet(snippet_id)
             .then(({ data }) => {
