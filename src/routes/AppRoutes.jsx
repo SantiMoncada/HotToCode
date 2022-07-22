@@ -9,6 +9,7 @@ import PrivateRoute from './PrivateRoute'
 
 import NotFoundPage from '../pages/NotFoundPage'
 
+import SnippetDetailsPage from '../pages/SnippetDetailsPage'
 const AppRoutes = () => {
 
     return (
@@ -22,6 +23,9 @@ const AppRoutes = () => {
             </Route>
             <Route path="/myProfile" element={<PrivateRoute />}>
                 <Route path="" element={<UserProfilePage />} />
+            </Route>
+            <Route path="/snippetDetails/:snippet_id" element={<PrivateRoute />}>
+                <Route path="" element={<SnippetDetailsPage />} />
             </Route>
             <Route path="*" element={<NotFoundPage />} />
         </Routes>
