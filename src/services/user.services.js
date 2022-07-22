@@ -35,6 +35,10 @@ class UserServices {
     rmFavSnippet(snippet_id) {
         return this.api.put(`/rmSnippet/${snippet_id}`)
     }
+
+    getAllFavSnippets(user_id) {
+        return this.api.get(`/getAllFavSnippets/${user_id}`)
+    }
 }
 
 const userService = new UserServices

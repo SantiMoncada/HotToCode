@@ -54,20 +54,20 @@ const UserProfileEditForm = ({ userData, loadUser, formOpenHandler }) => {
     return (
         <Form onSubmit={handleSubmit}>
             <Form.Group className="mb-3" controlId="title">
-                <Form.Label>Your name</Form.Label>
+                <Form.Label><h4>Name</h4></Form.Label>
                 <Form.Control type="text" value={username} onChange={handleChange} name="username" />
             </Form.Group>
             <Form.Group className="mb-3" controlId="avatar">
-                <Form.Label>Avatar (File)</Form.Label>
+                <Form.Label><h4>Avatar (File)</h4></Form.Label>
                 <Form.Control type="file" onChange={handleFileInput} name="avatar" />
             </Form.Group>
             <Form.Group className="mb-3" controlId="bio">
-                <Form.Label>Bio</Form.Label>
+                <Form.Label><h4>Bio</h4></Form.Label>
                 <Form.Control as="textarea" rows={3} value={bio} onChange={handleChange} name="bio" />
             </Form.Group>
             <div className="d-grid gap-3">
-                {!isLoading ? <Button variant="dark" type="submit">Submit</Button> : <p>Loading...</p>}
-                <Button variant="primary" onClick={formOpenHandler} >Cancel</Button>
+                {!isLoading ? <Button variant="success" type="submit">Submit</Button> : <p>Loading...</p>}
+                <Button variant="outline-secondary" onClick={formOpenHandler} >Cancel</Button>
             </div>
         </Form>
     )

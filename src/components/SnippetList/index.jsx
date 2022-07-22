@@ -2,7 +2,14 @@ import SnippetCard from "../SnippetCard"
 import "./SnippetList.css"
 import { Col, Row } from "react-bootstrap"
 
+import userService from "../../services/user.services"
+import { useState } from "react"
+
 const SnippetList = ({ snippets, maxColums }) => {
+
+    // userService.getAllFavSnippets('62d6b3d0bddd68202d5b168d')
+    //     .then(({ data }) => console.log(data))
+
 
     let md, lg, xl
     switch (maxColums) {

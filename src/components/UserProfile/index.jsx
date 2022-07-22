@@ -23,7 +23,7 @@ const UserProfile = ({ loadUser, userData }) => {
                             <h3>@{userData.username}</h3>
                             <p>{userData.bio}</p>
                             <div className="d-grid ">
-                                <Button variant="primary" onClick={formOpenHandler} >Edit</Button>
+                                <Button variant="outline-secondary" onClick={formOpenHandler} >Edit</Button>
                             </div>
                         </>
                         :

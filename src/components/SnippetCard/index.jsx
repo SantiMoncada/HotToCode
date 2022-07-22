@@ -1,6 +1,9 @@
 import { useContext } from "react"
 import { AuthContext } from '../../contexts/auth.context'
-import { Row, Col, Card, Button, } from "react-bootstrap"
+
+import userService from "../../services/user.services"
+
+import { Row, Col, Card, Button, Alert, } from "react-bootstrap"
 import CodeStyle from './../CodeStyle'
 import './SnippetCard.css'
 
@@ -8,10 +11,11 @@ import jsIcon from "./../../assets/LengIcons/nodejs-plain.svg"
 import cIcon from "./../../assets/LengIcons/c-plain.svg"
 import pythonIcon from "./../../assets/LengIcons/python-plain.svg"
 
-import { MdFavoriteBorder, MdFavorite, MdIosShare } from 'react-icons/md'
+import { MdFavoriteBorder, MdFavorite, MdShare, MdOutlineModeComment } from 'react-icons/md'
 import { TbGitFork } from 'react-icons/tb'
 
-const SnippetCard = ({ title, content, language, owner }) => {
+
+const SnippetCard = ({ title, content, language, owner, _id }) => {
 
     const { user } = useContext(AuthContext)
 
@@ -38,6 +42,17 @@ const SnippetCard = ({ title, content, language, owner }) => {
         default:
 
     }
+
+    const likeHandler = (snippet_id) => {
+        //TODO if state of fav remove or add
+        userService.favSnippet(snippet_id)
+            .then(({ data }) => {
+                alert(JSON.stringify(data))
+            })
+            .catch(err => alert(err))
+
+    }
+
 
     return (
         <Card border={border} className="SnippetCard" bg={'Secondary'} >
@@ -66,10 +81,11 @@ const SnippetCard = ({ title, content, language, owner }) => {
                 <CodeStyle className={'codeInCard'} code={content} language={len}></CodeStyle>
 
                 <div className="actionButtons">
-                    <MdFavoriteBorder className="actionButton" />
+                    <MdOutlineModeComment className="actionButton comment" />
+                    <TbGitFork className="actionButton fork" />
+                    <MdFavoriteBorder onClick={() => likeHandler(_id)} className="actionButton fav" />
                     {/* <MdFavorite /> */}
-                    <MdIosShare className="actionButton" />
-                    <TbGitFork className="actionButton" />
+                    <MdShare className="actionButton share" />
                 </div>
             </Card.Body>
         </Card>
