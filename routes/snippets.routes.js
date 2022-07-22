@@ -31,7 +31,7 @@ router.get('/list', (req, res) => {
     const filterParams = {}
 
     if (user) {
-        filterParams._id = user
+        filterParams.owner = user
     }
 
     if (lang) {
