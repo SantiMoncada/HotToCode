@@ -1,15 +1,32 @@
 import { Card, Row, Col, Container, Button } from 'react-bootstrap'
 import UserProfileEditForm from "../UserProfileEditForm"
-import { useState } from 'react'
+import { useState, useContext } from 'react'
 import './userprofile.css'
 import Loader from './../Loader'
+
+import { AuthContext } from "../../contexts/auth.context";
+
 const UserProfile = ({ loadUser, userData }) => {
+
+    const { user } = useContext(AuthContext)
+
     const [formOpen, setFormOpen] = useState(false)
 
     const formOpenHandler = () => {
         setFormOpen(state => !state)
     }
 
+    let editBuntton = <></>
+
+    if (userData && user) {
+        if (userData._id === user._id) {
+            editBuntton = <>
+                <div className="d-grid ">
+                    <Button variant="outline-secondary" onClick={formOpenHandler} >Edit</Button>
+                </div>
+            </>
+        }
+    }
 
     return (
         <>
@@ -22,9 +39,9 @@ const UserProfile = ({ loadUser, userData }) => {
                         <>
                             <h3>@{userData.username}</h3>
                             <p>{userData.bio}</p>
-                            <div className="d-grid ">
-                                <Button variant="outline-secondary" onClick={formOpenHandler} >Edit</Button>
-                            </div>
+
+                            {editBuntton}
+
                         </>
                         :
                         <UserProfileEditForm formOpenHandler={formOpenHandler} loadUser={loadUser} userData={userData} />

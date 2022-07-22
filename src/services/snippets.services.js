@@ -23,8 +23,8 @@ class SnippetService {
         return this.api.post('/create', snippetData)
     }
 
-    getSnippets() {
-        return this.api.get('/list')
+    getSnippets(values) {
+        return this.api.get('/list', { params: values })
     }
 
     getOneSnippet(snippet_id) {

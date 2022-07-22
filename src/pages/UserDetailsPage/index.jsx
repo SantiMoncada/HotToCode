@@ -2,28 +2,27 @@ import { Container, Row, Col } from "react-bootstrap"
 import UserProfile from "../../components/UserProfile"
 import SnippetList from "../../components/SnippetList"
 import { useState, useEffect } from "react"
-import { useContext } from "react"
-import { AuthContext } from "../../contexts/auth.context"
+
 import snippetService from "../../services/snippets.services"
 import userService from "../../services/user.services"
 
-const UserProfilePage = () => {
+import { useParams } from "react-router-dom"
 
+const UserDetailsPage = () => {
     const [snippets, setSnippets] = useState([])
 
     const [userData, setUserData] = useState([])
 
-    const { user: loggedUser } = useContext(AuthContext)
-
+    const { user_id } = useParams()
 
     useEffect(() => {
         loadUser()
         loadSnippet()
-    }, [])
+    }, [user_id])
 
     const loadUser = () => {
         userService
-            .getUser(loggedUser._id)
+            .getUser(user_id)
             .then(({ data }) => {
                 const { username, avatar, bio, _id } = data
                 setUserData({ username, avatar, bio, _id })
@@ -33,7 +32,7 @@ const UserProfilePage = () => {
 
     const loadSnippet = () => {
         snippetService
-            .getSnippets({ user: loggedUser._id })
+            .getSnippets({ user: user_id })
             .then(({ data }) => {
                 setSnippets(data)
             })
@@ -54,4 +53,4 @@ const UserProfilePage = () => {
     )
 }
 
-export default UserProfilePage
+export default UserDetailsPage

@@ -28,12 +28,11 @@ const SnippetCard = ({ title, content, language, owner, _id, isFav }) => {
 
     useEffect(() => {
         setIsFavLocal(isFav)
-    }, [isFav])
-
+    }, [isFav, user])
 
     let icon
     let len
-    let border = 'ligth'
+    let border
     switch (language) {
         case 'JS':
             icon = jsIcon
@@ -46,12 +45,15 @@ const SnippetCard = ({ title, content, language, owner, _id, isFav }) => {
             len = 'c'
             border = 'info'
             break
+
         case 'PYTHON':
             icon = pythonIcon
             len = 'py'
             border = 'warning'
             break
+
         default:
+            border = 'ligth'
 
     }
 
@@ -59,6 +61,9 @@ const SnippetCard = ({ title, content, language, owner, _id, isFav }) => {
 
         !user && navigate(`/login`)
 
+        if (isFavLocal === undefined) {
+            return
+        }
 
         if (isFavLocal) {
             userService.rmFavSnippet(_id)
