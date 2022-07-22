@@ -83,7 +83,7 @@ const Navigation = () => {
                                 <NavDropdown.Header>Hello {user.username} !</NavDropdown.Header>
                                 <NavDropdown.Divider />
                                 <NavDropdown.Item >
-                                    <Link to='/myProfile' className="LinkStyle" >
+                                    <Link to={`/user/${user._id}`} className="LinkStyle" >
                                         <NavDropdown.Item as='span' style={{ padding: '0' }}>
                                             Your Profile
                                         </NavDropdown.Item>
