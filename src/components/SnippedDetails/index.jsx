@@ -1,8 +1,8 @@
 import { useContext } from "react"
 import { AuthContext } from '../../contexts/auth.context'
-import { Row, Col, Card, Button, } from "react-bootstrap"
+import { Row, Col, Card, } from "react-bootstrap"
 import CodeStyle from './../CodeStyle'
-import './SnippetCard.css'
+import './SnippetDetailsCard.css'
 
 import jsIcon from "./../../assets/LengIcons/nodejs-plain.svg"
 import cIcon from "./../../assets/LengIcons/c-plain.svg"
@@ -14,6 +14,30 @@ import { TbGitFork } from 'react-icons/tb'
 const SnippetDetails = ({ title, content, language, owner }) => {
 
     const { user } = useContext(AuthContext)
+
+    let icon
+    let len
+    let border = 'ligth'
+    switch (language) {
+        case 'JS':
+            icon = jsIcon
+            len = 'jsx'
+            border = 'success'
+            break
+
+        case 'C':
+            icon = cIcon
+            len = 'c'
+            border = 'info'
+            break
+        case 'PYTHON':
+            icon = pythonIcon
+            len = 'py'
+            border = 'warning'
+            break
+        default:
+
+    }
 
     return (
         <Card border={border} className="SnippetCard" bg={'Secondary'} >

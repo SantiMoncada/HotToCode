@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from "react"
 import { AuthContext } from "../../contexts/auth.context"
 import snippetService from "../../services/snippets.services"
 import SnippetDetails from "../../components/SnippedDetails"
-
+import { Container } from "react-bootstrap"
 const SnippetDetailsPage = () => {
 
     const [snippet, setSnippet] = useState({})
