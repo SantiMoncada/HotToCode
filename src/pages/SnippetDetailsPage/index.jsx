@@ -1,32 +1,29 @@
-import { useContext, useEffect, useState } from "react"
-import { AuthContext } from "../../contexts/auth.context"
+import { useEffect, useState } from "react"
+import { useParams } from "react-router-dom"
+
 import snippetService from "../../services/snippets.services"
-import SnippetDetails from "../../components/SnippedDetails"
-import { Container } from "react-bootstrap"
+import SnippetDetails from "../../components/SnippetDetails"
+
 const SnippetDetailsPage = () => {
 
     const [snippet, setSnippet] = useState({})
-
-    const { user } = useContext(AuthContext)
+    const { snippet_id } = useParams()
 
     useEffect(() => {
         loadSnippet()
-    })
+    }, [])
 
-    const loadSnippet = (snippet_id) => {
+    const loadSnippet = () => {
         snippetService
             .getOneSnippet(snippet_id)
             .then(({ data }) => {
-                console.log(data)
                 setSnippet(data)
             })
             .catch(err => console.log(err))
 
     }
     return (
-        <Container>
-            <SnippetDetails snippet={snippet} />
-        </Container>
+        <SnippetDetails  {...snippet} />
     )
 }
 

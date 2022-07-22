@@ -1,7 +1,5 @@
-import { useContext } from "react"
-import { AuthContext } from '../../contexts/auth.context'
 import { Row, Col, Card, } from "react-bootstrap"
-import CodeStyle from './../CodeStyle'
+import CodeStyle from '../CodeStyle'
 import './SnippetDetailsCard.css'
 
 import jsIcon from "./../../assets/LengIcons/nodejs-plain.svg"
@@ -12,8 +10,6 @@ import { MdFavoriteBorder, MdFavorite, MdIosShare } from 'react-icons/md'
 import { TbGitFork } from 'react-icons/tb'
 
 const SnippetDetails = ({ title, content, language, owner }) => {
-
-    const { user } = useContext(AuthContext)
 
     let icon
     let len

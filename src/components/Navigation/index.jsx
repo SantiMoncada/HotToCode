@@ -99,7 +99,7 @@ const Navigation = () => {
                     </Nav>
                 </Navbar.Collapse>
             </Container>
-        </Navbar >
+        </Navbar>
     );
 }
 export default Navigation
