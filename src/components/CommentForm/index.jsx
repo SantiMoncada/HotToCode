@@ -1,43 +1,39 @@
-// import { useContext, useState } from "react"
-// import { Form, Button } from "react-bootstrap"
-// import { AuthContext } from "../../contexts/auth.context"
-// import commentService from "../../services/commets.services"
+import { useState } from "react"
+import { Form, Button } from "react-bootstrap"
 
+import commentService from "../../services/commets.services"
 
-// const CommentForm = ({ title, content }) => {
+const CommentForm = () => {
 
-//     const { user: loggedUser } = useContext(AuthContext)
+    const [comentData, setCommentData] = useState({})
 
-//     const [commentData, setCommentData] = useState(commentData)
+    const handleChange = e => {
+        const { value, name } = e.target
+        setCommentData({ ...comentData, [name]: value })
+    }
 
-//     const handleChange = e => {
-//         const { value, name } = e.target
-//         setCommentData({ ...commentData, [name]: value })
-//     }
+    const handleSubmit = e => {
+        e.preventDefault()
 
-//     const handleSubmit = e => {
-//         e.preventDefault()
+        commentService
+            .createComment(comentData)
+            .then((response) => {
+                console.log(response)
+            })
+            .catch(err => console.log(err))
+    }
 
-//         commentService
-//             .createComment(loggedUser._id, commentData)
-//             .then((response) => {
-//                 console.log(response)
-//             })
-//             .catch(err => console.log(err))
+    const { content } = comentData
 
-//     }
+    return (
+        <Form onSubmit={handleSubmit}>
+            <Form.Group className="mb-3" controlId="content">
+                <Form.Label></Form.Label>
+                <Form.Control as="textarea" rows={3} value={content} onChange={handleChange} name="content" />
+            </Form.Group>
+            <Button variant="dark" type="submit">Post</Button>
+        </Form>
+    )
+}
 
-
-//     return (
-
-//         <Form onSubmit={handleSubmit}>
-//             <Form.Group className="mb-3" controlId="content">
-//                 <Form.Label>{title}</Form.Label>
-//                 <Form.Control as="textarea" rows={3} value={content} onChange={handleChange} name="content" />
-//             </Form.Group>
-//             <Button variant="dark" type="submit">Submit</Button>
-//         </Form>
-//     )
-// }
-
-// export default CommentForm
+export default CommentForm

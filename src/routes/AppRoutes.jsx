@@ -24,9 +24,10 @@ const AppRoutes = () => {
             <Route path="/myProfile" element={<PrivateRoute />}>
                 <Route path="" element={<UserProfilePage />} />
             </Route>
-            <Route path="/snippetDetails/:snippet_id" element={<PrivateRoute />}>
+            <Route path="/snippetDetails/:snippet_id" element={<SnippetDetailsPage />} />
+            {/* <Route path="/snippetDetails/:snippet_id" element={<PrivateRoute />}>
                 <Route path="" element={<SnippetDetailsPage />} />
-            </Route>
+            </Route> */}
             <Route path="*" element={<NotFoundPage />} />
         </Routes>
 

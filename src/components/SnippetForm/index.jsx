@@ -6,7 +6,8 @@ const SnippetForm = () => {
 
     const [snippetData, setSnippetData] = useState({
         title: '',
-        content: ''
+        content: '',
+        language: ''
     })
 
     const handleChange = e => {

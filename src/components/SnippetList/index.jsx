@@ -2,9 +2,6 @@ import SnippetCard from "../SnippetCard"
 import "./SnippetList.css"
 import { Col, Row } from "react-bootstrap"
 
-import userService from "../../services/user.services"
-import { useState } from "react"
-
 const SnippetList = ({ snippets, maxColums }) => {
 
     let md, lg, xl
