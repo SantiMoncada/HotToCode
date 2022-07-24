@@ -35,7 +35,7 @@ const SnippetDetailsPage = () => {
             <Row className="snippetDetails">
                 <Col sm={6}>
                     {isLoading ? <Loader /> : <SnippetDetails  {...snippet} />}
-                    <CommentForm className="snippetDetails" />
+                    <CommentForm className="snippetDetails" snippet_id={snippet_id} />
                 </Col>
             </Row>
         </Container>

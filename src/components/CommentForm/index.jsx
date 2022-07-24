@@ -4,29 +4,30 @@ import { Form, Button, Row, Col } from "react-bootstrap"
 import './comment.css'
 import commentService from "../../services/commets.services"
 
-const CommentForm = () => {
+const CommentForm = ({ snippet_id }) => {
 
-    const [comentData, setCommentData] = useState({
+    const [commentData, setCommentData] = useState({
         content: ''
     })
 
     const handleChange = e => {
         const { value, name } = e.target
-        setCommentData({ ...comentData, [name]: value })
+        setCommentData({ commentData, [name]: value })
     }
-
+    //delete show all edit
     const handleSubmit = e => {
         e.preventDefault()
 
         commentService
-            .createComment(comentData)
+            .createComment(snippet_id, commentData)
             .then(({ data }) => {
+                console.log("esto es el inside de comentData", commentData)
                 console.log(data)
             })
             .catch(err => console.log(err))
     }
 
-    const { content } = comentData
+    const { content } = commentData
 
     return (
         <Form className="commentArea" onSubmit={handleSubmit}>
