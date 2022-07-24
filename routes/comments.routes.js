@@ -1,5 +1,4 @@
 const router = require('express').Router()
-
 const { isAuthenticated } = require("../middlewares/jwt.middleware")
 
 const Comment = require('./../models/Comment.model')
@@ -8,11 +7,10 @@ const Snippet = require('./../models/Snippet.model')
 router.post('/create/:post_id', isAuthenticated, (req, res) => {
 
     const { post_id } = req.params
-    const { title, content } = req.body
+    const { content } = req.body
     const { _id: logged_user_id } = req.payload
 
     const newComment = {
-        title,
         owner: logged_user_id,
         content,
     }
@@ -46,11 +44,10 @@ router.get('/:post_id', (req, res) => {
 router.put('/edit/:comment_id', isAuthenticated, (req, res) => {
 
     const { comment_id } = req.params
-    const { content, title } = req.body
+    const { content } = req.body
     const { _id: logged_user_id } = req.payload
 
     const newComment = {
-        title,
         content
     }
 
