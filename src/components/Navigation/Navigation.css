@@ -12,14 +12,19 @@
     border-radius: 8px;
 }
 
-/* #user-search-bar-aysnc{
-    height: 100%
-} */
 .rbt-loader {
     display: none;
 }
 
+.SearchBarForm {
+    display: flex;
+}
+
 @media (max-width:991px) {
+    .SearchBarForm {
+        flex-direction: column;
+    }
+
     .signup {
         border: none;
     }

@@ -52,7 +52,7 @@ const Navigation = () => {
                         className="me-auto my-2 my-lg-0"
                         navbarScroll
                     >
-                        <Form className="d-flex">
+                        <Form className="SearchBarForm">
 
                             <AsyncTypeahead
                                 id='user-search-bar-aysnc'

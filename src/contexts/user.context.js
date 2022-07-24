@@ -11,31 +11,31 @@ function UserProviderWrapper(props) {
     const { user } = useContext(AuthContext)
 
     const [favSnippets, setFavSnippets] = useState([])
+    const [isLoading, setIsLoading] = useState(true)
 
-    const getUserData = () => {
+    const UpdateUserData = () => {
+        setIsLoading(true)
         if (user) {
             userService
                 .getAllFavSnippets(user._id)
                 .then(({ data }) => {
-                    console.log(data)
-                    setFavSnippets(data)
+                    setIsLoading(false)
+                    setFavSnippets(data.favSnippets)
                 })
                 .catch(err => console.log(err))
 
         }
     }
 
-
     useEffect(() => {
-
-        getUserData()
+        UpdateUserData()
     }, [user])
 
     return (
-        <UserContext.Provider value={favSnippets}>
+        <UserContext.Provider value={{ favSnippets, UpdateUserData, isLoading }}>
             {props.children}
         </UserContext.Provider>
     )
 }
 
-export { AuthContext, UserProviderWrapper }
+export { UserContext, UserProviderWrapper }

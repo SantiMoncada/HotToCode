@@ -1,6 +1,7 @@
 import { useContext } from "react"
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from '../../contexts/auth.context'
+import { UserContext } from "../../contexts/user.context";
 
 import userService from "../../services/user.services"
 
@@ -18,17 +19,21 @@ import { useState } from "react";
 import { useEffect } from "react";
 
 
-const SnippetCard = ({ title, content, language, owner, _id, isFav }) => {
+const SnippetCard = ({ title, content, language, owner, _id }) => {
 
 
-    const [isFavLocal, setIsFavLocal] = useState(isFav)
+    const [isFavLocal, setIsFavLocal] = useState(false)
 
     const { user } = useContext(AuthContext)
+    const { favSnippets, UpdateUserData, isLoading } = useContext(UserContext)
+
     let navigate = useNavigate();
 
+
     useEffect(() => {
-        setIsFavLocal(isFav)
-    }, [isFav, user])
+        setIsFavLocal(favSnippets.includes(_id))
+    }
+        , [favSnippets, user])
 
     let icon
     let len
@@ -66,16 +71,12 @@ const SnippetCard = ({ title, content, language, owner, _id, isFav }) => {
         }
 
         if (isFavLocal) {
+            setIsFavLocal(false)
             userService.rmFavSnippet(_id)
-                .then(() => {
-                    setIsFavLocal(false)
-                })
                 .catch(err => console.log(err))
         } else {
+            setIsFavLocal(true)
             userService.favSnippet(_id)
-                .then(() => {
-                    setIsFavLocal(true)
-                })
                 .catch(err => console.log(err))
         }
 
