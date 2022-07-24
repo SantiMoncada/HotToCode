@@ -1,16 +1,16 @@
-import { useContext } from "react"
+import { useContext } from 'react';
 import Toast from 'react-bootstrap/Toast'
-import { MessageContext } from "../../contexts/appMessage"
+import { MessageContext } from '../../contexts/userMessage.context';
 
 function UserMessage() {
 
-    const { showMessage, setShowMessage } = useContext(MessageContext)
+    const { setShowMessage, showMessage } = useContext(MessageContext)
 
     return (
         <Toast
             show={showMessage.show}
-            onClose={() => setShowMessage({ ...showMessage, show: flase })}
-            style={{ position: 'fixed', bottom: 30, left: 30 }}
+            onClose={() => setShowMessage({ ...showMessage, show: false })}
+            style={{ position: 'fixed', bottom: 30, right: 30 }}
             autohide
             delay={5000}
         >
@@ -19,8 +19,7 @@ function UserMessage() {
             </Toast.Header>
             <Toast.Body>{showMessage.text}</Toast.Body>
         </Toast>
-    )
-
+    );
 }
 
 export default UserMessage

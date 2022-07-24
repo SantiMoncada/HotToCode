@@ -1,11 +1,14 @@
 import { useState } from "react"
-import { Form, Button } from "react-bootstrap"
+import { Form, Button, Row, Col } from "react-bootstrap"
 
+import './comment.css'
 import commentService from "../../services/commets.services"
 
 const CommentForm = () => {
 
-    const [comentData, setCommentData] = useState({})
+    const [comentData, setCommentData] = useState({
+        content: ''
+    })
 
     const handleChange = e => {
         const { value, name } = e.target
@@ -17,8 +20,8 @@ const CommentForm = () => {
 
         commentService
             .createComment(comentData)
-            .then((response) => {
-                console.log(response)
+            .then(({ data }) => {
+                console.log(data)
             })
             .catch(err => console.log(err))
     }
@@ -26,12 +29,14 @@ const CommentForm = () => {
     const { content } = comentData
 
     return (
-        <Form onSubmit={handleSubmit}>
-            <Form.Group className="mb-3" controlId="content">
-                <Form.Label></Form.Label>
-                <Form.Control as="textarea" rows={3} value={content} onChange={handleChange} name="content" />
-            </Form.Group>
-            <Button variant="dark" type="submit">Post</Button>
+        <Form className="commentArea" onSubmit={handleSubmit}>
+            <Row>
+                <Col><Form.Group className="mb-3" controlId="content">
+                    <Form.Label></Form.Label>
+                    <Form.Control as="textarea" rows={1} value={content} onChange={handleChange} name="content" />
+                </Form.Group></Col>
+                <Col><Button className="postBtn" variant="dark" type="submit">Post</Button></Col>
+            </Row>
         </Form>
     )
 }
