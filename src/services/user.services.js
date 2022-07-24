@@ -20,6 +20,10 @@ class UserServices {
         })
     }
 
+    getAllUsers(values) {
+        return this.api.get('/', { params: values })
+    }
+
     getUser(user_id) {
         return this.api.get(`/details/${user_id}`)
     }
