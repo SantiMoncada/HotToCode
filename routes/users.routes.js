@@ -5,9 +5,17 @@ const { isAuthenticated } = require("../middlewares/jwt.middleware")
 const User = require('./../models/User.model')
 
 router.get('/', (req, res) => {
+    console.log(req.query)
+    const { username, limit } = req.query
+
+    const filterParams = {}
+    if (username) {
+        filterParams.username = { '$regex': username, '$options': 'i' }
+    }
 
     User
-        .find()
+        .find(filterParams)
+        .limit(limit)
         .select('username bio avatar')
         .then(response => res.json(response))
         .catch(err => res.status(500).json(err))
