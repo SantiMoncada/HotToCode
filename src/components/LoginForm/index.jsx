@@ -3,6 +3,7 @@ import authService from "../../services/auth.services"
 import { Form, Button } from "react-bootstrap"
 import { AuthContext } from "../../contexts/auth.context"
 import { useNavigate } from "react-router-dom"
+import { MessageContext } from "../../contexts/userMessage.context"
 
 const LoginForm = () => {
 
@@ -12,6 +13,8 @@ const LoginForm = () => {
     })
 
     const navigate = useNavigate()
+
+    const { setShowMessage } = useContext(MessageContext)
 
     const { storeToken, authenticateUser } = useContext(AuthContext)
 
@@ -28,7 +31,8 @@ const LoginForm = () => {
             .then(({ data }) => {
                 storeToken(data.authToken)
                 authenticateUser()
-                navigate('/') //aqui redirigir al profile
+                setShowMessage({ show: true, title: `Welcome!`, text: 'Loged in successful' })
+                navigate('/')
             })
             .catch(err => console.log(err))
     }

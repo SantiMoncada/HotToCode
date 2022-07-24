@@ -1,7 +1,9 @@
-import { useState } from "react"
+import { useContext, useState } from "react"
 import { Form, Button } from "react-bootstrap"
 import { useNavigate } from 'react-router-dom'
 import authService from '../../services/auth.services'
+
+import { MessageContext } from "../../contexts/userMessage.context"
 
 const SignupForm = () => {
 
@@ -12,6 +14,8 @@ const SignupForm = () => {
     })
 
     const navigate = useNavigate()
+
+    const { setShowMessage } = useContext(MessageContext)
 
     const handleInputChange = e => {
         const { value, name } = e.target
@@ -24,6 +28,7 @@ const SignupForm = () => {
         authService
             .signup(signupData)
             .then(({ data }) => {
+                setShowMessage({ show: true, title: `Welcome, ${data.user.username}`, text: 'Sign up successful' })
                 navigate('/login')
             })
             .catch(err => console.log(err))
