@@ -20,7 +20,18 @@
     display: flex;
 }
 
+@media (min-width:991px) {
+    .rbt {
+        margin-right: 5px;
+    }
+}
+
 @media (max-width:991px) {
+    #user-search-bar-aysnc {
+        position: relative !important;
+        transform: none !important;
+    }
+
     .SearchBarForm {
         flex-direction: column;
     }

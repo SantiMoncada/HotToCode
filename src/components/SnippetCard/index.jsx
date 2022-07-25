@@ -88,8 +88,8 @@ const SnippetCard = ({ title, content, language, owner, _id }) => {
     }
 
     const shareHandler = () => {
+        navigator.clipboard.writeText(`${window.location.origin}/snippetDetails/${_id}`)
         alert('copied to clipboard')
-        navigator.clipboard.writeText(`${window.location.href}/snippetDetails/${_id}`)
     }
 
     return (
