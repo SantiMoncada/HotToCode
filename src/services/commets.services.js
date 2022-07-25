@@ -27,10 +27,10 @@ class CommentService {
         return this.api.get(`/${post_id}`)
     }
 
-    editComment(comment_id) {
-        return this.api.put(`/edit/${comment_id}`)
+    editComment(comment_id, commentData) {
+        return this.api.put(`/edit/${comment_id}`, commentData)
     }
-    s
+
     deleteComment(comment_id) {
         return this.api.delete(`delete/${comment_id}`)
     }

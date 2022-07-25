@@ -1,11 +1,3 @@
-.itemAvatar {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-}
-
-
 .itemAvatar img {
     width: 35px;
     height: 35px;
@@ -17,6 +9,17 @@
     border-radius: 50%;
 }
 
-.itemAvatar p {
-    justify-content: flex-start;
+.itemAvatar {
+    width: 60%;
+    margin-bottom: 20px;
+}
+
+.actionButton {
+    width: 30px;
+    height: 30px;
+
+}
+
+.commentHeader {
+    justify-content: flex-end;
 }

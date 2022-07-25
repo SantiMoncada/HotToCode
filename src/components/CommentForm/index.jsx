@@ -14,15 +14,13 @@ const CommentForm = ({ snippet_id }) => {
         const { value, name } = e.target
         setCommentData({ commentData, [name]: value })
     }
-    //delete show all edit
+    //TODO delete show all edit
     const handleSubmit = e => {
         e.preventDefault()
 
         commentService
             .createComment(snippet_id, commentData)
             .then(({ data }) => {
-                console.log("esto es el inside de comentData", commentData)
-                console.log(data)
             })
             .catch(err => console.log(err))
     }
