@@ -7,13 +7,17 @@ const Snippet = require('./../models/Snippet.model')
 router.post('/create/:post_id', isAuthenticated, (req, res) => {
 
     const { post_id } = req.params
-    const { content } = req.body
-    const { _id: logged_user_id } = req.payload
+    const { title, content } = req.body
+    const { _id: owner } = req.payload
 
     const newComment = {
-        owner: logged_user_id,
+        title,
+        owner,
         content,
     }
+
+    // const [errorCode, message] = getErrorDetails(err)
+
 
     Comment
         .create(newComment)
@@ -58,13 +62,13 @@ router.put('/edit/:comment_id', isAuthenticated, (req, res) => {
                 throw { message: "Comment does no exist", errorCode: 404 }
             }
             if (!comment.owner.equals(logged_user_id)) {
-
                 throw { message: "Can not edit a comment that you do not own", errorCode: 401 }
             }
             return Comment.findByIdAndUpdate(comment_id, newComment, { new: true })
         })
         .then(response => res.json(response))
         .catch(err => {
+
             const errorCode = err.errorCode ? err.errorCode : 500
             const message = err.message ? err.message : "Internal server error"
             res.status(errorCode).json({ message })

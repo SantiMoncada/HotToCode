@@ -5,10 +5,10 @@ const { isAuthenticated } = require("../middlewares/jwt.middleware")
 const User = require('./../models/User.model')
 
 router.get('/', (req, res) => {
-    console.log(req.query)
     const { username, limit } = req.query
 
     const filterParams = {}
+
     if (username) {
         filterParams.username = { '$regex': username, '$options': 'i' }
     }
