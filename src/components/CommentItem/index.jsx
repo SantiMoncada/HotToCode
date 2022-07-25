@@ -9,7 +9,7 @@ const CommentItem = () => {
                     {/* <img onScrollCapture={owner.avatar} alt={`profile pciture of ${owner.username}`} /> */}
                 </Col>
                 <Col>
-                    <p>@{owner.username}</p>
+                    {/* <p>@{owner.username}</p> */}
                 </Col>
             </Row>
             <Row>

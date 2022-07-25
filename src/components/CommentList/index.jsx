@@ -4,7 +4,7 @@ const CommentList = () => {
 
     return (
         <Row>
-            {
+            {/* {
                 comments.map(comment => {
                     return (
                         <Col>
@@ -12,7 +12,7 @@ const CommentList = () => {
                         </Col>
                     )
                 })
-            }
+            } */}
         </Row>
     )
 }
