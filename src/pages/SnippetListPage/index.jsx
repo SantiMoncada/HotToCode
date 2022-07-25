@@ -13,6 +13,7 @@ import Loader from "../../components/Loader"
 const SnippetListPage = () => {
 
     const [snippets, setSnippets] = useState([])
+    const [isLoading, setIsLoading] = useState(true)
 
     const { user } = useContext(AuthContext)
 
@@ -21,12 +22,16 @@ const SnippetListPage = () => {
     }, [user])
 
     const loadSnippet = () => {
-
+        setIsLoading(true)
         snippetService.getSnippets()
             .then(({ data }) => {
+                setIsLoading(false)
                 setSnippets(data)
             })
-            .catch(err => console.log(err))
+            .catch(err => {
+                setIsLoading(false)
+                console.log(err)
+            })
     }
 
     return (
@@ -34,7 +39,7 @@ const SnippetListPage = () => {
             <br></br>
             <Container>
                 {
-                    snippets.length ? <SnippetList snippets={snippets} /> : <Loader />
+                    isLoading ? <Loader /> : <SnippetList snippets={snippets} />
                 }
             </Container>
         </>

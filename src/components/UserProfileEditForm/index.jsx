@@ -4,6 +4,8 @@ import userService from "../../services/user.services"
 import uploadService from '../../services/upload.services'
 import { AuthContext } from "../../contexts/auth.context"
 
+import Spinner from 'react-bootstrap/Spinner';
+
 const UserProfileEditForm = ({ userData, loadUser, formOpenHandler }) => {
     const { user: loggedUser } = useContext(AuthContext)
 
@@ -66,7 +68,20 @@ const UserProfileEditForm = ({ userData, loadUser, formOpenHandler }) => {
                 <Form.Control as="textarea" rows={3} value={bio} onChange={handleChange} name="bio" />
             </Form.Group>
             <div className="d-grid gap-3">
-                {!isLoading ? <Button variant="success" type="submit">Submit</Button> : <p>Loading...</p>}
+                {!isLoading ?
+                    <Button variant="success" type="submit">Submit</Button>
+                    :
+                    <Button variant="warning" disabled>
+                        <Spinner
+                            as="span"
+                            animation="grow"
+                            size="sm"
+                            role="status"
+                            aria-hidden="true"
+                        />
+                        Loading...
+                    </Button>
+                }
                 <Button variant="outline-secondary" onClick={formOpenHandler} >Cancel</Button>
             </div>
         </Form>

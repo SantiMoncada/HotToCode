@@ -1,8 +1,13 @@
 import SnippetCard from "../SnippetCard"
 import "./SnippetList.css"
 import { Col, Row } from "react-bootstrap"
+import { UserContext } from "../../contexts/user.context";
+import { useContext } from "react"
+import { useEffect } from "react";
 
 const SnippetList = ({ snippets, maxColums }) => {
+
+    const { UpdateUserData } = useContext(UserContext)
 
     let md, lg, xl
     switch (maxColums) {
@@ -31,6 +36,11 @@ const SnippetList = ({ snippets, maxColums }) => {
             lg = 6
             xl = 4
     }
+
+    useEffect(() => {
+        UpdateUserData()
+    }, [])
+
 
     return (
 

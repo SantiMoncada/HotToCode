@@ -1,6 +1,7 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState, useContext } from "react"
 import { useParams } from "react-router-dom"
 
+import { UserContext } from "../../contexts/user.context";
 import { Container, Row, Col } from "react-bootstrap"
 
 import SnippetCard from './../../components/SnippetCard'
@@ -12,12 +13,15 @@ import './SnippetDetailsPage.css'
 
 const SnippetDetailsPage = () => {
 
+    const { UpdateUserData } = useContext(UserContext)
+
     const [snippet, setSnippet] = useState({})
     const [isLoading, setIsLoading] = useState(true)
 
     const { snippet_id } = useParams()
 
     useEffect(() => {
+        UpdateUserData()
         loadSnippet()
     }, [])
 

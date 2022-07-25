@@ -2,8 +2,10 @@ import { useContext } from "react"
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from '../../contexts/auth.context'
 import { UserContext } from "../../contexts/user.context";
+import { MessageContext } from "../../contexts/userMessage.context";
 
 import userService from "../../services/user.services"
+import SnippetService from "../../services/snippets.services"
 
 import { Row, Col, Card, Button, Alert, } from "react-bootstrap"
 import CodeStyle from './../CodeStyle'
@@ -17,6 +19,7 @@ import { MdFavoriteBorder, MdFavorite, MdShare, MdOutlineModeComment } from 'rea
 import { TbGitFork } from 'react-icons/tb'
 import { useState } from "react";
 import { useEffect } from "react";
+import snippetService from "../../services/snippets.services";
 
 
 const SnippetCard = ({ title, content, language, owner, _id }) => {
@@ -27,17 +30,17 @@ const SnippetCard = ({ title, content, language, owner, _id }) => {
     const { user } = useContext(AuthContext)
     const { favSnippets, UpdateUserData, isLoading } = useContext(UserContext)
 
+    const { setShowMessage } = useContext(MessageContext)
+
     let navigate = useNavigate();
 
 
     useEffect(() => {
         setIsFavLocal(favSnippets.includes(_id))
-    }
-        , [favSnippets, user])
+    }, [favSnippets, user])
 
-    let icon
-    let len
-    let border
+    let icon, len, border
+
     switch (language) {
         case 'JS':
             icon = jsIcon
@@ -64,17 +67,24 @@ const SnippetCard = ({ title, content, language, owner, _id }) => {
 
     const likeHandler = () => {
 
-        !user && navigate(`/login`)
+        if (!user) {
+            setShowMessage({ show: true, title: 'You are not loged in', text: 'You must be logged in to add favorites' })
+            return
+        }
 
         if (isFavLocal === undefined) {
             return
         }
 
         if (isFavLocal) {
+            setShowMessage({ show: true, title: 'Like removed', text: 'You removed the post from your favorites' })
             setIsFavLocal(false)
-            userService.rmFavSnippet(_id)
+            userService
+                .rmFavSnippet(_id)
                 .catch(err => console.log(err))
+
         } else {
+            setShowMessage({ show: true, title: 'Liked a post', text: 'You added the post to your favorites' })
             setIsFavLocal(true)
             userService.favSnippet(_id)
                 .catch(err => console.log(err))
@@ -89,7 +99,33 @@ const SnippetCard = ({ title, content, language, owner, _id }) => {
 
     const shareHandler = () => {
         navigator.clipboard.writeText(`${window.location.origin}/snippetDetails/${_id}`)
-        alert('copied to clipboard')
+        setShowMessage({ show: true, title: 'Copied to clipboard', text: `Copied the link ${window.location.origin}/snippetDetails/${_id} to clipboard` })
+    }
+
+    const forkHandler = () => {
+        !user && navigate(`/login`)
+
+        SnippetService.getSnippets({ user: user._id })
+            .then(({ data }) => {
+                const isYourSnippet = data.some(snippet => snippet._id === _id)
+
+                if (isYourSnippet) {
+                    setShowMessage({ show: true, title: 'Can not Fork', text: 'You can not fork your own snippet' })
+                    throw 'you own the snippet'
+                }
+
+                const forkedSnippet = {
+                    content,
+                    language,
+                    title
+                }
+                return snippetService.createSnippet(forkedSnippet)
+            })
+            .then(({ data }) => {
+                //TODO navigate to Edit details
+                navigate(`/snippetDetails/${data._id}`)
+            })
+            .catch(err => console.warn(err))
     }
 
     return (
@@ -121,7 +157,7 @@ const SnippetCard = ({ title, content, language, owner, _id }) => {
                 <div className="actionButtons">
                     <MdOutlineModeComment onClick={commentHandler} className="actionButton comment" />
 
-                    <TbGitFork className="actionButton fork" />
+                    <TbGitFork onClick={forkHandler} className="actionButton fork" />
                     {
                         isFavLocal
                             ?

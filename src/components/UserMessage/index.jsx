@@ -10,7 +10,7 @@ function UserMessage() {
         <Toast
             show={showMessage.show}
             onClose={() => setShowMessage({ ...showMessage, show: false })}
-            style={{ position: 'fixed', bottom: 30, right: 30 }}
+            style={{ position: 'fixed', bottom: 30, right: 30, width: '35%' }}
             autohide
             delay={5000}
         >

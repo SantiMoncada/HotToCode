@@ -1,34 +1,24 @@
-import { useState, useContext } from "react";
-import { Link, useNavigate } from 'react-router-dom'
-
+import { useContext } from "react";
+import { Link } from 'react-router-dom'
 
 import { AuthContext } from "../../contexts/auth.context";
-import userService from "../../services/user.services";
+import { MessageContext } from "../../contexts/userMessage.context";
 
 import './Navigation.css'
 import logo from './../../assets/blackLogo.svg'
 
-import { Container, Navbar, Nav, Button, Form, NavDropdown } from "react-bootstrap"
-import { Menu, MenuItem, AsyncTypeahead } from 'react-bootstrap-typeahead';
+import { Container, Navbar, Nav, NavDropdown } from "react-bootstrap"
 
-
-import { MdOutlineSearch } from 'react-icons/md'
-
-
+import SearchBar from './searchBar'
 
 const Navigation = () => {
 
-    let navigate = useNavigate();
-
     const { logoutUser, user } = useContext(AuthContext)
+    const { setShowMessage } = useContext(MessageContext)
 
-    const [fetchingUserData, setFetchingUserData] = useState(true);
-    const [userSearchResult, setUserSearchResult] = useState([]);
-
-    const handleSearchButton = (change) => {
-        if (userSearchResult[0]) {
-            navigate(`/user/${userSearchResult[0].id}`)
-        }
+    const logOuthandler = () => {
+        setShowMessage({ show: true, title: 'Good bay!', text: 'Your session has been terminated' })
+        logoutUser()
     }
 
     return (
@@ -52,47 +42,8 @@ const Navigation = () => {
                         className="me-auto my-2 my-lg-0"
                         navbarScroll
                     >
-                        <Form className="SearchBarForm">
+                        <SearchBar />
 
-                            <AsyncTypeahead
-                                id='user-search-bar-aysnc'
-                                isLoading={fetchingUserData}
-                                labelKey={option => (option.label)}
-                                placeholder="Search Users ..."
-                                minLength={0}
-                                onSearch={(query) => {
-                                    setFetchingUserData(true)
-                                    userService.getAllUsers({ username: query, limit: 5 })
-                                        .then(({ data }) => {
-                                            const userLabels = data.map(user => { return { label: user.username, id: user._id } })
-                                            setUserSearchResult(userLabels)
-                                            setFetchingUserData(false)
-                                        })
-                                        .catch(err => {
-                                            setFetchingUserData(false)
-                                            console.log(err)
-                                        })
-                                }}
-                                options={userSearchResult}
-
-                                renderMenu={(results, menuProps) => (
-                                    <Menu {...menuProps}>
-                                        {results.map((result, index) => (
-                                            <MenuItem
-                                                key={result.id}
-                                                onClick={() => navigate(`/user/${result.id}`)}
-                                                option={result}
-                                                position={index}>
-                                                {result.label}
-                                            </MenuItem>
-                                        ))}
-                                    </Menu>
-                                )}
-                            />
-                            <Button onClick={handleSearchButton} variant="outline-success"><MdOutlineSearch /></Button>
-
-
-                        </Form>
                         <Link to='/snippets' className="LinkStyle" >
                             <Nav.Link as='span' >
                                 Snippets
@@ -128,7 +79,7 @@ const Navigation = () => {
                             <NavDropdown title="Session" id="navbarScrollingDropdown" align={'end'}>
                                 <NavDropdown.Header>Hello {user.username} !</NavDropdown.Header>
                                 <NavDropdown.Divider />
-                                <NavDropdown.Item >
+                                <NavDropdown.Item as='span'>
                                     <Link to={`/user/${user._id}`} className="LinkStyle" >
                                         <NavDropdown.Item as='span' style={{ padding: '0' }}>
                                             Your Profile
@@ -139,7 +90,7 @@ const Navigation = () => {
                                 <NavDropdown.Item >Your snippets</NavDropdown.Item>
                                 <NavDropdown.Item >Your favs</NavDropdown.Item>
                                 <NavDropdown.Divider />
-                                <NavDropdown.Item onClick={logoutUser}>Sign out</NavDropdown.Item>
+                                <NavDropdown.Item onClick={logOuthandler}>Sign out</NavDropdown.Item>
                             </NavDropdown>
                         }
                     </Nav>

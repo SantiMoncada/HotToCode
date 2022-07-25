@@ -31,7 +31,7 @@ const LoginForm = () => {
             .then(({ data }) => {
                 storeToken(data.authToken)
                 authenticateUser()
-                setShowMessage({ show: true, title: `Welcome!`, text: 'Loged in successful' })
+                setShowMessage({ show: true, title: `Welcome!`, text: 'Login was successful' })
                 navigate('/')
             })
             .catch(err => console.log(err))
