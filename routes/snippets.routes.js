@@ -27,9 +27,7 @@ router.post('/create', isAuthenticated, (req, res) => {
 router.get('/list', (req, res) => {
     const { user, lang, limit } = req.query
 
-    //TODO fix this bs code
     const filterParams = {}
-
     if (user) {
         filterParams.owner = user
     }
