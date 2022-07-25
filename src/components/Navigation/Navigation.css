@@ -12,7 +12,19 @@
     border-radius: 8px;
 }
 
+.rbt-loader {
+    display: none;
+}
+
+.SearchBarForm {
+    display: flex;
+}
+
 @media (max-width:991px) {
+    .SearchBarForm {
+        flex-direction: column;
+    }
+
     .signup {
         border: none;
     }

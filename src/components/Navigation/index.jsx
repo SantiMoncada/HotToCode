@@ -1,40 +1,35 @@
-import { useContext, useEffect } from "react";
+import { useState, useContext } from "react";
 import { Link, useNavigate } from 'react-router-dom'
+
 
 import { AuthContext } from "../../contexts/auth.context";
 import userService from "../../services/user.services";
 
 import './Navigation.css'
-import { Container, Navbar, Nav } from "react-bootstrap"
-import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
-import NavDropdown from 'react-bootstrap/NavDropdown';
-
 import logo from './../../assets/blackLogo.svg'
+
+import { Container, Navbar, Nav, Button, Form, NavDropdown } from "react-bootstrap"
+import { Menu, MenuItem, AsyncTypeahead } from 'react-bootstrap-typeahead';
+
+
 import { MdOutlineSearch } from 'react-icons/md'
 
-import { useState } from "react";
-import { Typeahead, Menu, MenuItem } from 'react-bootstrap-typeahead';
 
 
 const Navigation = () => {
-
-
-
-    const [allUsers, setAllUsers] = useState([])
-    const [usersSelected, setUsersSelected] = useState([]);
 
     let navigate = useNavigate();
 
     const { logoutUser, user } = useContext(AuthContext)
 
+    const [fetchingUserData, setFetchingUserData] = useState(true);
+    const [userSearchResult, setUserSearchResult] = useState([]);
 
-    useEffect(() => {
-        userService.getAllUsers()
-            .then(({ data }) => {
-                setAllUsers(data.map(user => { return { label: user.username, id: user._id } }))
-            })
-    }, [])
+    const handleSearchButton = (change) => {
+        if (userSearchResult[0]) {
+            navigate(`/user/${userSearchResult[0].id}`)
+        }
+    }
 
     return (
 
@@ -57,33 +52,46 @@ const Navigation = () => {
                         className="me-auto my-2 my-lg-0"
                         navbarScroll
                     >
-                        <Form className="d-flex">
+                        <Form className="SearchBarForm">
 
-                            <div className="user-search-bar" style={{ display: 'flex' }}>
-                                <Typeahead
-                                    id='user-search-bar'
-                                    onChange={setUsersSelected}
-                                    options={allUsers}
-                                    placeholder="User..."
-                                    selected={usersSelected}
-                                    highlightOnlyResult={true}
-                                    minLength={0}
-                                    renderMenu={(results, menuProps) => (
-                                        <Menu {...menuProps}>
-                                            {results.map((result, index) => (
-                                                <MenuItem
-                                                    key={result.id}
-                                                    onClick={() => navigate(`/user/${result.id}`)}
-                                                    option={result}
-                                                    position={index}>
-                                                    {result.label}
-                                                </MenuItem>
-                                            ))}
-                                        </Menu>
-                                    )}
-                                />
-                                <Button onClick={() => console.log(usersSelected[0])} variant="outline-success"><MdOutlineSearch /></Button>
-                            </div>
+                            <AsyncTypeahead
+                                id='user-search-bar-aysnc'
+                                className="me-2"
+                                isLoading={fetchingUserData}
+                                labelKey={option => (option.label)}
+                                placeholder="Search Users ..."
+                                minLength={0}
+                                onSearch={(query) => {
+                                    setFetchingUserData(true)
+                                    userService.getAllUsers({ username: query })
+                                        .then(({ data }) => {
+                                            const userLabels = data.map(user => { return { label: user.username, id: user._id } })
+                                            setUserSearchResult(userLabels)
+                                            setFetchingUserData(false)
+                                        })
+                                        .catch(err => {
+                                            setFetchingUserData(false)
+                                            console.log(err)
+                                        })
+                                }}
+                                options={userSearchResult}
+
+                                renderMenu={(results, menuProps) => (
+                                    <Menu {...menuProps}>
+                                        {results.map((result, index) => (
+                                            <MenuItem
+                                                key={result.id}
+                                                onClick={() => navigate(`/user/${result.id}`)}
+                                                option={result}
+                                                position={index}>
+                                                {result.label}
+                                            </MenuItem>
+                                        ))}
+                                    </Menu>
+                                )}
+                            />
+                            <Button onClick={handleSearchButton} variant="outline-success"><MdOutlineSearch /></Button>
+
 
                         </Form>
                         <Link to='/snippets' className="LinkStyle" >

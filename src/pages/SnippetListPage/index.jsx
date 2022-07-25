@@ -20,43 +20,13 @@ const SnippetListPage = () => {
         loadSnippet()
     }, [user])
 
-
     const loadSnippet = () => {
-        if (user) {
-            const promises = []
-            promises.push(userService.getAllFavSnippets(user._id))
-            promises.push(snippetService.getSnippets())
 
-            Promise.all(promises)
-                .then(response => {
-                    const favArray = response[0].data.favSnippets
-                    const snippets = response[1].data
-
-                    const snippetsData = snippets.map(snippet => {
-                        return {
-                            isFav: favArray.includes(snippet._id),
-                            ...snippet
-                        }
-                    })
-                    setSnippets(snippetsData)
-                })
-                .catch(err => console.log(err))
-        }
-        else {
-            snippetService
-                .getSnippets()
-                .then(({ data }) => {
-                    const snippetsData = data.map(snippet => {
-                        return {
-                            isFav: false,
-                            ...snippet
-                        }
-                    })
-                    setSnippets(snippetsData)
-                })
-                .catch(err => console.log(err))
-        }
-
+        snippetService.getSnippets()
+            .then(({ data }) => {
+                setSnippets(data)
+            })
+            .catch(err => console.log(err))
     }
 
     return (
