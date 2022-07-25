@@ -62,12 +62,11 @@ const SnippetDetailsPage = () => {
                             <SnippetCard  {...snippet} />
                             {/* edit delete snippets*/}
                             <CommentForm snippet_id={snippet_id} />
-                            <CommentList commentsData={comment} />
-                            {console.log('snippet debuggin ---- ', comment)}
                         </>
                     }
                 </Col>
             </Row>
+            <Row><CommentList commentsData={comment} /></Row>
         </Container>
     )
 }
