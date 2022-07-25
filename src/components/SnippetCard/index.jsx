@@ -12,8 +12,10 @@ import CodeStyle from './../CodeStyle'
 import './SnippetCard.css'
 
 import jsIcon from "./../../assets/LengIcons/nodejs-plain.svg"
-import cIcon from "./../../assets/LengIcons/c-plain.svg"
+import cIcon from "./../../assets/LengIcons/cplusplus-plain.svg"
 import pythonIcon from "./../../assets/LengIcons/python-plain.svg"
+import rustIcon from "./../../assets/LengIcons/rust-plain.svg"
+import cssIcon from "./../../assets/LengIcons/css3-plain.svg"
 
 import { MdFavoriteBorder, MdFavorite, MdShare, MdOutlineModeComment } from 'react-icons/md'
 import { TbGitFork } from 'react-icons/tb'
@@ -51,7 +53,7 @@ const SnippetCard = ({ title, content, language, owner, _id }) => {
         case 'C':
             icon = cIcon
             len = 'c'
-            border = 'info'
+            border = 'danger'
             break
 
         case 'PYTHON':
@@ -59,7 +61,16 @@ const SnippetCard = ({ title, content, language, owner, _id }) => {
             len = 'py'
             border = 'warning'
             break
-
+        case 'CSS':
+            icon = cssIcon
+            len = 'css'
+            border = 'info'
+            break
+        case 'RUST':
+            icon = rustIcon
+            len = 'rust'
+            border = 'dark'
+            break
         default:
             border = 'ligth'
 
