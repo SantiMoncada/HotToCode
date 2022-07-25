@@ -3,7 +3,9 @@ import { useParams } from "react-router-dom"
 
 import { Container, Row, Col } from "react-bootstrap"
 
+import SnippetCard from './../../components/SnippetCard'
 import CommentForm from "../../components/CommentForm"
+
 import snippetService from "../../services/snippets.services"
 import SnippetDetails from "../../components/SnippetDetails"
 import Loader from "../../components/Loader"
@@ -34,8 +36,15 @@ const SnippetDetailsPage = () => {
         <Container>
             <Row className="snippetDetails">
                 <Col sm={6}>
-                    {isLoading ? <Loader /> : <SnippetDetails  {...snippet} />}
-                    <CommentForm className="snippetDetails" />
+                    {isLoading ?
+                        <Loader />
+                        :
+                        <>
+                            <SnippetCard  {...snippet} />
+                            {/* edit delete snippets*/}
+                            <CommentForm className="snippetDetails" />
+                        </>
+                    }
                 </Col>
             </Row>
         </Container>

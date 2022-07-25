@@ -56,14 +56,13 @@ const Navigation = () => {
 
                             <AsyncTypeahead
                                 id='user-search-bar-aysnc'
-                                className="me-2"
                                 isLoading={fetchingUserData}
                                 labelKey={option => (option.label)}
                                 placeholder="Search Users ..."
                                 minLength={0}
                                 onSearch={(query) => {
                                     setFetchingUserData(true)
-                                    userService.getAllUsers({ username: query })
+                                    userService.getAllUsers({ username: query, limit: 5 })
                                         .then(({ data }) => {
                                             const userLabels = data.map(user => { return { label: user.username, id: user._id } })
                                             setUserSearchResult(userLabels)

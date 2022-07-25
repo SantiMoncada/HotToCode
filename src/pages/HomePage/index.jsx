@@ -10,12 +10,10 @@ const HomePage = () => {
             <Row>
 
                 <Col md={{ span: 6, offset: 3 }}>
-                    <h1>WELCOME TO</h1>
                     <br />
                     <img
                         src={logo}
-                        width="700"
-                        height="200"
+                        width="100%"
                         className="d-inline-block align-top"
                         alt="React Bootstrap logo"
                     />
