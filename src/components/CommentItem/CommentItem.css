@@ -1,0 +1,22 @@
+.itemAvatar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+
+.itemAvatar img {
+    width: 35px;
+    height: 35px;
+    display: inline-block;
+    position: relative;
+    vertical-align: middle;
+    object-fit: cover;
+    overflow: inherit;
+    border-radius: 50%;
+}
+
+.itemAvatar p {
+    justify-content: flex-start;
+}
