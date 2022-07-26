@@ -2,7 +2,7 @@ import { useEffect, useState, useContext } from "react"
 import { useParams, useNavigate } from "react-router-dom"
 
 import { UserContext } from "../../contexts/user.context";
-import { Container, Row, Col, Button } from "react-bootstrap"
+import { Container, Row, Col } from "react-bootstrap"
 
 import { MessageContext } from "./../../contexts/userMessage.context"
 
@@ -68,8 +68,11 @@ const SnippetDetailsPage = () => {
     }
 
 
-    const fireFinalActions = () => {
-        loadSnippet()
+    const deleteSnippetFinalActions = () => {
+        navigate(`/user/${snippet.owner._id}`)
+    }
+
+    const deleteComentFinalActions = () => {
         loadComments()
     }
 
@@ -84,7 +87,7 @@ const SnippetDetailsPage = () => {
                         :
                         snippet ?
                             <>
-                                <SnippetCard  {...snippet} fireFinalActions={fireFinalActions} />
+                                <SnippetCard  {...snippet} fireFinalActions={deleteSnippetFinalActions} />
                             </>
                             :
                             <></>
@@ -94,12 +97,12 @@ const SnippetDetailsPage = () => {
                         ?
                         <Loader />
                         : snippet ?
-                            <CommentForm snippet_id={snippet_id} />
+                            <CommentForm snippet_id={snippet_id} loadComments={loadComments} />
                             :
                             <></>
                     }
                     <br></br>
-                    <CommentList commentsData={comments} fireFinalActions={fireFinalActions} />
+                    <CommentList commentsData={comments} fireFinalActions={deleteComentFinalActions} loadComments={loadComments} />
                 </Col>
             </Row>
         </Container>

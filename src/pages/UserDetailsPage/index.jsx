@@ -21,7 +21,7 @@ const UserDetailsPage = () => {
 
     useEffect(() => {
         loadUser()
-        loadSnippet()
+        loadSnippets()
     }, [user_id])
 
     const loadUser = () => {
@@ -39,7 +39,7 @@ const UserDetailsPage = () => {
             })
     }
 
-    const loadSnippet = () => {
+    const loadSnippets = () => {
         setLoadingSnippets(true)
         snippetService
             .getSnippets({ user: user_id })
@@ -51,6 +51,10 @@ const UserDetailsPage = () => {
                 setLoadingSnippets(false)
                 console.log(err)
             })
+    }
+
+    const deleteFinalActions = () => {
+        loadSnippets()
     }
 
     return (
@@ -67,7 +71,7 @@ const UserDetailsPage = () => {
                 </Col>
                 <Col sm={8}>
                     {!loadingSnippets ?
-                        <SnippetList maxColums={2} snippets={snippets} />
+                        <SnippetList maxColums={2} snippets={snippets} fireFinalActions={deleteFinalActions} />
                         :
                         <Loader />
                     }
