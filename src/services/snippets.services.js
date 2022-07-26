@@ -31,8 +31,8 @@ class SnippetService {
         return this.api.get(`/details/${snippet_id}`)
     }
 
-    editSnippet(snippet_id) {
-        return this.api.put(`/edit/${snippet_id}`)
+    editSnippet(snippet_id, data) {
+        return this.api.put(`/edit/${snippet_id}`, data)
     }
 
     deleteSnippet(snippet_id) {

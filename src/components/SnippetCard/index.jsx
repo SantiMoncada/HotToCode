@@ -144,7 +144,7 @@ const SnippetCard = ({ title, content, language, owner, _id, fireFinalActions })
     }
 
     const editHandler = () => {
-        alert('curratelo')
+        navigate(`/editSnippet/${_id}`)
     }
 
     const deleteHandler = () => {

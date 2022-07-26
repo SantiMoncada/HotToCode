@@ -9,6 +9,7 @@ import PrivateRoute from './PrivateRoute'
 import UserDetailsPage from '../pages/UserDetailsPage'
 import NotFoundPage from '../pages/NotFoundPage'
 import SnippetDetailsPage from '../pages/SnippetDetailsPage'
+import SnippetEditPage from '../pages/SnippetEditPage'
 
 const AppRoutes = () => {
 
@@ -23,6 +24,11 @@ const AppRoutes = () => {
             <Route path="/snippetForm" element={<PrivateRoute />}>
                 <Route path="" element={<SnippetFormPage />} />
             </Route>
+
+            <Route path="/editSnippet/:snippet_id" element={<PrivateRoute />}>
+                <Route path="" element={<SnippetEditPage />} />
+            </Route>
+
             <Route path="/snippetDetails/:snippet_id" element={<SnippetDetailsPage />} />
             {/* <Route path="/snippetDetails/:snippet_id" element={<PrivateRoute />}>
                 <Route path="" element={<SnippetDetailsPage />} />
