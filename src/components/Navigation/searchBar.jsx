@@ -17,6 +17,7 @@ const SearchBar = () => {
     let navigate = useNavigate();
 
     const handlerSearchQuery = (query) => {
+        console.log('hellou')
         setFetchingUserData(true)
         userService.getAllUsers({ username: query })
             .then(({ data }) => {
@@ -30,6 +31,11 @@ const SearchBar = () => {
             })
     }
 
+    const santi = event => {
+        if (event.key === 'Enter') {
+            handleSearchButton();
+        }
+    }
 
     const childRender = (results, menuProps) => (
         <Menu {...menuProps}>
@@ -63,6 +69,7 @@ const SearchBar = () => {
                 onSearch={handlerSearchQuery}
                 options={userSearchResult}
                 renderMenu={childRender}
+                onKeyDown={santi}
             />
             <Button onClick={handleSearchButton} variant="outline-success"><MdOutlineSearch /></Button>
 

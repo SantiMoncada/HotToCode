@@ -34,7 +34,10 @@ const LoginForm = () => {
                 setShowMessage({ show: true, title: `Welcome!`, text: 'Login was successful' })
                 navigate('/')
             })
-            .catch(err => console.log(err))
+            .catch(err => {
+                setShowMessage({ show: true, title: `Error :C`, text: 'Login was unsuccessful' })
+                console.log(err)
+            })
     }
 
     const { password, email } = loginData

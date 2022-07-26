@@ -31,7 +31,10 @@ const SignupForm = () => {
                 setShowMessage({ show: true, title: `Welcome, ${data.user.username}`, text: 'Sign up successful' })
                 navigate('/login')
             })
-            .catch(err => console.log(err))
+            .catch(err => {
+                setShowMessage({ show: true, title: `Error :C`, text: 'Sign up was unsuccessful' })
+                console.log(err)
+            })
     }
 
 
