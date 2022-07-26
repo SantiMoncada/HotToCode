@@ -82,15 +82,15 @@ router.put('/edit/:snippet_id', isAuthenticated, (req, res) => {
         })
 })
 
-router.delete('/delete/:snippet_id', (req, res) => {
-
+router.delete('/delete/:snippet_id', isAuthenticated, (req, res) => {
     const { snippet_id } = req.params
     const { _id: user_id } = req.payload
 
     Snippet.findById(snippet_id)
         .select('owner')
         .then(snippet => {
-            if (snippet.owner !== user_id) {
+            console.log(snippet.owner, user_id)
+            if (!snippet.owner.equals(user_id)) {
                 const message = "Can not delete a snippet that you do not own"
                 throw { message, errorCode: 401 }
             }
