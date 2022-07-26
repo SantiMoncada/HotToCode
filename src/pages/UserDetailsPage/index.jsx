@@ -28,16 +28,7 @@ const UserDetailsPage = () => {
     }, [user_id])
 
     useEffect(() => {
-        switch (tabKet) {
-            case 'favs':
-                loadFavSnippets()
-                break
-            case 'own':
-            default:
-                loadSnippets()
-
-
-        }
+        loadSnippets()
     }, [tabKet])
 
     const loadUser = () => {
@@ -57,31 +48,33 @@ const UserDetailsPage = () => {
 
     const loadSnippets = () => {
         setLoadingSnippets(true)
-        snippetService
-            .getSnippets({ user: user_id })
-            .then(({ data }) => {
-                setSnippets(data)
-                setLoadingSnippets(false)
-            })
-            .catch(err => {
-                setLoadingSnippets(false)
-                console.log(err)
-            })
-    }
-
-    const loadFavSnippets = () => {
-        setLoadingSnippets(true)
-        userService
-            .getAllFavSnippetsContent(user_id)
-            .then(({ data }) => {
-                console.log('fav snippets', data)
-                setSnippets(data)
-                setLoadingSnippets(false)
-            })
-            .catch(err => {
-                setLoadingSnippets(false)
-                console.log(err)
-            })
+        switch (tabKet) {
+            case 'favs':
+                userService
+                    .getAllFavSnippetsContent(user_id)
+                    .then(({ data }) => {
+                        console.log('fav snippets', data)
+                        setSnippets(data)
+                        setLoadingSnippets(false)
+                    })
+                    .catch(err => {
+                        setLoadingSnippets(false)
+                        console.log(err)
+                    })
+                break
+            case 'own':
+            default:
+                snippetService
+                    .getSnippets({ user: user_id })
+                    .then(({ data }) => {
+                        setSnippets(data)
+                        setLoadingSnippets(false)
+                    })
+                    .catch(err => {
+                        setLoadingSnippets(false)
+                        console.log(err)
+                    })
+        }
     }
 
     const deleteFinalActions = () => {
