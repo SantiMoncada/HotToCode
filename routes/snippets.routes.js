@@ -39,6 +39,7 @@ router.get('/list', (req, res) => {
     Snippet
         .find(filterParams)
         .limit(limit)
+        .sort({ 'createdAt': -1 })
         .populate({ path: 'owner', select: 'username avatar' })
         .then(response => res.json(response))
         .catch(err => res.status(500).json(err))

@@ -10,6 +10,7 @@ const commentSchema = new Schema(
         },
         content: {
             type: String,
+            minlength: 2,
             maxlength: 250
         }
     },

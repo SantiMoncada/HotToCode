@@ -33,6 +33,7 @@ router.get('/:post_id', (req, res) => {
 
     Snippet
         .findById(post_id)
+        .sort({ 'createdAt': -1 })
         .select('comments')
         .populate({
             path: 'comments',
