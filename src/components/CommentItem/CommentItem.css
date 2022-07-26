@@ -9,8 +9,11 @@
     border-radius: 50%;
 }
 
-.CommentItem {
+.commentImgContainer {
+    padding: 0;
     display: flex;
+    margin-top: 10px;
+    justify-content: end;
 }
 
 @keyframes redBack {
@@ -31,6 +34,4 @@
     border-radius: 50%;
     animation-fill-mode: forwards;
     animation-duration: 0.3s;
-    margin: 5px 0;
-    display: flex;
 }

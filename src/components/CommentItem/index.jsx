@@ -24,7 +24,7 @@ const CommentItem = ({ owner, content, _id, loadComments }) => {
     return (
         <Card className="CommentItem">
             <Row>
-                <Col xs={1}>
+                <Col xs={1} className={'commentImgContainer'}>
                     <img src={owner.avatar} alt={`profile pciture of ${owner.username}`} />
                 </Col>
                 <Col xs={10}>
