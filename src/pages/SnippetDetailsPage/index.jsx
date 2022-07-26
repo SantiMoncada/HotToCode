@@ -67,6 +67,12 @@ const SnippetDetailsPage = () => {
 
     }
 
+
+    const fireFinalActions = () => {
+        loadSnippet()
+        loadComments()
+    }
+
     return (
         <Container>
             <Row className="justify-content-center">
@@ -78,7 +84,7 @@ const SnippetDetailsPage = () => {
                         :
                         snippet ?
                             <>
-                                <SnippetCard  {...snippet} />
+                                <SnippetCard  {...snippet} fireFinalActions={fireFinalActions} />
                             </>
                             :
                             <></>
@@ -88,12 +94,12 @@ const SnippetDetailsPage = () => {
                         ?
                         <Loader />
                         : snippet ?
-                            <CommentForm loadComments={loadComments} snippet_id={snippet_id} />
+                            <CommentForm snippet_id={snippet_id} />
                             :
                             <></>
                     }
                     <br></br>
-                    <CommentList commentsData={comments} loadComments={loadComments} />
+                    <CommentList commentsData={comments} fireFinalActions={fireFinalActions} />
                 </Col>
             </Row>
         </Container>

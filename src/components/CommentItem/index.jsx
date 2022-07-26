@@ -3,13 +3,13 @@ import commentService from './../../services/commets.services'
 import { AuthContext } from '../../contexts/auth.context'
 import { useContext } from "react"
 
-import { Card, Row, Col, Button } from "react-bootstrap"
+import { Card, Row, Col } from "react-bootstrap"
 
 import { MdDeleteForever } from 'react-icons/md'
 
 import './CommentItem.css'
 
-const CommentItem = ({ owner, content, _id, loadComments }) => {
+const CommentItem = ({ owner, content, _id, fireFinalActions }) => {
 
     const { user } = useContext(AuthContext)
 
@@ -17,7 +17,11 @@ const CommentItem = ({ owner, content, _id, loadComments }) => {
 
         commentService
             .deleteComment(_id)
-            .then(() => loadComments())
+            .then(() => {
+                if (fireFinalActions) {
+                    fireFinalActions()
+                }
+            })
             .catch(err => console.log(err))
     }
 

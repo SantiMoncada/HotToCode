@@ -24,7 +24,7 @@ import { useEffect } from "react";
 import snippetService from "../../services/snippets.services";
 
 
-const SnippetCard = ({ title, content, language, owner, _id }) => {
+const SnippetCard = ({ title, content, language, owner, _id, fireFinalActions }) => {
 
 
     const [isFavLocal, setIsFavLocal] = useState(false)
@@ -152,8 +152,10 @@ const SnippetCard = ({ title, content, language, owner, _id }) => {
         snippetService
             .deleteSnippet(_id)
             .then(() => {
-                //TODO fire actions
-                navigate('/myProfile')
+                if (fireFinalActions) {
+                    fireFinalActions()
+                }
+                // navigate(`/user/${user._id}`)
             })
             .catch(err => {
                 setShowMessage({ show: true, title: 'Error deliting comment', text: 'You can not delete this commet' })

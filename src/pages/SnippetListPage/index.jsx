@@ -17,11 +17,11 @@ const SnippetListPage = () => {
     const { user } = useContext(AuthContext)
 
     useEffect(() => {
+        setIsLoading(true)
         loadSnippet()
     }, [user])
 
     const loadSnippet = () => {
-        setIsLoading(true)
         snippetService.getSnippets()
             .then(({ data }) => {
                 setIsLoading(false)
@@ -33,12 +33,16 @@ const SnippetListPage = () => {
             })
     }
 
+    const fireFinalActions = () => {
+        loadSnippet()
+    }
+
     return (
         <>
             <br></br>
             <Container>
                 {
-                    isLoading ? <Loader /> : <SnippetList snippets={snippets} />
+                    isLoading ? <Loader /> : <SnippetList snippets={snippets} fireFinalActions={fireFinalActions} />
                 }
             </Container>
         </>

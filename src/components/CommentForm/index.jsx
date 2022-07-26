@@ -8,7 +8,7 @@ import commentService from "../../services/commets.services"
 
 import { MdScheduleSend, MdSend } from "react-icons/md"
 
-const CommentForm = ({ snippet_id, loadComments }) => {
+const CommentForm = ({ snippet_id, fireFinalActions }) => {
 
     const [commentData, setCommentData] = useState({
         content: ''
@@ -31,7 +31,9 @@ const CommentForm = ({ snippet_id, loadComments }) => {
         commentService
             .createComment(snippet_id, commentData)
             .then(({ data }) => {
-                loadComments()
+                if (fireFinalActions) {
+                    fireFinalActions()
+                }
                 setCommentData('')
                 setIsSendingComment(false)
             })

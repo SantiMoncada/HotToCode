@@ -18,7 +18,7 @@ const UserProfilePage = () => {
 
     useEffect(() => {
         loadUser()
-        loadSnippet()
+        loadSnippets()
     }, [])
 
     const loadUser = () => {
@@ -31,7 +31,7 @@ const UserProfilePage = () => {
             .catch(err => console.log(err))
     }
 
-    const loadSnippet = () => {
+    const loadSnippets = () => {
         snippetService
             .getSnippets({ user: loggedUser._id })
             .then(({ data }) => {
@@ -40,6 +40,12 @@ const UserProfilePage = () => {
             .catch(err => console.log(err))
     }
 
+    const fireFinalActions = () => {
+        console.log('me estás llamando¡????')
+        loadSnippets()
+    }
+
+
     return (
         <Container>
             <br />
@@ -47,7 +53,7 @@ const UserProfilePage = () => {
                 <Col sm={4}>
                     <UserProfile loadUser={loadUser} userData={userData} />
                 </Col>
-                <Col sm={8}><SnippetList maxColums={2} snippets={snippets} /></Col>
+                <Col sm={8}><SnippetList maxColums={2} snippets={snippets} fireFinalActions={fireFinalActions} /></Col>
             </Row>
         </Container>
 

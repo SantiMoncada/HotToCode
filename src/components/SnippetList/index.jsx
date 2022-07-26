@@ -5,7 +5,7 @@ import { UserContext } from "../../contexts/user.context";
 import { useContext } from "react"
 import { useEffect } from "react";
 
-const SnippetList = ({ snippets, maxColums }) => {
+const SnippetList = ({ snippets, maxColums, fireFinalActions }) => {
 
     const { UpdateUserData } = useContext(UserContext)
 
@@ -48,7 +48,7 @@ const SnippetList = ({ snippets, maxColums }) => {
             {snippets.map(snippet => {
                 return (
                     <Col md={md} lg={lg} xl={xl} key={snippet._id} className="mb-4">
-                        <SnippetCard {...snippet} />
+                        <SnippetCard {...snippet} fireFinalActions={fireFinalActions} />
                     </Col>
                 )
             })}

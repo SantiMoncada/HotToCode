@@ -1,6 +1,6 @@
 import CommentItem from "../CommentItem"
 
-const CommentList = ({ commentsData, loadComments }) => {
+const CommentList = ({ commentsData, fireFinalActions }) => {
 
     return (
         <>
@@ -8,7 +8,7 @@ const CommentList = ({ commentsData, loadComments }) => {
                 commentsData.map(comment => {
                     return (
                         <div key={comment._id}>
-                            <CommentItem {...comment} loadComments={loadComments} />
+                            <CommentItem {...comment} fireFinalActions={fireFinalActions} />
                         </div>
                     )
                 })
