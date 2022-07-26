@@ -33,13 +33,15 @@ router.get('/:post_id', (req, res) => {
 
     Snippet
         .findById(post_id)
-        .sort({ 'createdAt': -1 })
         .select('comments')
         .populate({
             path: 'comments',
+            options: {
+                sort: { 'createdAt': -1 },
+            },
             populate: {
                 path: 'owner',
-                select: 'username avatar'
+                select: 'username avatar createdAt'
             }
         })
         .then(response => res.json(response.comments))
