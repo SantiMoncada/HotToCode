@@ -17,7 +17,7 @@ import pythonIcon from "./../../assets/LengIcons/python-plain.svg"
 import rustIcon from "./../../assets/LengIcons/rust-plain.svg"
 import cssIcon from "./../../assets/LengIcons/css3-plain.svg"
 
-import { MdFavoriteBorder, MdFavorite, MdShare, MdOutlineModeComment } from 'react-icons/md'
+import { MdFavoriteBorder, MdFavorite, MdShare, MdOutlineModeComment, MdMode, MdOutlineDeleteForever } from 'react-icons/md'
 import { TbGitFork } from 'react-icons/tb'
 import { useState } from "react";
 import { useEffect } from "react";
@@ -74,6 +74,10 @@ const SnippetCard = ({ title, content, language, owner, _id }) => {
         default:
             border = 'ligth'
 
+    }
+
+    const profileHandler = () => {
+        navigate(`/user/${owner._id}`)
     }
 
     const likeHandler = () => {
@@ -139,12 +143,30 @@ const SnippetCard = ({ title, content, language, owner, _id }) => {
             .catch(err => console.warn(err))
     }
 
+    const editHandler = () => {
+        alert('curratelo')
+    }
+
+    const deleteHandler = () => {
+
+        snippetService
+            .deleteSnippet(_id)
+            .then(() => {
+                //TODO fire actions
+                navigate('/myProfile')
+            })
+            .catch(err => {
+                setShowMessage({ show: true, title: 'Error deliting comment', text: 'You can not delete this commet' })
+                console.log(err)
+            })
+    }
+
     return (
         <Card border={border} className="SnippetCard" bg={'Secondary'} >
             <Card.Header style={{ backgroundColor: 'white' }}>
-                <Row>
+                <Row onClick={profileHandler} style={{ cursor: ' pointer ' }}>
                     <Col xs={2} style={{ padding: 0 }}>
-                        <div className="cardAvatar">
+                        <div className="cardAvatar" >
                             <img src={owner.avatar} alt={`profile pciture of ${owner.username}`} ></img>
                         </div>
                     </Col>
@@ -153,7 +175,7 @@ const SnippetCard = ({ title, content, language, owner, _id }) => {
                         <hr />
                         <p>{title}</p>
                     </Col>
-                    <Col xs={1} style={{ padding: 0 }} >
+                    <Col xs={1} style={{ padding: 0, display: 'flex', justifyContent: 'center' }} >
                         <div className="cardIcon">
                             <img src={icon} alt={`Icon of ${language}`} />
                         </div>
@@ -178,6 +200,12 @@ const SnippetCard = ({ title, content, language, owner, _id }) => {
                     }
 
                     <MdShare onClick={shareHandler} className="actionButton share" />
+                    {user && user._id === owner._id &&
+                        <>
+                            <MdMode onClick={editHandler} className="actionButton edit" />
+                            <MdOutlineDeleteForever className="actionButton delete" onClick={(deleteHandler)} />
+                        </>
+                    }
                 </div>
             </Card.Body>
         </Card>

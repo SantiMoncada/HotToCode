@@ -1,8 +1,10 @@
 import { useEffect, useState, useContext } from "react"
-import { useParams } from "react-router-dom"
+import { useParams, useNavigate } from "react-router-dom"
 
 import { UserContext } from "../../contexts/user.context";
-import { Container, Row, Col } from "react-bootstrap"
+import { Container, Row, Col, Button } from "react-bootstrap"
+
+import { MessageContext } from "./../../contexts/userMessage.context"
 
 import SnippetCard from './../../components/SnippetCard'
 import CommentForm from "../../components/CommentForm"
@@ -14,59 +16,86 @@ import './SnippetDetailsPage.css'
 
 const SnippetDetailsPage = () => {
 
+    const { snippet_id } = useParams()
+    const navigate = useNavigate()
     const { UpdateUserData } = useContext(UserContext)
 
-    const [snippet, setSnippet] = useState({})
-    const [isLoading, setIsLoading] = useState(true)
+    const [snippet, setSnippet] = useState()
+    const [comments, setComments] = useState([])
 
-    const [comment, setComment] = useState([])
+    const [isLoadingSnippet, setIsLoadingSnippet] = useState(true)
+    const [isLoadingComments, setIsLoadingComments] = useState(true)
 
-    const { snippet_id } = useParams()
+    const { setShowMessage } = useContext(MessageContext)
+
 
 
     useEffect(() => {
         UpdateUserData()
         loadSnippet()
-        loadComment()
+        loadComments()
     }, [])
 
     const loadSnippet = () => {
         snippetService
             .getOneSnippet(snippet_id)
             .then(({ data }) => {
-                setIsLoading(false)
                 setSnippet(data)
+                setIsLoadingSnippet(false)
             })
-            .catch(err => console.log(err))
+            .catch(err => {
+                setShowMessage({ show: true, title: 'Error loading comment', text: 'There was an error loading snippet content' })
+                setIsLoadingSnippet(false)
+                console.log(err)
+            })
 
     }
 
-    const loadComment = () => {
+
+    const loadComments = () => {
         commentService
             .getComment(snippet_id)
             .then(({ data }) => {
-                setComment(data)
+                setComments(data)
+                setIsLoadingComments(false)
             })
-            .catch(err => console.log(err))
+            .catch(err => {
+                setShowMessage({ show: true, title: 'Error loading comment', text: 'There was an error loading comment content' })
+                setIsLoadingComments(false)
+                console.log(err)
+            })
 
     }
 
     return (
         <Container>
-            <Row className="snippetDetails">
-                <Col sm={6}>
-                    {isLoading ?
+            <Row className="justify-content-center">
+                <Col xl={8}>
+                    <br></br>
+
+                    {isLoadingSnippet ?
                         <Loader />
                         :
-                        <>
-                            <SnippetCard  {...snippet} />
-                            {/* edit delete snippets*/}
-                            <CommentForm snippet_id={snippet_id} />
-                        </>
+                        snippet ?
+                            <>
+                                <SnippetCard  {...snippet} />
+                            </>
+                            :
+                            <></>
                     }
+                    <br></br>
+                    {isLoadingComments
+                        ?
+                        <Loader />
+                        : snippet ?
+                            <CommentForm loadComments={loadComments} snippet_id={snippet_id} />
+                            :
+                            <></>
+                    }
+                    <br></br>
+                    <CommentList commentsData={comments} loadComments={loadComments} />
                 </Col>
             </Row>
-            <Row><CommentList commentsData={comment} /></Row>
         </Container>
     )
 }

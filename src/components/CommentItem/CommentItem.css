@@ -1,6 +1,6 @@
-.itemAvatar img {
-    width: 35px;
-    height: 35px;
+.CommentItem img {
+    width: 50px;
+    height: 50px;
     display: inline-block;
     position: relative;
     vertical-align: middle;
@@ -9,17 +9,28 @@
     border-radius: 50%;
 }
 
-.itemAvatar {
-    width: 60%;
-    margin-bottom: 20px;
+.CommentItem {
+    display: flex;
 }
 
-.actionButton {
-    width: 30px;
-    height: 30px;
+@keyframes redBack {
+    from {
+        background-color: none;
+    }
 
+    to {
+        background-color: rgba(229, 76, 76, 0.637);
+    }
 }
 
-.commentHeader {
-    justify-content: flex-end;
+.delete:hover {
+    animation-name: redBack;
+}
+
+.actionButton:hover {
+    border-radius: 50%;
+    animation-fill-mode: forwards;
+    animation-duration: 0.3s;
+    margin: 5px 0;
+    display: flex;
 }

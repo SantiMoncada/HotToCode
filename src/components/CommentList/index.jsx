@@ -1,23 +1,19 @@
 import CommentItem from "../CommentItem"
-import { Col, Row, Container } from "react-bootstrap"
 
-const CommentList = ({ commentsData }) => {
+const CommentList = ({ commentsData, loadComments }) => {
 
     return (
-        <Container>
+        <>
             {
                 commentsData.map(comment => {
                     return (
-                        <Row>
-                            <Col key={comment._id}>
-                                <CommentItem {...comment} />
-                            </Col>
-                            <br />
-                        </Row>
+                        <div key={comment._id}>
+                            <CommentItem {...comment} loadComments={loadComments} />
+                        </div>
                     )
                 })
             }
-        </Container>
+        </>
     )
 }
 

@@ -3,17 +3,13 @@ import commentService from './../../services/commets.services'
 import { AuthContext } from '../../contexts/auth.context'
 import { useContext } from "react"
 
-import { useNavigate } from 'react-router-dom'
-import { Container, Card, Row, Col } from "react-bootstrap"
+import { Card, Row, Col, Button } from "react-bootstrap"
 
 import { MdDeleteForever } from 'react-icons/md'
 
 import './CommentItem.css'
 
-const CommentItem = ({ owner, content, _id }) => {
-
-
-    const navigate = useNavigate()
+const CommentItem = ({ owner, content, _id, loadComments }) => {
 
     const { user } = useContext(AuthContext)
 
@@ -21,31 +17,34 @@ const CommentItem = ({ owner, content, _id }) => {
 
         commentService
             .deleteComment(_id)
-            .then(() => navigate('/'))
+            .then(() => loadComments())
             .catch(err => console.log(err))
     }
 
     return (
-        <Container className="itemAvatar">
-            <Card>
-                <Card.Header>
-                    <Row>
-                        <Col>
-                            <img src={owner.avatar} alt={`profile pciture of ${owner.username}`} />@{owner.username}
-                        </Col>
-                        <Col className='commentHeader'>
-                            {
-                                owner._id === user?._id &&
-                                <MdDeleteForever size="sm" onClick={() => commentDelete()} className='actionButton' />
-                            }
-                        </Col>
-                    </Row>
-                </Card.Header>
-                <Card.Text>
-                    <p>{content}</p>
-                </Card.Text>
-            </Card>
-        </Container>
+        <Card className="CommentItem">
+            <Row>
+                <Col xs={1}>
+                    <img src={owner.avatar} alt={`profile pciture of ${owner.username}`} />
+                </Col>
+                <Col xs={10}>
+                    <Card.Text>
+                        <p>
+                            <strong>
+                                @{owner.username}
+                            </strong>
+                        </p>
+                        <p>{content}</p>
+                    </Card.Text>
+                </Col>
+                <Col xs={1}>
+                    {
+                        owner._id === user?._id &&
+                        <MdDeleteForever className="actionButton delete" size="sm" onClick={() => commentDelete()} />
+                    }
+                </Col>
+            </Row>
+        </Card>
     )
 
 }

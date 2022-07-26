@@ -3,7 +3,6 @@ import { AuthContext } from "../../contexts/auth.context"
 import { Container } from "react-bootstrap"
 
 import snippetService from "../../services/snippets.services"
-import userService from "../../services/user.services"
 
 import SnippetList from "../../components/SnippetList"
 import Loader from "../../components/Loader"
