@@ -97,7 +97,7 @@ router.get('/getAllFavSnippets/:user_id', isAuthenticated, (req, res) => {
         .catch(err => res.status(500).json(err))
 })
 
-router.get('/getAllFavSnippetsContent/:user_id', isAuthenticated, (req, res) => {
+router.get('/getAllFavSnippetsContent/:user_id', (req, res) => {
 
     const { user_id } = req.params
 
