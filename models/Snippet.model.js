@@ -6,7 +6,7 @@ const snippetSchema = new Schema(
         content: String,
         language: {
             type: String,
-            enum: ['JS', 'PYTHON', 'C'],
+            enum: ['JS', 'PYTHON', 'C', 'RUST', 'CSS'],
             default: 'JS'
         },
         owner:
