@@ -1,4 +1,4 @@
-import { Container, Row, Col } from "react-bootstrap"
+import { Container, Row, Col, Tab, Tabs } from "react-bootstrap"
 import UserProfile from "../../components/UserProfile"
 import SnippetList from "../../components/SnippetList"
 import { useState, useEffect } from "react"
@@ -9,10 +9,13 @@ import userService from "../../services/user.services"
 import Loader from "./../../components/Loader"
 import { useParams } from "react-router-dom"
 
-const UserDetailsPage = () => {
-    const [snippets, setSnippets] = useState([])
+import './UserDetailsPage.css'
 
+const UserDetailsPage = () => {
+
+    const [snippets, setSnippets] = useState([])
     const [userData, setUserData] = useState([])
+    const [tabKet, setTabKey] = useState('own')
 
     const { user_id } = useParams()
 
@@ -23,6 +26,19 @@ const UserDetailsPage = () => {
         loadUser()
         loadSnippets()
     }, [user_id])
+
+    useEffect(() => {
+        switch (tabKet) {
+            case 'favs':
+                loadFavSnippets()
+                break
+            case 'own':
+            default:
+                loadSnippets()
+
+
+        }
+    }, [tabKet])
 
     const loadUser = () => {
         setLoadingUser(true)
@@ -53,6 +69,21 @@ const UserDetailsPage = () => {
             })
     }
 
+    const loadFavSnippets = () => {
+        setLoadingSnippets(true)
+        userService
+            .getAllFavSnippetsContent(user_id)
+            .then(({ data }) => {
+                console.log('fav snippets', data)
+                setSnippets(data)
+                setLoadingSnippets(false)
+            })
+            .catch(err => {
+                setLoadingSnippets(false)
+                console.log(err)
+            })
+    }
+
     const deleteFinalActions = () => {
         loadSnippets()
     }
@@ -70,6 +101,20 @@ const UserDetailsPage = () => {
 
                 </Col>
                 <Col sm={8}>
+
+                    <Tabs
+                        activeKey={tabKet}
+                        onSelect={(k) => setTabKey(k)}
+                        id="favSelector"
+                        className="mb-3"
+                        justify
+                    >
+                        <Tab eventKey="own" title="Your Snippets" style={{ color: 'red' }}>
+                        </Tab>
+                        <Tab eventKey="favs" title="Favourites">
+                        </Tab>
+
+                    </Tabs>
                     {!loadingSnippets ?
                         <SnippetList maxColums={2} snippets={snippets} fireFinalActions={deleteFinalActions} />
                         :

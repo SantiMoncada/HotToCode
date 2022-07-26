@@ -43,6 +43,9 @@ class UserServices {
     getAllFavSnippets(user_id) {
         return this.api.get(`/getAllFavSnippets/${user_id}`)
     }
+    getAllFavSnippetsContent(user_id) {
+        return this.api.get(`/getAllFavSnippetsContent/${user_id}`)
+    }
 }
 
 const userService = new UserServices

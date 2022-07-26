@@ -1,0 +1,18 @@
+#favSelector-tab-own {
+    color: gray;
+    width: 100%;
+}
+
+#favSelector-tab-own.active {
+    color: black;
+}
+
+
+#favSelector-tab-favs {
+    color: gray;
+    width: 100%;
+}
+
+#favSelector-tab-favs.active {
+    color: black;
+}

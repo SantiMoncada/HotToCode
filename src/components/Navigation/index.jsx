@@ -87,6 +87,7 @@ const Navigation = () => {
                                     </Link>
                                 </NavDropdown.Item>
 
+                                <NavDropdown.Item >Your snippets</NavDropdown.Item>
                                 <NavDropdown.Item >Your favs</NavDropdown.Item>
                                 <NavDropdown.Divider />
                                 <NavDropdown.Item onClick={logOuthandler}>Sign out</NavDropdown.Item>
