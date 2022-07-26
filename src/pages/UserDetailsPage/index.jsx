@@ -14,7 +14,7 @@ import './UserDetailsPage.css'
 const UserDetailsPage = () => {
 
     const [snippets, setSnippets] = useState([])
-    const [userData, setUserData] = useState([])
+    const [userData, setUserData] = useState({})
     const [tabKet, setTabKey] = useState('own')
 
     const { user_id } = useParams()
@@ -109,9 +109,9 @@ const UserDetailsPage = () => {
                         className="mb-3"
                         justify
                     >
-                        <Tab eventKey="own" title="Your Snippets" style={{ color: 'red' }}>
+                        <Tab eventKey="own" title={`${userData.username}'s Snippets`} style={{ color: 'red' }}>
                         </Tab>
-                        <Tab eventKey="favs" title="Favourites">
+                        <Tab eventKey="favs" title={`${userData.username}'s Favourites`}>
                         </Tab>
 
                     </Tabs>
