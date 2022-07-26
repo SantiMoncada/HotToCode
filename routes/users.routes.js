@@ -1,6 +1,7 @@
 const router = require('express').Router()
 
 const { isAuthenticated } = require("../middlewares/jwt.middleware")
+const { populate } = require('./../models/User.model')
 
 const User = require('./../models/User.model')
 
@@ -96,5 +97,24 @@ router.get('/getAllFavSnippets/:user_id', isAuthenticated, (req, res) => {
         .catch(err => res.status(500).json(err))
 })
 
+router.get('/getAllFavSnippetsContent/:user_id', isAuthenticated, (req, res) => {
+
+    const { user_id } = req.params
+
+    User
+        .findById(user_id)
+        .select('favSnippets')
+        .populate({
+            path: 'favSnippets',
+            select: 'title content language owner',
+            populate: {
+                path: 'owner',
+                select: 'avatar username'
+            }
+
+        })
+        .then(response => res.json(response.favSnippets))
+        .catch(err => res.status(500).json(err))
+})
 
 module.exports = router 

@@ -68,7 +68,7 @@ router.put('/edit/:snippet_id', isAuthenticated, (req, res) => {
     Snippet.findById(snippet_id)
         .select('owner')
         .then(snippet => {
-            if (snippet.owner !== user_id) {
+            if (!snippet.owner.equals(user_id)) {
                 const message = "Can not edit a snippet that you do not own"
                 throw { message, errorCode: 401 }
             }
