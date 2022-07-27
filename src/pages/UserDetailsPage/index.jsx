@@ -100,6 +100,7 @@ const UserDetailsPage = () => {
                         onSelect={(k) => setTabKey(k)}
                         id="favSelector"
                         className="mb-3"
+                        transition={false}
                         justify
                     >
                         <Tab eventKey="own" title={`${userData.username}'s Snippets`} style={{ color: 'red' }}>

@@ -7,6 +7,7 @@ const AuthContext = createContext()
 function AuthProviderWrapper(props) {
 
     const [user, setUser] = useState(null)
+    const [socketId, setSocketId] = useState(null)
     const [isLoading, setIsLoading] = useState(true)
 
 
@@ -41,7 +42,7 @@ function AuthProviderWrapper(props) {
     }, [])
 
     return (
-        <AuthContext.Provider value={{ isLoading, user, storeToken, authenticateUser, logoutUser }}>
+        <AuthContext.Provider value={{ isLoading, user, storeToken, authenticateUser, logoutUser, socketId, setSocketId }}>
             {props.children}
         </AuthContext.Provider>
     )

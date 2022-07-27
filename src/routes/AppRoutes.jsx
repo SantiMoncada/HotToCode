@@ -10,6 +10,7 @@ import UserDetailsPage from '../pages/UserDetailsPage'
 import NotFoundPage from '../pages/NotFoundPage'
 import SnippetDetailsPage from '../pages/SnippetDetailsPage'
 import SnippetEditPage from '../pages/SnippetEditPage'
+import GuestSnippetPage from '../pages/GuestSnippetPage'
 
 const AppRoutes = () => {
 
@@ -20,6 +21,8 @@ const AppRoutes = () => {
             <Route path='/login' element={<LoginPage />} />
             <Route path='/snippets' element={<SnippetListPage />} />
             <Route path='/user/:user_id' element={<UserDetailsPage />} />
+
+            <Route path='/liveCodeGuest/:owner_socket' element={<GuestSnippetPage />} />
 
             <Route path="/snippetForm" element={<PrivateRoute />}>
                 <Route path="" element={<SnippetFormPage />} />

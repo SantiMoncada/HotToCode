@@ -39,7 +39,7 @@ const LanguageSelector = ({ len, setLen }) => {
 
     }
     return (
-        <Form className='LenguageSelector'>
+        <Form.Group className='LenguageSelector'>
             <img src={icon} alt="" />
             <Form.Select value={len} onChange={handleChange} aria-label="Default select example">
                 <option value="JS">JavaScript</option>
@@ -48,7 +48,7 @@ const LanguageSelector = ({ len, setLen }) => {
                 <option value="CSS">CSS</option>
                 <option value="RUST">RUST</option>
             </Form.Select>
-        </Form>
+        </Form.Group>
     );
 }
 export default LanguageSelector
