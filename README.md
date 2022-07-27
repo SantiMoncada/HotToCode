@@ -13,3 +13,8 @@
 | /snippets/create                  | snippet create page     |
 | /snippets/edit                    | snippet edit page       |
 | /snippets/my-snippets             | own snippet page        |
+
+#env variables
+
+BACK_END_APP_API_URL
+BACK_END_URL

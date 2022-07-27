@@ -37,9 +37,10 @@ const SnippetFormPage = () => {
 
     useEffect(() => {
         socket.auth = { username: user.username };
-
+        console.log("sending request")
         socket.on('me', (payload) => {
             setSocketId(payload)
+            console.log('esto es el pyload', payload)
         })
 
         socket.on('receiveGuestId', (payload) => {
@@ -57,7 +58,7 @@ const SnippetFormPage = () => {
 
     useEffect(() => {
         if (guestId) {
-
+            setModalShow(false)
             setShowMessage({ show: true, title: 'Guest connected', text: `A guest is connected to you session. Now the both of you can code together in real time.` })
 
             socket.off('receiveGuestId')
@@ -122,7 +123,7 @@ const SnippetFormPage = () => {
     }
 
     const shareHandler = () => {
-        navigator.clipboard.writeText(`${window.location.origin}/liveCodeGuest/${socketId}`)
+        // navigator.clipboard.writeText(`${window.location.origin}/liveCodeGuest/${socketId}`)
         setShowMessage({ show: true, title: 'Copied to clipboard', text: `Copied the link ${window.location.origin}/liveCodeGuest/${socketId} to clipboard` })
         setModalShow(true)
     }
@@ -131,7 +132,7 @@ const SnippetFormPage = () => {
         <Container>
 
             <Row>
-                <Col md={{ offset: 3, span: 6 }}>
+                <Col lg={{ offset: 3, span: 6 }}>
 
                     <Form onSubmit={handleSubmmit}>
                         <br></br>
@@ -148,12 +149,17 @@ const SnippetFormPage = () => {
                                 Save Snippet
                             </Button>
                         </div>
-                        <br></br>
-                        <div className="d-grid">
-                            <Button variant="outline-info" size="lg" onClick={shareHandler}>
-                                Share Link
-                            </Button>
-                        </div>
+                        {
+                            socketId &&
+                            <>
+                                <br></br>
+                                <div className="d-grid">
+                                    <Button variant="outline-info" size="lg" onClick={shareHandler}>
+                                        Share Link
+                                    </Button>
+                                </div>
+                            </>
+                        }
                     </Form>
                 </Col>
             </Row>

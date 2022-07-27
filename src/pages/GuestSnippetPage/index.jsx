@@ -70,7 +70,7 @@ const SnippetFormPage = () => {
         <Container>
             <Row>
 
-                <Col md={{ offset: 3, span: 6 }}>
+                <Col lg={{ offset: 3, span: 6 }}>
 
                     <Form>
                         <br></br>
