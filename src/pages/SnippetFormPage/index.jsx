@@ -1,15 +1,20 @@
 import { useEffect, useState, useContext } from "react"
 import { useNavigate } from "react-router-dom"
 import { AuthContext } from '../../contexts/auth.context'
+import { MessageContext } from "../../contexts/userMessage.context";
 import { Container, Row, Col, Button, Form } from 'react-bootstrap'
 import SnippetCodeEditor from './../../components/SnippetCodeEditor'
 import LanguageSelector from './../../components/LanguageSelector'
 import snippetService from "../../services/snippets.services"
 import socket from '../../config/socket-config'
 
+import ModalLink from "../../components/ModalLink"
+import QRCode from "qrcode"
+
 const SnippetFormPage = () => {
 
     const { user, socketId, setSocketId } = useContext(AuthContext)
+
     let navigate = useNavigate()
 
 
@@ -24,6 +29,11 @@ const SnippetFormPage = () => {
     const [title, setTitle] = useState('')
 
     const [guestId, setGuestId] = useState(null)
+
+    const { setShowMessage } = useContext(MessageContext)
+
+    const [modalShow, setModalShow] = useState(false)
+    const [qrScr, setQrSrc] = useState("")
 
     useEffect(() => {
         socket.auth = { username: user.username };
@@ -47,6 +57,9 @@ const SnippetFormPage = () => {
 
     useEffect(() => {
         if (guestId) {
+
+            setShowMessage({ show: true, title: 'Guest connected', text: `A guest is connected to you session. Now the both of you can code together in real time.` })
+
             socket.off('receiveGuestId')
 
             socket.on('receiveCode', (payload) => {
@@ -82,6 +95,10 @@ const SnippetFormPage = () => {
         setTitle(e.target.value)
     }
 
+    useEffect(() => {
+        QRCode.toDataURL(`${window.location.origin}/liveCodeGuest/${socketId}`).then(setQrSrc)
+    }, [socketId])
+
     const handleSubmmit = e => {
         e.preventDefault()
         const newSnippet = {
@@ -104,11 +121,16 @@ const SnippetFormPage = () => {
         console.log({ code, len, title })
     }
 
+    const shareHandler = () => {
+        navigator.clipboard.writeText(`${window.location.origin}/liveCodeGuest/${socketId}`)
+        setShowMessage({ show: true, title: 'Copied to clipboard', text: `Copied the link ${window.location.origin}/liveCodeGuest/${socketId} to clipboard` })
+        setModalShow(true)
+    }
+
     return (
         <Container>
 
             <Row>
-
                 <Col md={{ offset: 3, span: 6 }}>
 
                     <Form onSubmit={handleSubmmit}>
@@ -122,14 +144,28 @@ const SnippetFormPage = () => {
                         <SnippetCodeEditor len={len} code={code} setCode={setCode} />
                         <br></br>
                         <div className="d-grid">
-                            <Button variant="primary" type='submmit' size="lg">
+                            <Button variant="outline-success" type='submmit' size="lg">
                                 Save Snippet
+                            </Button>
+                        </div>
+                        <br></br>
+                        <div className="d-grid">
+                            <Button variant="outline-info" size="lg" onClick={shareHandler}>
+                                Share Link
                             </Button>
                         </div>
                     </Form>
                 </Col>
             </Row>
-            <p>{`${window.location.origin}/liveCodeGuest/${socketId}`}</p>
+            {
+                socketId &&
+                <ModalLink
+                    show={modalShow}
+                    onHide={() => setModalShow(false)}
+                    linkShare={`${window.location.origin}/liveCodeGuest/${socketId}`}
+                    qrCodeData={<img style={{ width: "75%" }} src={qrScr} />}
+                />
+            }
         </Container>
     )
 }
