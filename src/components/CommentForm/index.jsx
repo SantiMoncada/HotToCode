@@ -40,6 +40,8 @@ const CommentForm = ({ snippet_id, loadComments }) => {
                 setIsSendingComment(false)
                 setShowMessage({ show: true, title: 'Error posting comment', text: 'There was an erro posting you comment, try again' })
             })
+
+        e.target.reset()
     }
 
     const { content } = commentData
