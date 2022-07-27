@@ -1,5 +1,5 @@
 import { useEffect, useState, useContext } from "react"
-import { useNavigate } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 import { AuthContext } from '../../contexts/auth.context'
 import { Container, Row, Col, Button, Form } from 'react-bootstrap'
 import SnippetCodeEditor from './../../components/SnippetCodeEditor'
@@ -9,29 +9,27 @@ import socket from '../../config/socket-config'
 
 const SnippetFormPage = () => {
 
-    const { user, socketId, setSocketId } = useContext(AuthContext)
+    const { owner_socket } = useParams()
     let navigate = useNavigate()
-
-
 
     const [code, setCode] = useState('')
     const [len, setLen] = useState('JS')
     const [title, setTitle] = useState('')
-    const [guestId, setGuestId] = useState(null)
+    const [socketId, setSocketId] = useState(null)
 
     useEffect(() => {
-        socket.auth = { username: user.username };
+        socket.auth = { username: 'guest' };
 
         socket.on('me', (payload) => {
             setSocketId(payload)
-        })
-
-        socket.on('receiveGuestId', (payload) => {
-            console.log('hooked to ', payload.sender)
-            setGuestId(payload.sender)
+            socket.emit('sendGuestId', {
+                sender: payload,
+                addressee: owner_socket
+            })
         })
 
         socket.on('receiveCode', (payload) => {
+            console.log(payload)
             setLen(() => payload.len)
             setTitle(() => payload.title)
             setCode(() => payload.code)
@@ -43,15 +41,14 @@ const SnippetFormPage = () => {
 
 
     useEffect(() => {
-        if (guestId) {
-            socket.emit("sendCode", {
-                len,
-                title,
-                code,
-                sender: socketId,
-                addressee: guestId
-            })
-        }
+        socket.emit("sendCode", {
+            code,
+            len,
+            title,
+            sender: socketId,
+            addressee: owner_socket
+
+        })
     }, [code, len, title])
 
     const handleChangeTitle = e => {
@@ -66,29 +63,15 @@ const SnippetFormPage = () => {
             language: len,
             content: code,
         }
-
-        snippetService.createSnippet(newSnippet)
-            .then(({ data }) => {
-                socket.disconnect()
-                setSocketId(null)
-
-                navigate(`/snippetDetails/${data._id}`)
-                console.log(data)
-            })
-            .catch(err => {
-                console.log(err)
-            })
-        console.log({ code, len, title })
     }
 
     return (
         <Container>
-
             <Row>
 
                 <Col md={{ offset: 3, span: 6 }}>
 
-                    <Form onSubmit={handleSubmmit}>
+                    <Form>
                         <br></br>
                         <LanguageSelector len={len} setLen={setLen} />
                         <br></br>
@@ -98,15 +81,10 @@ const SnippetFormPage = () => {
 
                         <SnippetCodeEditor len={len} code={code} setCode={setCode} />
                         <br></br>
-                        <div className="d-grid">
-                            <Button variant="primary" type='submmit' size="lg">
-                                Save Snippet
-                            </Button>
-                        </div>
                     </Form>
                 </Col>
             </Row>
-            <p>{`${window.location.origin}/liveCodeGuest/${socketId}`}</p>
+
         </Container>
     )
 }
