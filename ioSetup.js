@@ -22,7 +22,6 @@ const ioSetup = (io) => {
         })
 
         socket.on("sendGuestId", (payload) => {
-            console.log('getting user id on server ', payload)
             io.to(payload.addressee).emit('receiveGuestId', payload)
         })
 

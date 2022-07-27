@@ -6,10 +6,9 @@ const setup = (app) => {
     const { Server } = require("socket.io");
 
     const ORIGIN = process.env.ORIGIN;
-    //TODO set origin env variable
     const io = new Server(server, {
         cors: {
-            origin: '*',
+            origin: process.env.ORIGIN || 'http://localhost:3000',
         },
     });
 
