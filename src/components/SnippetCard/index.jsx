@@ -11,18 +11,15 @@ import { Row, Col, Card, Button, Alert, } from "react-bootstrap"
 import CodeStyle from './../CodeStyle'
 import './SnippetCard.css'
 
-import jsIcon from "./../../assets/LengIcons/nodejs-plain.svg"
-import cIcon from "./../../assets/LengIcons/cplusplus-plain.svg"
-import pythonIcon from "./../../assets/LengIcons/python-plain.svg"
-import rustIcon from "./../../assets/LengIcons/rust-plain.svg"
-import cssIcon from "./../../assets/LengIcons/css3-plain.svg"
-
 import { MdFavoriteBorder, MdFavorite, MdShare, MdOutlineModeComment, MdMode, MdOutlineDeleteForever } from 'react-icons/md'
 import { TbGitFork } from 'react-icons/tb'
 import { useState } from "react";
 import { useEffect } from "react";
 import snippetService from "../../services/snippets.services";
 
+import links from "../../utils/lenIconsSvgLinks"
+
+const { jsIcon, cIcon, pythonIcon, rustIcon, cssIcon } = links
 
 const SnippetCard = ({ title, content, language, owner, _id, fireFinalActions }) => {
 
