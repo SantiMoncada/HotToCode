@@ -1,11 +1,9 @@
-import { useState } from 'react';
 import './LenguageSelector.css'
 import { Form, Row, Col } from 'react-bootstrap';
-import jsIcon from "./../../assets/LengIcons/nodejs-plain.svg"
-import cIcon from "./../../assets/LengIcons/cplusplus-plain.svg"
-import pythonIcon from "./../../assets/LengIcons/python-plain.svg"
-import rustIcon from "./../../assets/LengIcons/rust-plain.svg"
-import cssIcon from "./../../assets/LengIcons/css3-plain.svg"
+
+import links from "./../../utils/lenIconsSvgLinks"
+
+const { jsIcon, cIcon, pythonIcon, rustIcon, cssIcon } = links
 
 const LanguageSelector = ({ len, setLen }) => {
 

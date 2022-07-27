@@ -13,10 +13,16 @@ const SnippetFormPage = () => {
     let navigate = useNavigate()
 
 
+    const [receivingCode, setReceivingCode] = useState(false)
+
+    const [remoteCode, setRemoteCode] = useState('')
+    const [remoteLen, setRemoteLen] = useState('JS')
+    const [remoteTitle, setRemoteTitle] = useState('')
 
     const [code, setCode] = useState('')
     const [len, setLen] = useState('JS')
     const [title, setTitle] = useState('')
+
     const [guestId, setGuestId] = useState(null)
 
     useEffect(() => {
@@ -27,23 +33,41 @@ const SnippetFormPage = () => {
         })
 
         socket.on('receiveGuestId', (payload) => {
+
             console.log('hooked to ', payload.sender)
             setGuestId(payload.sender)
+
         })
 
-        socket.on('receiveCode', (payload) => {
-            setLen(() => payload.len)
-            setTitle(() => payload.title)
-            setCode(() => payload.code)
-        })
+
 
         socket.connect();
 
     }, [])
 
-
     useEffect(() => {
         if (guestId) {
+            socket.off('receiveGuestId')
+
+            socket.on('receiveCode', (payload) => {
+
+                console.log(payload.sender, guestId)
+                if (payload.sender === guestId) {
+                    setLen(payload.len)
+                    setTitle(payload.title)
+                    setCode(payload.code)
+
+                    setRemoteCode(payload.code)
+                    setRemoteLen(payload.len)
+                    setRemoteTitle(payload.title)
+                }
+            })
+        }
+    }, [guestId])
+
+
+    useEffect(() => {
+        if (guestId && remoteCode !== code || remoteTitle !== title || remoteLen !== len) {
             socket.emit("sendCode", {
                 len,
                 title,
@@ -56,7 +80,6 @@ const SnippetFormPage = () => {
 
     const handleChangeTitle = e => {
         setTitle(e.target.value)
-
     }
 
     const handleSubmmit = e => {
