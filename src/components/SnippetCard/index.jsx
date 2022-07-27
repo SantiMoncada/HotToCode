@@ -7,7 +7,7 @@ import { MessageContext } from "../../contexts/userMessage.context";
 import userService from "../../services/user.services"
 import SnippetService from "../../services/snippets.services"
 
-import { Row, Col, Card, Button, Alert, } from "react-bootstrap"
+import { Row, Col, Card } from "react-bootstrap"
 import CodeStyle from './../CodeStyle'
 import './SnippetCard.css'
 
@@ -137,7 +137,6 @@ const SnippetCard = ({ title, content, language, owner, _id, fireFinalActions })
                 return snippetService.createSnippet(forkedSnippet)
             })
             .then(({ data }) => {
-                //TODO navigate to Edit details
                 navigate(`/snippetDetails/${data._id}`)
             })
             .catch(err => console.warn(err))
