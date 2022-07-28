@@ -20,7 +20,7 @@ const CarouselHome = () => {
 
     const updatePeek = () => {
         console.log('helllou', window.innerHeight)
-        if (window.innerHeight < 940) {
+        if (window.innerHeight < 800) {
             setCarrouselPeek(0)
         } else {
             setCarrouselPeek(50)
