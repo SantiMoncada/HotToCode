@@ -9,7 +9,7 @@ const setup = (app) => {
     //TODO set origin env variable
     const io = new Server(server, {
         cors: {
-            origin: '*',
+            origin: process.env.ORIGIN,
         },
     });
 

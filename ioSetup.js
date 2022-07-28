@@ -11,18 +11,15 @@ const ioSetup = (io) => {
     });
 
     io.on("connection", (socket) => {
-        console.log(socket.username)
-        console.log('recived Conection')
+        console.log(`Recived a socket connection from ${socket.username}`)
 
         socket.emit("me", socket.id)
 
         socket.on("message", ({ message }) => {
-            console.log(message)
             socket.emit('message', { message })
         })
 
         socket.on("sendGuestId", (payload) => {
-            console.log('getting user id on server ', payload)
             io.to(payload.addressee).emit('receiveGuestId', payload)
         })
 
