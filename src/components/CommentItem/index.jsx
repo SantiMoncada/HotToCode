@@ -26,12 +26,12 @@ const CommentItem = ({ owner, content, _id, fireFinalActions }) => {
     }
 
     return (
-        <Card className="CommentItem">
+        <Card className="CommentItem" style={{ padding: '5px 10px 30px 10px' }}>
             <Row>
-                <Col xs={2} md={1} className={'commentImgContainer'}>
+                <Col xs={2} sm={1} className={'commentImgContainer'}>
                     <img src={owner.avatar} alt={`profile pciture of ${owner.username}`} />
                 </Col>
-                <Col xs={8} md={10}>
+                <Col xs={8} sm={10}>
                     <Card.Text>
                         <strong>
                             @{owner.username}
@@ -42,11 +42,11 @@ const CommentItem = ({ owner, content, _id, fireFinalActions }) => {
                     </Card.Text>
 
                 </Col>
-                <Col xs={2} md={1} style={{ padding: '0', display: 'flex', justifyContent: 'end' }}>
+                <Col xs={2} sm={1} style={{ padding: '0', display: 'flex', justifyContent: 'end' }}>
                     <figure style={{ padding: '0', display: 'flex', justifyContent: 'end' }}>
                         {
                             owner._id === user?._id &&
-                            <MdDeleteForever style={{ width: '40%', marginRight: '15px' }} size="sm" onClick={() => commentDelete()} />
+                            <MdDeleteForever style={{ width: '25px', height: '25px', marginRight: '15px' }} onClick={() => commentDelete()} />
                         }
                     </figure>
                 </Col>

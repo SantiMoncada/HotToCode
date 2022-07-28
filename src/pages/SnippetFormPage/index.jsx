@@ -121,7 +121,7 @@ const SnippetFormPage = () => {
     }
 
     const shareHandler = () => {
-        // navigator.clipboard.writeText(`${window.location.origin}/liveCodeGuest/${socketId}`)
+        navigator.clipboard.writeText(`${window.location.origin}/liveCodeGuest/${socketId}`)
         setShowMessage({ show: true, title: 'Copied to clipboard', text: `Copied the link ${window.location.origin}/liveCodeGuest/${socketId} to clipboard` })
         setModalShow(true)
     }
