@@ -12,7 +12,7 @@ const setup = (app) => {
         },
     });
 
-    require("./ioSetup")(io)
+    require("./../routes/socket.routes")(io)
 
     return server;
 }
