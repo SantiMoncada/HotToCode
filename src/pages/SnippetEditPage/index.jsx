@@ -50,7 +50,6 @@ const SnippetEditPage = () => {
                 console.log(data)
             })
             .catch(err => console.log(err))
-        console.log({ code, len, title })
     }
 
     return (

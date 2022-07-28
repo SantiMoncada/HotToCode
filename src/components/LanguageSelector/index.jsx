@@ -9,7 +9,6 @@ const LanguageSelector = ({ len, setLen }) => {
 
 
     const handleChange = (event) => {
-        console.log(event.target.value)
         setLen(event.target.value)
     }
 

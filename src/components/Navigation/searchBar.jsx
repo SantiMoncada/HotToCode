@@ -17,7 +17,6 @@ const SearchBar = () => {
     let navigate = useNavigate();
 
     const handlerSearchQuery = (query) => {
-        console.log('hellou')
         setFetchingUserData(true)
         userService.getAllUsers({ username: query })
             .then(({ data }) => {

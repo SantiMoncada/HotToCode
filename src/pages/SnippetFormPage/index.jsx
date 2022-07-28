@@ -37,10 +37,8 @@ const SnippetFormPage = () => {
 
     useEffect(() => {
         socket.auth = { username: user.username };
-        console.log("sending request")
         socket.on('me', (payload) => {
             setSocketId(payload)
-            console.log('esto es el pyload', payload)
         })
 
         socket.on('receiveGuestId', (payload) => {

@@ -51,7 +51,7 @@ const CommentForm = ({ snippet_id, loadComments }) => {
             <Row>
                 <Col xs={10} xl={11} style={{ paddingRight: 0 }}>
                     <Form.Group controlId="content">
-                        <Form.Control type="text" autoComplete="off" value={content} onChange={handleChange} name="content" placeholder="comment..." />
+                        <Form.Control type="text" autoComplete="off" value={content || ''} onChange={handleChange} name="content" placeholder="comment..." />
                     </Form.Group>
                 </Col>
                 <Col xs={2} xl={1} style={{ paddingLeft: 0, alignItems: 'center' }}>

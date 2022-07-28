@@ -28,24 +28,27 @@ const CommentItem = ({ owner, content, _id, fireFinalActions }) => {
     return (
         <Card className="CommentItem">
             <Row>
-                <Col xs={1} className={'commentImgContainer'}>
+                <Col xs={2} md={1} className={'commentImgContainer'}>
                     <img src={owner.avatar} alt={`profile pciture of ${owner.username}`} />
                 </Col>
-                <Col xs={10}>
+                <Col xs={8} md={10}>
                     <Card.Text>
-                        <p>
-                            <strong>
-                                @{owner.username}
-                            </strong>
-                        </p>
-                        <p>{content}</p>
+                        <strong>
+                            @{owner.username}
+                        </strong>
                     </Card.Text>
+                    <Card.Text>
+                        {content}
+                    </Card.Text>
+
                 </Col>
-                <Col xs={1}>
-                    {
-                        owner._id === user?._id &&
-                        <MdDeleteForever className="actionButton delete" size="sm" onClick={() => commentDelete()} />
-                    }
+                <Col xs={2} md={1} style={{ padding: '0', display: 'flex', justifyContent: 'end' }}>
+                    <figure style={{ padding: '0', display: 'flex', justifyContent: 'end' }}>
+                        {
+                            owner._id === user?._id &&
+                            <MdDeleteForever style={{ width: '40%', marginRight: '15px' }} size="sm" onClick={() => commentDelete()} />
+                        }
+                    </figure>
                 </Col>
             </Row>
         </Card>
