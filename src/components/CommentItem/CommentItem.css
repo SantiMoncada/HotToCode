@@ -11,6 +11,7 @@
 
 .commentImgContainer {
     padding: 0;
+    padding-left: 10px;
     display: flex;
     margin-top: 10px;
     justify-content: end;
