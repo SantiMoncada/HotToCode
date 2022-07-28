@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react"
-import { Carousel, Figure } from "react-bootstrap"
 import SnipperCard from "../../components/SnippetCard"
 import snippetService from "../../services/snippets.services"
 import React from 'react';
@@ -19,7 +18,6 @@ const CarouselHome = () => {
     }, [])
 
     const updatePeek = () => {
-        console.log('helllou', window.innerHeight)
         if (window.innerHeight < 800) {
             setCarrouselPeek(0)
         } else {
@@ -49,7 +47,6 @@ const CarouselHome = () => {
             items: 3,
         },
     };
-
 
     const items = snippets.map(
         snippet => {
@@ -89,7 +86,6 @@ const CarouselHome = () => {
         />
     )
 
-
     return (
         <>
             {Carousel()}
@@ -98,5 +94,3 @@ const CarouselHome = () => {
 }
 
 export default CarouselHome
-
-
