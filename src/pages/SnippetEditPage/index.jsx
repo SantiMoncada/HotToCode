@@ -1,4 +1,4 @@
-import { useContext, useState, useEffect } from "react"
+import { useState, useEffect } from "react"
 import { useNavigate, useParams } from "react-router-dom"
 import { Container, Row, Col, Button, Form } from 'react-bootstrap'
 import SnippetCodeEditor from './../../components/SnippetCodeEditor'

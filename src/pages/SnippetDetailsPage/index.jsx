@@ -12,7 +12,6 @@ import CommentList from "../../components/CommentList"
 import snippetService from "../../services/snippets.services"
 import commentService from "../../services/commets.services"
 import Loader from "../../components/Loader"
-import './SnippetDetailsPage.css'
 
 const SnippetDetailsPage = () => {
 

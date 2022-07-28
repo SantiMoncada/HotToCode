@@ -1,10 +1,8 @@
-import { useEffect, useState, useContext } from "react"
+import { useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
-import { AuthContext } from '../../contexts/auth.context'
-import { Container, Row, Col, Button, Form } from 'react-bootstrap'
+import { Container, Row, Col, Form } from 'react-bootstrap'
 import SnippetCodeEditor from './../../components/SnippetCodeEditor'
 import LanguageSelector from './../../components/LanguageSelector'
-import snippetService from "../../services/snippets.services"
 import socket from '../../config/socket-config'
 
 const SnippetFormPage = () => {

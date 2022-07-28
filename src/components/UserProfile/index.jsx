@@ -1,4 +1,4 @@
-import { Card, Row, Col, Container, Button } from 'react-bootstrap'
+import { Container, Button } from 'react-bootstrap'
 import UserProfileEditForm from "../UserProfileEditForm"
 import { useState, useContext } from 'react'
 import './userprofile.css'
