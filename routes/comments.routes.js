@@ -87,8 +87,6 @@ router.delete('/delete/:comment_id', isAuthenticated, (req, res) => {
     Comment.findById(comment_id)
         .select('owner')
         .then(comment => {
-            console.log(comment.owner)
-            console.log(logged_user_id)
             if (!comment.owner.equals(logged_user_id)) {
                 const message = "Can not delete a comment that you do not own"
                 throw { message, errorCode: 401 }

@@ -3,11 +3,11 @@ The server for the application HotToCode developed by Santiago Moncada & Jorge H
 
 ## Auth routes
 
-| METHOD | ENDPOINT                         | RESPONSE                         | ACTION                |
-|--------|----------------------------------|----------------------------------|-----------------------|
-| GET    | api/auth/signup                  | [{user}]                         |     |
-| GET    | api/auth/login                   | [{user}]                         |     |
-| GET    | api/auth/verify                  | [{user}]                         |     |
+| METHOD | ENDPOINT                         | RESPONSE                         | ACTION                      |
+|--------|----------------------------------|----------------------------------|-----------------------------|
+| GET    | api/auth/signup                  |  {user}                          | Registers the user on the DB|
+| GET    | api/auth/login                   |  {authToken}                     | Gets the auth token         |
+| GET    | api/auth/verify                  |  {authData}                      | Verifies the auth token     |
 
 ## User routes
 
@@ -39,11 +39,18 @@ The server for the application HotToCode developed by Santiago Moncada & Jorge H
 | DELETE | api/comments/delete/:post_id     | {comment}                        | delete a comment      |
 
 ## Environment variables required
+
 PORT
+
 ORIGIN
+
 MONGODB_URI
+
 TOKEN_SECRET
+
 CLOUDINARY_NAME
+
 CLOUDINARY_KEY
+
 CLOUDINARY_SECRET
 
