@@ -5,7 +5,6 @@
     position: relative;
     vertical-align: middle;
     object-fit: cover;
-    overflow: inherit;
     border-radius: 50%;
 }
 
