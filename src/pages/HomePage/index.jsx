@@ -10,7 +10,7 @@ const HomePage = () => {
             <br />
             <Container>
                 <Row>
-                    <Col md={{ offset: 3, span: 6 }} className='mb-4 mt-5'>
+                    <Col md={{ offset: 3, span: 6 }} className='mb-4 mt-4'>
                         <figure>
                             <img
                                 src={logo}
