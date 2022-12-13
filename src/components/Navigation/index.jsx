@@ -11,6 +11,14 @@ import { Container, Navbar, Nav, NavDropdown } from "react-bootstrap"
 
 import SearchBar from './searchBar'
 
+import styled from 'styled-components'
+
+const StyledLogo = styled.img`
+    width: 120px;
+    height: 40px;
+    display: inline-block;
+    vertical-align: top;
+`
 const Navigation = () => {
 
     const { logoutUser, user } = useContext(AuthContext)
@@ -27,11 +35,8 @@ const Navigation = () => {
             <Container fluid>
                 <Link to='/'>
                     <Navbar.Brand>
-                        <img
+                        <StyledLogo
                             src={logo}
-                            width="120"
-                            height="40"
-                            className="d-inline-block align-top"
                             alt="React Bootstrap logo"
                         />
                     </Navbar.Brand>

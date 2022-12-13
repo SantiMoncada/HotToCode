@@ -1,16 +1,19 @@
-import './App.css'
-import 'bootstrap/dist/css/bootstrap.min.css'
 
 import AppRoutes from './routes/AppRoutes'
 import Navigation from './components/Navigation';
 import UserMessage from './components/UserMessage';
+
+import GlobalStyle from './globalStyles';
+import 'bootstrap/dist/css/bootstrap.min.css'
+
 function App() {
   return (
-    <div className="App">
+    <>
+      <GlobalStyle />
       <Navigation />
       <AppRoutes />
       <UserMessage />
-    </div>
+    </>
   );
 }
 

@@ -13,12 +13,8 @@
     position: relative;
     vertical-align: middle;
     object-fit: cover;
-    overflow: inherit;
+    overflow: hidden;
     border-radius: 50%;
-}
-
-hr {
-    margin: 0;
 }
 
 .SnippetCard p {

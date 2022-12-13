@@ -13,7 +13,7 @@
 }
 
 .rbt-loader {
-    display: none;
+    display: none !important;
 }
 
 .SearchBarForm {

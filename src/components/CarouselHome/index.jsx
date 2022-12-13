@@ -4,7 +4,7 @@ import snippetService from "../../services/snippets.services"
 import React from 'react';
 import AliceCarousel from 'react-alice-carousel';
 import 'react-alice-carousel/lib/alice-carousel.css';
-
+import Loader from "../Loader";
 const CarouselHome = () => {
 
     const [snippets, setSnippets] = useState([])
@@ -27,7 +27,7 @@ const CarouselHome = () => {
     }
 
     const loadSnippet = () => {
-        snippetService.getSnippets({ limit: 10 })
+        snippetService.getSnippets({ limit: 20 })
             .then(({ data }) => {
                 setIsLoading(false)
                 setSnippets(data)
@@ -83,12 +83,17 @@ const CarouselHome = () => {
             items={items}
             onResized={onResized}
             responsive={responsive}
+            autoPlayDirection='rtl'
         />
     )
 
     return (
         <>
-            {Carousel()}
+        {isLoading ?
+            <Loader/>
+            :    
+            Carousel()
+            }
         </>
     )
 }

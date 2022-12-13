@@ -1,10 +1,27 @@
 import { Container, Button } from 'react-bootstrap'
 import UserProfileEditForm from "../UserProfileEditForm"
 import { useState, useContext } from 'react'
-import './userprofile.css'
 import Loader from './../Loader'
 
 import { AuthContext } from "../../contexts/auth.context";
+
+import styled from 'styled-components'
+
+const StyledAvatar = styled.figure`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+`
+const StyledAvatarImg = styled.img`
+    width: 220px;
+    height: 220px;
+    align-self: end;
+    display: inline-block;
+    position: relative;
+    vertical-align: middle;
+    object-fit: cover;
+    border-radius: 50%;
+`
 
 const UserProfile = ({ loadUser, userData }) => {
 
