@@ -51,7 +51,7 @@ const SignupForm = () => {
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="username">
-                <Form.Label>Usernaem</Form.Label>
+                <Form.Label>Username</Form.Label>
                 <Form.Control type="text" value={username} onChange={handleInputChange} name="username" />
             </Form.Group>
 
