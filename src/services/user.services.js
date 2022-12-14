@@ -48,6 +48,6 @@ class UserServices {
     }
 }
 
-const userService = new UserServices
+const userService = new UserServices()
 
 export default userService
