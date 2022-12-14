@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react"
+import { Container } from "react-bootstrap";
 import SnipperCard from "../../components/SnippetCard"
 import snippetService from "../../services/snippets.services"
 import React from 'react';
@@ -51,9 +52,9 @@ const CarouselHome = () => {
     const items = snippets.map(
         snippet => {
             return (
-                <figure style={{ margin: '0 5px' }}>
+                <Container>
                     <SnipperCard {...snippet} />
-                </figure>
+                </Container>
             )
         }
     )

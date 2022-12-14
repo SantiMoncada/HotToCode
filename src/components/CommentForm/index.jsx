@@ -3,10 +3,25 @@ import { Form, Button, Row, Col } from "react-bootstrap"
 
 import { MessageContext } from "../../contexts/userMessage.context"
 
-import './comment.css'
 import commentService from "../../services/commets.services"
 
 import { MdScheduleSend, MdSend } from "react-icons/md"
+
+import styled from "styled-components"
+
+const StyledColComment = styled(Col)`
+    padding-right: 0;
+`
+
+const StyledCommentInputField = styled(Form.Control)`
+    border-right: none;
+    border-radius:4px 0 0 4px;
+    padding-right: 0;
+`
+const StyledSendButton = styled(Button)`
+        width: 100%;
+        border-radius:0px 4px 4px 0px ;
+`
 
 const CommentForm = ({ snippet_id, loadComments }) => {
 
@@ -38,7 +53,7 @@ const CommentForm = ({ snippet_id, loadComments }) => {
             .catch(err => {
                 console.log(err)
                 setIsSendingComment(false)
-                setShowMessage({ show: true, title: 'Error posting comment', text: 'There was an erro posting you comment, try again' })
+                setShowMessage({ show: true, title: 'Error posting comment', text: 'There was an error posting your comment, try again' })
             })
 
         e.target.reset()
@@ -47,26 +62,28 @@ const CommentForm = ({ snippet_id, loadComments }) => {
     const { content } = commentData
 
     return (
-        <Form className="commentArea" onSubmit={handleSubmit}>
+        <Form onSubmit={handleSubmit}>
+            
             <Row>
-                <Col xs={10} xl={11} style={{ paddingRight: 0 }}>
+                <StyledColComment xs={10} md={11}>
                     <Form.Group controlId="content">
-                        <Form.Control type="text" autoComplete="off" value={content || ''} onChange={handleChange} name="content" placeholder="comment..." />
+                        <StyledCommentInputField type="text" autoComplete="off" value={content || ''} onChange={handleChange} name="content" placeholder="comment..." />
                     </Form.Group>
-                </Col>
-                <Col xs={2} xl={1} style={{ paddingLeft: 0, alignItems: 'center' }}>
-                    {isSendingComment
-                        ?
-                        <Button variant="warning" type="submit" style={{ width: '100%' }} >
-                            <MdScheduleSend />
-                        </Button>
-                        :
-                        <Button className="" variant="dark" type="submit" style={{ width: '100%' }}>
-                            <MdSend />
-                        </Button>
-                    }
+                </StyledColComment>
+                <Col xs={2} md={1} style={{ paddingLeft: 0, alignItems: 'center' }}>
+                {isSendingComment
+                    ?
+                    <StyledSendButton variant="warning" type="submit" >
+                        <MdScheduleSend />
+                    </StyledSendButton>
+                    :
+                    <StyledSendButton variant="dark" type="submit" >
+                        <MdSend />
+                    </StyledSendButton>
+                }
                 </Col>
             </Row>
+            
         </Form>
     )
 }

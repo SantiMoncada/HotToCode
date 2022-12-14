@@ -49,9 +49,9 @@ const UserProfile = ({ loadUser, userData }) => {
         <>
             {userData ?
                 <Container>
-                    <figure className='avatar'>
-                        <img src={userData.avatar} alt={`avatar of ${userData.username}`} />
-                    </figure>
+                    <StyledAvatar className='avatar'>
+                        <StyledAvatarImg src={userData.avatar} alt={`avatar of ${userData.username}`} />
+                    </StyledAvatar>
                     {!formOpen ?
                         <>
                             <h3>@{userData.username}</h3>
