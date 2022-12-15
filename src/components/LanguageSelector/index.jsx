@@ -1,9 +1,17 @@
-import './LenguageSelector.css'
-import { Form, Row, Col } from 'react-bootstrap';
+import { Form } from 'react-bootstrap';
 
 import links from "./../../utils/lenIconsSvgLinks"
+import styled from 'styled-components';
 
 const { jsIcon, cIcon, pythonIcon, rustIcon, cssIcon } = links
+
+const StyledLenguageFormGroup = styled(Form.Group)`
+    display: flex;
+    img{
+        width: 35px;
+    }
+`
+
 
 const LanguageSelector = ({ len, setLen }) => {
 
@@ -36,7 +44,7 @@ const LanguageSelector = ({ len, setLen }) => {
 
     }
     return (
-        <Form.Group className='LenguageSelector'>
+        <StyledLenguageFormGroup>
             <img src={icon} alt="" />
             <Form.Select value={len} onChange={handleChange} aria-label="Default select example">
                 <option value="JS">JavaScript</option>
@@ -45,7 +53,7 @@ const LanguageSelector = ({ len, setLen }) => {
                 <option value="CSS">CSS</option>
                 <option value="RUST">RUST</option>
             </Form.Select>
-        </Form.Group>
+        </StyledLenguageFormGroup>
     );
 }
 export default LanguageSelector

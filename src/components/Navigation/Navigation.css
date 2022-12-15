@@ -1,24 +1,3 @@
-.user-search-bar {
-    width: 250px;
-
-}
-
-.LinkStyle {
-    text-decoration: none;
-}
-
-.signup {
-    border: solid gray 1px;
-    border-radius: 8px;
-}
-
-.rbt-loader {
-    display: none !important;
-}
-
-.SearchBarForm {
-    display: flex;
-}
 
 @media (min-width:991px) {
     .rbt {

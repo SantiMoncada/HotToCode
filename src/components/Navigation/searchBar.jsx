@@ -4,10 +4,14 @@ import { useNavigate } from 'react-router-dom'
 import { Menu, MenuItem, AsyncTypeahead } from 'react-bootstrap-typeahead';
 import userService from "../../services/user.services";
 
-import './Navigation.css'
 import { Button, Form } from "react-bootstrap"
 import { MdOutlineSearch } from 'react-icons/md'
 
+import styled from 'styled-components'
+
+const StyledSearchBarForm = styled(Form)`
+    display: flex;
+`
 
 const SearchBar = () => {
 
@@ -57,8 +61,7 @@ const SearchBar = () => {
     }
 
     return (
-        <Form className="SearchBarForm">
-
+        <StyledSearchBarForm className="SearchBarForm">
             <AsyncTypeahead
                 id='user-search-bar-aysnc'
                 isLoading={fetchingUserData}
@@ -73,7 +76,7 @@ const SearchBar = () => {
             <Button onClick={handleSearchButton} variant="outline-success"><MdOutlineSearch /></Button>
 
 
-        </Form>
+        </StyledSearchBarForm>
     )
 }
 

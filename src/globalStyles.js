@@ -8,6 +8,11 @@ const GlobalStyle = createGlobalStyle`
   hr{
     margin: 0;
   }
+
+  //spinner from async typehead
+  .rbt-loader {
+      display: none !important;
+  }
 `;
  
 export default GlobalStyle;

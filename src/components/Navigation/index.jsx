@@ -19,6 +19,19 @@ const StyledLogo = styled.img`
     display: inline-block;
     vertical-align: top;
 `
+const StyledLink = styled(Link)`
+    text-decoration: none;
+    .signup{
+        border: solid gray 1px;
+        border-radius: 8px;
+    }
+`
+
+const StyledNavItem = styled(NavDropdown.Item)`
+    padding: 0;
+    color:black;
+`
+
 const Navigation = () => {
 
     const { logoutUser, user } = useContext(AuthContext)
@@ -31,7 +44,7 @@ const Navigation = () => {
 
     return (
 
-        <Navbar className="Navigation" bg="light" expand="lg">
+        <Navbar bg="light" expand="lg">
             <Container fluid>
                 <Link to='/'>
                     <Navbar.Brand>
@@ -49,35 +62,35 @@ const Navigation = () => {
                     >
                         <SearchBar />
 
-                        <Link to='/snippets' className="LinkStyle" >
+                        <StyledLink to='/snippets' >
                             <Nav.Link as='span' >
                                 Snippets
                             </Nav.Link>
-                        </Link>
+                        </StyledLink>
 
                         {user &&
-                            <Link to='/snippetForm' className="LinkStyle" >
+                            <StyledLink to='/snippetForm' >
                                 <Nav.Link as='span' >
                                     Create snippet
                                 </Nav.Link>
-                            </Link>
+                            </StyledLink>
                         }
                     </Nav>
                     <Nav>
 
                         {!user ?
                             <>
-                                <Link to='/login' className="LinkStyle" >
+                                <StyledLink to='/login' >
                                     <Nav.Link as='span' >
                                         Sign in
                                     </Nav.Link>
-                                </Link>
+                                </StyledLink>
 
-                                <Link to='/signup' className="LinkStyle" >
+                                <StyledLink to='/signup' >
                                     <Nav.Link className="signup" as='span' >
                                         Sign up
                                     </Nav.Link>
-                                </Link>
+                                </StyledLink>
                             </>
 
                             :
@@ -85,11 +98,11 @@ const Navigation = () => {
                                 <NavDropdown.Header>Hello {user.username} !</NavDropdown.Header>
                                 <NavDropdown.Divider />
                                 <NavDropdown.Item as='span'>
-                                    <Link to={`/user/${user._id}`} className="LinkStyle" >
-                                        <NavDropdown.Item as='span' style={{ padding: '0' }}>
+                                    <StyledLink to={`/user/${user._id}`} >
+                                        <StyledNavItem as='span' >
                                             Your Profile
-                                        </NavDropdown.Item>
-                                    </Link>
+                                        </StyledNavItem>
+                                    </StyledLink>
                                 </NavDropdown.Item>
                                 <NavDropdown.Divider />
                                 <NavDropdown.Item onClick={logOuthandler}>Sign out</NavDropdown.Item>

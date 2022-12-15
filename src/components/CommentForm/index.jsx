@@ -41,6 +41,10 @@ const CommentForm = ({ snippet_id, loadComments }) => {
     const handleSubmit = e => {
         e.preventDefault()
 
+        if(isSendingComment){
+            return
+        }
+        
         setIsSendingComment(true)
 
         commentService
