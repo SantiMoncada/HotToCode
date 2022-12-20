@@ -7,9 +7,13 @@ import { Card, Row, Col } from "react-bootstrap"
 
 import { MdDeleteForever, MdDeleteOutline } from 'react-icons/md'
 
-import './CommentItem.css'
-import styled from 'styled-components'
+import styled, { keyframes,css } from 'styled-components'
 
+const StyledDeletebutton = css`
+    width: 25px; 
+    height: 25px;
+    margin-right: 15px;
+`
 
 const StyledCommentAvatar = styled.div`
     padding: 0;
@@ -37,6 +41,30 @@ const StyledCommentIemCard = styled(Card)`
     margin-top: 10px;
     justify-content: end;
     padding: 5px 10px 30px 10px;
+`
+const animation = keyframes`
+    from {
+        background-color: none;
+    }
+
+    to {
+        background-color: rgba(229, 76, 76, 0.637);
+    }
+ `
+
+const StyledDeleteIcon = styled(MdDeleteForever)`
+    ${StyledDeletebutton}
+
+    &:hover{
+        animation: ${animation};
+        border-radius: 50%;
+        animation-fill-mode: forwards;
+        animation-duration: 0.3s;
+    }
+`
+
+const StyledDeleteIconOutline = styled(MdDeleteOutline)`
+    ${StyledDeletebutton}
 `
 
 const CommentItem = ({ owner, content, _id, fireFinalActions }) => {
@@ -88,9 +116,9 @@ const CommentItem = ({ owner, content, _id, fireFinalActions }) => {
                         {
                             owner._id === user?._id &&
                             isDeleting?
-                            <MdDeleteOutline style={{ width: '25px', height: '25px', marginRight: '15px' }}/>
+                            <StyledDeleteIconOutline />
                             :
-                            <MdDeleteForever className='delete' style={{ width: '25px', height: '25px', marginRight: '15px' }} onClick={() => commentDelete()} />
+                            <StyledDeleteIcon onClick={() => commentDelete()} />
                         }
                     </figure>
                 </Col>
