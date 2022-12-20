@@ -2,8 +2,12 @@ import { Container, Row, Col, } from 'react-bootstrap'
 import logo from './../../assets/blackLogo.svg'
 import Footer from '../../components/Footer'
 import CarouselHome from '../../components/CarouselHome'
+import styled from 'styled-components'
 
 const HomePage = () => {
+    const StyledLogo = styled.img`
+        padding: 0;
+    `
 
     return (
         <hero>
@@ -12,11 +16,10 @@ const HomePage = () => {
                 <Row>
                     <Col md={{ offset: 3, span: 6 }} className='mb-4 mt-4'>
                         <figure>
-                            <img
+                            <StyledLogo
                                 src={logo}
-                                className=" align-top"
+                                className="align-top"
                                 alt="React Bootstrap logo"
-                                style={{ padding: 0, width: '100%' }}
                             />
                         </figure>
                     </Col>

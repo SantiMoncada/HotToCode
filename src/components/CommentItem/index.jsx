@@ -11,13 +11,14 @@ import './CommentItem.css'
 import styled from 'styled-components'
 
 
-const styledCommentAvatar = styled.div`
+const StyledCommentAvatar = styled.div`
     padding: 0;
     padding-left: 10px;
     display: flex;
     margin-top: 10px;
     justify-content: end;
-    .img{
+
+    img{
         width: 50px;
         height: 50px;
         display: inline-block;
@@ -26,6 +27,16 @@ const styledCommentAvatar = styled.div`
         object-fit: cover;
         border-radius: 50%;
     }
+`
+
+
+const StyledCommentIemCard = styled(Card)`
+    padding: 0;
+    padding-left: 10px;
+    display: flex;
+    margin-top: 10px;
+    justify-content: end;
+    padding: 5px 10px 30px 10px;
 `
 
 const CommentItem = ({ owner, content, _id, fireFinalActions }) => {
@@ -54,12 +65,12 @@ const CommentItem = ({ owner, content, _id, fireFinalActions }) => {
     }
 
     return (
-        <Card className="CommentItem" style={{ padding: '5px 10px 30px 10px' }}>
+        <StyledCommentIemCard >
             <Row>
                 <Col xs={2} sm={1} >
-                    <styledCommentAvatar>
+                    <StyledCommentAvatar>
                         <img src={owner.avatar} alt={`profile pciture of ${owner.username}`} />
-                    </styledCommentAvatar>
+                    </StyledCommentAvatar>
                 </Col>
                 <Col xs={8} sm={10}>
                     <Card.Text>
@@ -79,12 +90,12 @@ const CommentItem = ({ owner, content, _id, fireFinalActions }) => {
                             isDeleting?
                             <MdDeleteOutline style={{ width: '25px', height: '25px', marginRight: '15px' }}/>
                             :
-                            <MdDeleteForever className='actionButton delete' style={{ width: '25px', height: '25px', marginRight: '15px' }} onClick={() => commentDelete()} />
+                            <MdDeleteForever className='delete' style={{ width: '25px', height: '25px', marginRight: '15px' }} onClick={() => commentDelete()} />
                         }
                     </figure>
                 </Col>
             </Row>
-        </Card>
+        </StyledCommentIemCard>
     )
 
 }
