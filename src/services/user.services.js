@@ -5,7 +5,7 @@ class UserServices {
     constructor() {
 
         this.api = axios.create({
-            baseURL: `${process.env.REACT_APP_API_URL}/users`
+            baseURL: `${process.env.REACT_APP_BACK_END_URL}/api/users`
         })
 
         this.api.interceptors.request.use((config) => {

@@ -4,7 +4,7 @@ class CommentService {
 
     constructor() {
         this.api = axios.create({
-            baseURL: `${process.env.REACT_APP_API_URL}/comments`
+            baseURL: `${process.env.REACT_APP_BACK_END_URL}/api/comments`
         })
 
         this.api.interceptors.request.use((config) => {
