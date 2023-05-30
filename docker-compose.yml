@@ -1,0 +1,13 @@
+services:
+    frontend-react:
+      build: ./client
+      ports:
+        - "3000:3000"
+      env_file:
+        - .env
+    hot-to-code-api:
+      build: ./server
+      ports:
+        - 5005:5005
+      env_file:
+        - .env
