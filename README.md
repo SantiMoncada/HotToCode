@@ -1,5 +1,16 @@
 # HotToCode-App
 
+## App link
+
+## how to run
+
+```
+git clone --recursive https://github.com/SantiMoncada/HotToCode-App
+cd HotToCode-App
+docker-compose up
+
+```
+
 ## Enviroment variables
 
 ```

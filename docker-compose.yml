@@ -1,13 +1,19 @@
 services:
-    frontend-react:
-      build: ./client
-      ports:
-        - "3000:3000"
-      env_file:
-        - .env
-    hot-to-code-api:
-      build: ./server
-      ports:
-        - 5005:5005
-      env_file:
-        - .env
+  frontend-react:
+    build: ./client
+    ports:
+      - "3000:3000"
+    env_file:
+      - .env
+  hot-to-code-api:
+    build: ./server
+    ports:
+      - 5005:5005
+    env_file:
+      - .
+  mongo:
+    image: mongo
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
