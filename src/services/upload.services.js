@@ -4,7 +4,7 @@ class UploadService {
 
     constructor() {
         this.api = axios.create({
-            baseURL: `${process.env.REACT_APP_API_URL}/upload`
+            baseURL: `${import.meta.env.FRONT_APP_BACK_END_URL}/upload`
         })
 
         this.api.interceptors.request.use((config) => {

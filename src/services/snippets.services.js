@@ -4,7 +4,7 @@ class SnippetService {
 
     constructor() {
         this.api = axios.create({
-            baseURL: `${process.env.REACT_APP_BACK_END_URL}/api/snippets`
+            baseURL: `${import.meta.env.FRONT_APP_BACK_END_URL}/api/snippets`
         })
 
         this.api.interceptors.request.use((config) => {

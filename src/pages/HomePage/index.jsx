@@ -10,7 +10,7 @@ const HomePage = () => {
     `
 
     return (
-        <hero>
+        <section>
             <br />
             <Container>
                 <Row>
@@ -28,7 +28,7 @@ const HomePage = () => {
             <CarouselHome />
             <br />
             <Footer />
-        </hero>
+        </section>
     )
 }
 
