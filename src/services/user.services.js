@@ -1,52 +1,51 @@
-import axios from 'axios'
+import axios from "axios";
+import { backURL } from "./constants";
 
 class UserServices {
+  constructor() {
+    this.api = axios.create({
+      baseURL: `${backURL}/api/users`,
+    });
 
-    constructor() {
-        this.api = axios.create({
-            baseURL: `${import.meta.env.FRONT_APP_BACK_END_URL}/api/users`
-        })
+    this.api.interceptors.request.use((config) => {
+      const storedToken = localStorage.getItem("authToken");
 
-        this.api.interceptors.request.use((config) => {
+      if (storedToken) {
+        config.headers = { Authorization: `Bearer ${storedToken}` };
+      }
 
-            const storedToken = localStorage.getItem("authToken");
+      return config;
+    });
+  }
 
-            if (storedToken) {
-                config.headers = { Authorization: `Bearer ${storedToken}` }
-            }
+  getAllUsers(values) {
+    return this.api.get("/", { params: values });
+  }
 
-            return config
-        })
-    }
+  getUser(user_id) {
+    return this.api.get(`/details/${user_id}`);
+  }
 
-    getAllUsers(values) {
-        return this.api.get('/', { params: values })
-    }
+  editUser(user_id, userData) {
+    return this.api.put(`/edit/${user_id}`, userData);
+  }
 
-    getUser(user_id) {
-        return this.api.get(`/details/${user_id}`)
-    }
+  favSnippet(snippet_id) {
+    return this.api.put(`/favSnippet/${snippet_id}`);
+  }
 
-    editUser(user_id, userData) {
-        return this.api.put(`/edit/${user_id}`, userData)
-    }
+  rmFavSnippet(snippet_id) {
+    return this.api.put(`/rmSnippet/${snippet_id}`);
+  }
 
-    favSnippet(snippet_id) {
-        return this.api.put(`/favSnippet/${snippet_id}`)
-    }
-
-    rmFavSnippet(snippet_id) {
-        return this.api.put(`/rmSnippet/${snippet_id}`)
-    }
-
-    getAllFavSnippets(user_id) {
-        return this.api.get(`/getAllFavSnippets/${user_id}`)
-    }
-    getAllFavSnippetsContent(user_id) {
-        return this.api.get(`/getAllFavSnippetsContent/${user_id}`)
-    }
+  getAllFavSnippets(user_id) {
+    return this.api.get(`/getAllFavSnippets/${user_id}`);
+  }
+  getAllFavSnippetsContent(user_id) {
+    return this.api.get(`/getAllFavSnippetsContent/${user_id}`);
+  }
 }
 
-const userService = new UserServices()
+const userService = new UserServices();
 
-export default userService
+export default userService;

@@ -1,29 +1,28 @@
-import axios from 'axios'
+import axios from "axios";
+import { backURL } from "./constants";
 
 class UploadService {
+  constructor() {
+    this.api = axios.create({
+      baseURL: `${backURL}/upload`,
+    });
 
-    constructor() {
-        this.api = axios.create({
-            baseURL: `${import.meta.env.FRONT_APP_BACK_END_URL}/upload`
-        })
+    this.api.interceptors.request.use((config) => {
+      const storedToken = localStorage.getItem("authToken");
 
-        this.api.interceptors.request.use((config) => {
+      if (storedToken) {
+        config.headers = { Authorization: `Bearer ${storedToken}` };
+      }
 
-            const storedToken = localStorage.getItem("authToken");
+      return config;
+    });
+  }
 
-            if (storedToken) {
-                config.headers = { Authorization: `Bearer ${storedToken}` }
-            }
-
-            return config
-        })
-    }
-
-    uploadimage(imageForm) {
-        return this.api.post('/image', imageForm)
-    }
+  uploadimage(imageForm) {
+    return this.api.post("/image", imageForm);
+  }
 }
 
-const uploadService = new UploadService()
+const uploadService = new UploadService();
 
-export default uploadService
+export default uploadService;

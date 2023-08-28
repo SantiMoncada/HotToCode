@@ -1,46 +1,44 @@
-import axios from 'axios'
+import axios from "axios";
+import { backURL } from "./constants";
 
 class SnippetService {
+  constructor() {
+    this.api = axios.create({
+      baseURL: `${backURL}/api/snippets`,
+    });
 
-    constructor() {
-        this.api = axios.create({
-            baseURL: `${import.meta.env.FRONT_APP_BACK_END_URL}/api/snippets`
-        })
+    this.api.interceptors.request.use((config) => {
+      const storedToken = localStorage.getItem("authToken");
 
-        this.api.interceptors.request.use((config) => {
+      if (storedToken) {
+        config.headers = { Authorization: `Bearer ${storedToken}` };
+      }
 
-            const storedToken = localStorage.getItem("authToken");
+      return config;
+    });
+  }
 
-            if (storedToken) {
-                config.headers = { Authorization: `Bearer ${storedToken}` }
-            }
+  createSnippet(snippetData) {
+    return this.api.post("/create", snippetData);
+  }
 
-            return config
-        })
-    }
+  getSnippets(values) {
+    return this.api.get("/list", { params: values });
+  }
 
-    createSnippet(snippetData) {
-        return this.api.post('/create', snippetData)
-    }
+  getOneSnippet(snippet_id) {
+    return this.api.get(`/details/${snippet_id}`);
+  }
 
-    getSnippets(values) {
-        return this.api.get('/list', { params: values })
-    }
+  editSnippet(snippet_id, data) {
+    return this.api.put(`/edit/${snippet_id}`, data);
+  }
 
-    getOneSnippet(snippet_id) {
-        return this.api.get(`/details/${snippet_id}`)
-    }
-
-    editSnippet(snippet_id, data) {
-        return this.api.put(`/edit/${snippet_id}`, data)
-    }
-
-    deleteSnippet(snippet_id) {
-        return this.api.delete(`/delete/${snippet_id}`)
-    }
-
+  deleteSnippet(snippet_id) {
+    return this.api.delete(`/delete/${snippet_id}`);
+  }
 }
 
-const snippetService = new SnippetService()
+const snippetService = new SnippetService();
 
-export default snippetService
+export default snippetService;
