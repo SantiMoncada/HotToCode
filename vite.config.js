@@ -10,6 +10,6 @@ export default defineConfig(() => {
       outDir: "dist",
     },
     plugins: [react()],
-    base: "/vite-deploy-demo/",
+    base: "/HotToCode-Client/",
   };
 });
