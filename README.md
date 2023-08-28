@@ -1,3 +1,1 @@
-Github pages link
-
-https://santimoncada.github.io/HotToCode-Client/
+Currently looking for a cool deployment solution
