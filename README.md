@@ -1,7 +1,5 @@
 # HotToCode-App
 
-## App link
-
 ## how to run
 
 ```
