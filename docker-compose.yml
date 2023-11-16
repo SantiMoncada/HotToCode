@@ -3,17 +3,14 @@ services:
     build: ./client
     ports:
       - "3000:3000"
-    env_file:
-      - .env
+    environment:
+      - REACT_APP_BACK_END_URL:http://santiserver.nowddns.com:5005
   hot-to-code-api:
     build: ./server
     ports:
       - 5005:5005
-    env_file:
-      - .
-  mongo:
-    image: mongo
-    restart: always
     environment:
-      MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: example
+      - ORIGIN:*
+      - TOKEN_SECRET:secret
+    env_file:
+      - .env
