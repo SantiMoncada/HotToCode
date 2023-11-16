@@ -1,0 +1,157 @@
+.cardAvatar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+
+.cardAvatar>img {
+    width: 50px;
+    height: 50px;
+    display: inline-block;
+    position: relative;
+    vertical-align: middle;
+    object-fit: cover;
+    overflow: hidden;
+    border-radius: 50%;
+}
+
+.SnippetCard p {
+    margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.cardIcon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+
+}
+
+.cardIcon>img {
+    width: 100%;
+
+}
+
+.codeInCard {
+    height: 150px;
+    margin: 0;
+}
+
+
+.SnippetCard Col {
+    padding: 0;
+}
+
+.SnippetCard pre {
+    white-space: wrap;
+}
+
+.SnippetCard .col-4 {
+    flex: 0 0 33.3333333%;
+    max-width: 33.3333333%;
+    position: relative;
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+    display: flex;
+}
+
+.actionButtons {
+    margin: 5px 0;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.actionButton {
+    margin: 5px;
+    padding: 3px;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+}
+
+@keyframes pinkBack {
+    from {
+        background-color: none;
+    }
+
+    to {
+        background-color: rgba(241, 146, 146, 0.637);
+    }
+}
+
+@keyframes greenBack {
+    from {
+        background-color: none;
+    }
+
+    to {
+        background-color: rgba(182, 243, 167, 0.637);
+    }
+}
+
+@keyframes blueBack {
+    from {
+        background-color: none;
+    }
+
+    to {
+        background-color: rgba(148, 196, 241, 0.637);
+    }
+}
+
+@keyframes redBack {
+    from {
+        background-color: none;
+    }
+
+    to {
+        background-color: rgba(229, 76, 76, 0.637);
+    }
+}
+
+@keyframes yellowBack {
+    from {
+        background-color: none;
+    }
+
+    to {
+        background-color: rgba(221, 233, 52, 0.637);
+    }
+}
+
+.actionButton:hover {
+    border-radius: 50%;
+    animation-fill-mode: forwards;
+    animation-duration: 0.3s;
+
+}
+
+.comment:hover {
+    animation-name: blueBack;
+}
+
+.fav:hover {
+    animation-name: pinkBack;
+}
+
+.share:hover {
+    animation-name: blueBack;
+}
+
+.fork:hover {
+    animation-name: greenBack;
+}
+
+.delete:hover {
+    animation-name: redBack;
+}
+
+.edit:hover {
+    animation-name: yellowBack;
+}

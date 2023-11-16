@@ -1,0 +1,7 @@
+services:
+    frontend-react:
+      build: .
+      ports:
+        - "3000:3000"
+      environment:
+        - VITE_BACK_END_URL=http://localhost:5005
