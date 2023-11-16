@@ -1,0 +1,7 @@
+services:
+  hot-to-code-api:
+    build: .
+    ports:
+      - 5005:5005
+    env_file:
+      - .env
